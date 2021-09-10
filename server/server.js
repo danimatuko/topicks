@@ -1,11 +1,21 @@
-const express = require("express");
+import express from "express";
+import connectToDB from "./database/db.js";
+import postRoutes from "./routes/postRoutes.js";
+import dotenv from "dotenv";
+dotenv.config();
+
 const app = express();
-const port = 5000;
+const PORT = process.env.PORT || 5000;
 
-app.get("/", (req, res) => {
-	res.send("Hello World!");
-});
 
-app.listen(port, () => {
-	console.log(`Example app listening at http://localhost:${port}`);
+
+
+connectToDB();
+
+app.use(express.json());
+
+app.use("/posts", postRoutes);
+
+app.listen(PORT, () => {
+	console.log(`Example app listening at http://localhost:${PORT}`);
 });

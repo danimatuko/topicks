@@ -1,30 +1,51 @@
 import { action, makeObservable, observable } from "mobx";
 import { getDate } from "../helpers/getDate";
+import Axios from "axios";
 
 class Post {
-	id = Math.random();
 	author = "John Doe";
 	topic = "Technology";
 	title = "";
+	subjectImage = "";
 	body = "";
-	date = "";
+	dateOfPost = "";
 
-	constructor(title, body) {
+	constructor(author, topic, title, subjectImage, body) {
 		makeObservable(this, {
 			title: observable,
 			body: observable,
 			save: action
 		});
 
-		this.author = this.author;
+		this.author = author;
+		this.topic = topic;
 		this.title = title;
-		this.topic = this.topic;
+		this.subjectImage = subjectImage;
 		this.body = body;
-		this.date = getDate();
+		this.dateOfPost = getDate();
 	}
 
-	save() {
-		localStorage.setItem(`post-${this.id}`, this.body);
+	async save() {
+		const { author, topic, title, subjectImage, body, dateOfPost } = this;
+		try {
+			const { data } = await Axios.post("/posts", {
+				author,
+				topic,
+				title,
+				subjectImage,
+				body,
+				dateOfPost
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	static getAllPosts() {
+		try {
+			return Axios.get("/posts");
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	static get(id) {

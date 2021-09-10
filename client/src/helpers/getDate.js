@@ -4,6 +4,6 @@ export const getDate = () => {
 	let month = date.getMonth() + 1;
 	let year = date.getFullYear();
 
-	let fullDate = `${day}.${month}.${year}.`;
+	let fullDate = `${day}.${month}.${year}`;
 	return fullDate;
 };

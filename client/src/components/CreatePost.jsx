@@ -5,40 +5,79 @@ import parse from "html-react-parser";
 import Post from "../Models/Post";
 
 const CreatePost = () => {
-	const [title, setTitle] = useState("");
+	const initialState = {
+		author: "John Doe",
+		title: "",
+		topic: "",
+		subjectImage: "",
+		postHTML: ""
+	};
+	const [post, setPost] = useState(initialState);
+
+	const handleChange = ({ name, value }) => {
+		setPost({ ...post, [name]: value });
+	};
+
 	const [postBody, setPostBody] = useState("");
-	const [postIsDone, setPostIsDone] = useState(false);
-	const [postHTML, setPostHTML] = useState(false);
+	const [postIsSubmitted, setPostIsSubmitted] = useState(false);
 
 	const handleEditorChange = (e) => {
-		setPostBody(e.target.getContent());
+		setPost({ ...post, ["postHTML"]: e.target.getContent() });
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const post = new Post(title, postBody);
-		post.save();
-		setPostIsDone(true);
+		console.table(post);
+
+		const newPost = new Post(
+			post.author,
+			post.topic,
+			post.title,
+			post.subjectImage,
+			post.postHTML
+		);
+		newPost.save();
+		setPostIsSubmitted(true);
 	};
 
 	return (
-		<Container>
+		<Container className="pt-3 mb-5">
 			<h1 className="my-5">Write Somthing...</h1>
 			<Form onSubmit={handleSubmit}>
 				<Form.Group className="mb-3" controlId="title">
-					<Form.Label>Email address</Form.Label>
+					<Form.Label>Title</Form.Label>
 					<Form.Control
+						name="title"
 						type="text"
-						placeholder="title"
-						onChange={(e) => setTitle(e.target.value)}
+						onChange={(e) => handleChange(e.target)}
 					/>
 					<Form.Text className="text-muted">
-						We'll never share your email with anyone else.
+						This will appear at the preview of the post.
+					</Form.Text>
+				</Form.Group>
+				<Form.Group className="mb-3" controlId="topic">
+					<Form.Label>Topic</Form.Label>
+					<Form.Select name="topic" onChange={(e) => handleChange(e.target)}>
+						<option>Money</option>
+						<option>Technology</option>
+						<option>Business</option>
+					</Form.Select>
+				</Form.Group>
+				<Form.Group className="mb-3" controlId="subjectImage">
+					<Form.Label>Subject Image</Form.Label>
+					<Form.Control
+						name="subjectImage"
+						type="text"
+						placeholder="Enter image source from URL"
+						onChange={(e) => handleChange(e.target)}
+					/>
+					<Form.Text className="text-muted">
+						This will appear at the preview of the post.
 					</Form.Text>
 				</Form.Group>
 				<Editor
 					apiKey={process.env.REACT_APP_TINYMCE_API_KEY}
-					initialValue="<p>Initial content</p>"
+					initialValue="<p>Write your post here...</p>"
 					init={{
 						height: 500,
 						menubar: false,
@@ -61,11 +100,10 @@ const CreatePost = () => {
 					}}
 					onChange={(e) => handleEditorChange(e)}
 				/>
-				<Button variant="dark" type="submit">
+				<Button variant="dark" type="submit" className="w-100 mt-3">
 					Submit
 				</Button>
 			</Form>
-			<div>{postHTML && parse(postHTML)}</div>
 		</Container>
 	);
 };
