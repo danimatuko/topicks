@@ -28,7 +28,7 @@ class Post {
 	async save() {
 		const { author, topic, title, subjectImage, body, dateOfPost } = this;
 		try {
-			const { data } = await Axios.post("/posts", {
+			await Axios.post("/posts", {
 				author,
 				topic,
 				title,
@@ -48,8 +48,12 @@ class Post {
 		}
 	}
 
-	static get(id) {
-		return localStorage.getItem(id);
+	static async get(id) {
+		try {
+			return await Axios.get(`/posts/${id}`);
+		} catch (error) {
+			console.log(error);
+		}
 	}
 }
 

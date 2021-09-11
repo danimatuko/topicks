@@ -28,3 +28,12 @@ export const getAllposts = async (req, res) => {
 		res.json(error.message);
 	}
 };
+
+export const getPostById = async (req, res) => {
+	try {
+		const post = await Post.findOne({ _id: req.params.id });
+		res.status(200).json(post);
+	} catch (error) {
+		res.json(error.message);
+	}
+};
