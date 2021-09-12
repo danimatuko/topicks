@@ -5,3 +5,13 @@ nav.nav {
 .hero {
     padding: 10rem
 }
+
+#dropdown-basic-button {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+/* remove the  default arrow from bootstrap dropdown button*/
+#dropdown-basic-button::after {
+    content: none;
+}

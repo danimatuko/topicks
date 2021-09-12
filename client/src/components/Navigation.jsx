@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Nav, Navbar, Button } from "react-bootstrap";
+import { Container, Nav, Navbar, Button, Dropdown, DropdownButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Navigation = () => {
@@ -11,10 +11,18 @@ const Navigation = () => {
 					<Nav.Link href="/home">Home</Nav.Link>
 					<Nav.Link href="/about">About</Nav.Link>
 				</Nav>
-				<Button as={Link} to="/post" variant="light">
-					<i className="fas fa-plus me-1"></i>
-					<span>Post</span>
-				</Button>
+				<DropdownButton
+					id="dropdown-basic-button"
+					title="D"
+					variant="secondary"
+					menuVariant="dark"
+				>
+					<Dropdown.Item as={Link} to="/post">
+						Write somthing
+					</Dropdown.Item>
+					<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+					<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+				</DropdownButton>
 			</Container>
 		</Navbar>
 	);
