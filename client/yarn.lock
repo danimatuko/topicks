@@ -7715,6 +7715,11 @@
   "resolved" "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   "version" "1.0.4"
 
+"mobx-persist-store@^1.0.3":
+  "integrity" "sha512-R6GWCtA77O2mbwKRn0iJqecNHhEMDnUv7P60SCFntz+qRtfutsTWcP56Xz9Q29nefgo1E4JnBaoqcWejMdkvNQ=="
+  "resolved" "https://registry.npmjs.org/mobx-persist-store/-/mobx-persist-store-1.0.3.tgz"
+  "version" "1.0.3"
+
 "mobx-react-lite@^3.2.0":
   "integrity" "sha512-hwURgfmP2apX3HQrB55V9DN47kuN3C6KlQvI5UIfJRibXma72C/JudcNt2r9dWjAdFMrcZoz1ivvtXMCkJ2aQA=="
   "resolved" "https://registry.npmjs.org/mobx-react-lite/-/mobx-react-lite-3.2.1.tgz"
@@ -7727,7 +7732,7 @@
   dependencies:
     "mobx-react-lite" "^3.2.0"
 
-"mobx@^6.1.0", "mobx@^6.3.3":
+"mobx@*", "mobx@^6.1.0", "mobx@^6.3.3":
   "integrity" "sha512-JoNU50rO6d1wHwKPJqKq4rmUMbYnI9CsJmBo+Cu4exBYenFvIN77LWrZENpzW6reZPADtXMmB1DicbDSfy8Clw=="
   "resolved" "https://registry.npmjs.org/mobx/-/mobx-6.3.3.tgz"
   "version" "6.3.3"

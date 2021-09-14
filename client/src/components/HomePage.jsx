@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
-import Post from "../Models/Post";
+import Post from "../stores/Post";
 import Hero from "./Hero";
 import PostPreview from "./PostPreview";
 import RecommandedTopics from "./RecommandedTopics";
+import { observer } from "mobx-react";
+import { StoreContext } from "../stores/rootStore";
 
-const HomePage = () => {
+const HomePage = observer(() => {
 	const [latestPosts, setLatestPosts] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
+
+	const store = useContext(StoreContext);
 
 	useEffect(() => {
 		(async () => {
@@ -49,6 +53,6 @@ const HomePage = () => {
 			</Container>
 		</>
 	);
-};
+});
 
 export default HomePage;
