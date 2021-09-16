@@ -34,7 +34,7 @@ const PostPage = ({ match }) => {
 	) : (
 		<Container>
 			<div className="post w-75 m-auto my-5">
-				<h1 className="display-3">React useRef Hook</h1>
+				<h1 className="display-3">{post && post.title}</h1>
 				<div className="d-flex justify-content-between">
 					<div>
 						<div className="author mb-2 text-muted text-capitalize fw-bold">

@@ -37,7 +37,7 @@ const CreatePost = () => {
 
 	return (
 		<Container className="pt-3 mb-5">
-			<h1 className="my-5">Write Somthing...</h1>
+			<h1 className="my-5 display-3">Write Somthing...</h1>
 			<Form onSubmit={handleSubmit}>
 				<Form.Group className="mb-3" controlId="title">
 					<Form.Label>Title</Form.Label>
@@ -47,7 +47,7 @@ const CreatePost = () => {
 						onChange={(e) => handleChange(e.target)}
 					/>
 					<Form.Text className="text-muted">
-						This will appear at the preview of the post.
+						This will appear at the preview of the post
 					</Form.Text>
 				</Form.Group>
 				<Form.Group className="mb-3" controlId="topic">
@@ -68,7 +68,7 @@ const CreatePost = () => {
 						onChange={(e) => handleChange(e.target)}
 					/>
 					<Form.Text className="text-muted">
-						This will appear at the preview of the post.
+						This will appear at the preview of the post
 					</Form.Text>
 				</Form.Group>
 				<Editor

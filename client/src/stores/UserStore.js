@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import Axios from "axios";
 
-import { makePersistable } from "mobx-persist-store";
+import { clearPersistedStore, getPersistedStore, makePersistable } from "mobx-persist-store";
 
 class User {
 	id = "";
@@ -25,6 +25,17 @@ class User {
 			email: email,
 			password: passsword
 		});
+	}
+
+	// logout by clearin localstorage with mobx-persist-store
+	async logout() {
+		await clearPersistedStore(this);
+		this.getStoredData();
+		window.location.href = "/login";
+	}
+
+	async getStoredData() {
+		return getPersistedStore(this);
 	}
 }
 

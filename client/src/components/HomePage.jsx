@@ -11,7 +11,7 @@ const HomePage = observer(() => {
 	const [latestPosts, setLatestPosts] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 
-	const store = useContext(StoreContext);
+	useContext(StoreContext);
 
 	useEffect(() => {
 		(async () => {

@@ -8,6 +8,8 @@ const Navigation = observer(() => {
 	const { user } = useContext(StoreContext);
 	const initials = user.first_name.charAt(0) + user.last_name.charAt(0);
 
+	const logout = () => user.logout();
+
 	return (
 		<Navbar bg="dark" variant="dark">
 			<Container>
@@ -22,13 +24,13 @@ const Navigation = observer(() => {
 						About
 					</Nav.Link>
 				</Nav>
-				{user.id ? <SignedInMenu initials={initials} /> : <UnsignedMenu />}
+				{user.id ? <SignedInMenu initials={initials} logout={logout} /> : <UnsignedMenu />}
 			</Container>
 		</Navbar>
 	);
 });
 
-const SignedInMenu = ({ initials }) => {
+const SignedInMenu = ({ initials, logout }) => {
 	return (
 		<DropdownButton
 			id="dropdown-basic-button"
@@ -43,7 +45,7 @@ const SignedInMenu = ({ initials }) => {
 				Profile
 			</Dropdown.Item>
 			<Dropdown.Divider />
-			<Dropdown.Item>Logout</Dropdown.Item>
+			<Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
 		</DropdownButton>
 	);
 };
@@ -60,4 +62,5 @@ const UnsignedMenu = () => {
 		</>
 	);
 };
+
 export default Navigation;
