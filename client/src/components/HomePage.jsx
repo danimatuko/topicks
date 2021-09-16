@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
-import Post from "../stores/Post";
+import Post from "../stores/PostStore";
 import Hero from "./Hero";
 import PostPreview from "./PostPreview";
 import RecommandedTopics from "./RecommandedTopics";
 import { observer } from "mobx-react";
-import { StoreContext } from "../stores/rootStore";
+import { StoreContext } from "../stores/RootStore";
 
 const HomePage = observer(() => {
 	const [latestPosts, setLatestPosts] = useState(null);

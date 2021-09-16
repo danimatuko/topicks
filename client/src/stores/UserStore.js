@@ -1,18 +1,18 @@
-import { makeAutoObservable} from "mobx";
+import { makeAutoObservable } from "mobx";
 import Axios from "axios";
 
 import { makePersistable } from "mobx-persist-store";
 
 class User {
 	id = "";
-	first_name = "Dani";
+	first_name = "";
 	last_name = "";
 	email = "";
 	role = "";
 
 	constructor() {
 		makeAutoObservable(this);
-	
+
 		makePersistable(this, {
 			name: "userStore",
 			properties: ["id", "first_name", "last_name", "email", "role"],

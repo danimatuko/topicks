@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { Editor } from "@tinymce/tinymce-react";
-import Post from "../stores/Post";
+import Post from "../stores/PostStore";
 
 const CreatePost = () => {
 	const initialState = {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Badge, Container, Spinner } from "react-bootstrap";
-import Post from "../stores/Post";
+import Post from "../stores/PostStore";
 import parse from "html-react-parser";
 
 const PostPage = ({ match }) => {

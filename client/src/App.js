@@ -10,7 +10,7 @@ const App = () => {
 	return (
 		<div className="App">
 			<Navigation />
-			<main style={{ minHeight: "85vh" }}>
+			<main style={{ minHeight: "80vh" }}>
 				<Switch>
 					<Route exact path="/login" component={LoginForm} />
 					<Route exact path={["/", "/home"]} component={HomePage} />
