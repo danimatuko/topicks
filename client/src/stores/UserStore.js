@@ -20,10 +20,19 @@ class User {
 		});
 	}
 
-	static async login(email, passsword) {
+	static async signUp(first_name, last_name, email, password, role) {
+		return await Axios.post("/users", {
+			first_name,
+			last_name,
+			email,
+			password
+		});
+	}
+
+	static async login(email, password) {
 		return await Axios.post("/users/login", {
 			email: email,
-			password: passsword
+			password: password
 		});
 	}
 

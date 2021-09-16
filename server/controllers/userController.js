@@ -5,27 +5,28 @@ import { generateToken } from "../utils/generateToken.js";
 export const register = async (req, res) => {
 	const { first_name, last_name, email, password, role } = req.body;
 	if (first_name === "" || last_name === "" || email === "" || password === "" || role === "") {
-		res.status(400).json("All fields are required.");
+		res.status(400);
+		throw new Error("All fields are required");
 	}
 	const userExists = await User.findOne({ email });
 	if (userExists) {
-		res.status(400).json("User alerdy exist");
+		res.status(400);
+		throw new Error("User alerdy exist");
 	} else {
 		// hash the password before saving the user in the database
 		const salt = await bcrypt.genSalt(10);
 		const encryptedPassword = await bcrypt.hash(password, salt);
 
 		let user = new User({
-			first_name,
-			last_name,
+			first_name: first_name.charAt(0).toUpperCase() + first_name.slice(1),
+			last_name: last_name.charAt(0).toUpperCase() + last_name.slice(1),
 			email,
-			password: encryptedPassword,
-			role
+			password: encryptedPassword
 		});
 
 		user = await user.save();
 
-		const token = generateToken(user._id, first_name, last_name, role);
+		const token = generateToken(user._id, first_name, last_name, user.role);
 
 		if (user) {
 			res.status(201).json({
@@ -33,7 +34,7 @@ export const register = async (req, res) => {
 				first_name,
 				last_name,
 				email,
-				role,
+				role: user.role,
 				token
 			});
 		} else {

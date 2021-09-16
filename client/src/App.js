@@ -5,6 +5,7 @@ import HomePage from "./components/HomePage";
 import LoginForm from "./components/LoginForm";
 import Navigation from "./components/Navigation";
 import PostPage from "./components/PostPage";
+import SignUpForm from "./components/SignUpForm";
 
 const App = () => {
 	return (
@@ -12,6 +13,7 @@ const App = () => {
 			<Navigation />
 			<main style={{ minHeight: "80vh" }}>
 				<Switch>
+					<Route exact path="/sign-in" component={SignUpForm} />
 					<Route exact path="/login" component={LoginForm} />
 					<Route exact path={["/", "/home"]} component={HomePage} />
 					<Route exact path="/post" component={CreatePost} />
