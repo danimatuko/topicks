@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { Editor } from "@tinymce/tinymce-react";
 import Post from "../stores/PostStore";
+import { StoreContext } from "../stores/RootStore";
 
 const CreatePost = () => {
 	const initialState = {
+		userId:"",
 		author: "John Doe",
 		title: "",
 		topic: "",
@@ -12,6 +14,8 @@ const CreatePost = () => {
 		postHTML: ""
 	};
 	const [post, setPost] = useState(initialState);
+	const { user } = useContext(StoreContext);
+
 
 	const handleChange = ({ name, value }) => {
 		setPost({ ...post, [name]: value });
@@ -26,6 +30,7 @@ const CreatePost = () => {
 		console.table(post);
 
 		const newPost = new Post(
+			user.id,
 			post.author,
 			post.topic,
 			post.title,

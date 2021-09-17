@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const PostSchema = mongoose.Schema(
 	{
+		userId: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: true,
+			ref: "User"
+		},
 		author: {
 			type: String,
 			required: true
@@ -24,6 +29,10 @@ const PostSchema = mongoose.Schema(
 		dateOfPost: {
 			type: String,
 			required: true
+		},
+		likes: {
+			type: Number,
+			default: 0
 		}
 	},
 	{

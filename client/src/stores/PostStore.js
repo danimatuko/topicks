@@ -3,6 +3,7 @@ import { getDate } from "../helpers/getDate";
 import Axios from "axios";
 
 class Post {
+	user_id = "";
 	author = "John Doe";
 	topic = "Technology";
 	title = "";
@@ -10,13 +11,13 @@ class Post {
 	body = "";
 	dateOfPost = "";
 
-	constructor(author, topic, title, subjectImage, body) {
+	constructor(userId, author, topic, title, subjectImage, body) {
 		makeObservable(this, {
 			title: observable,
 			body: observable,
 			save: action
 		});
-
+		this.userId = userId;
 		this.author = author;
 		this.topic = topic;
 		this.title = title;
@@ -26,9 +27,10 @@ class Post {
 	}
 
 	async save() {
-		const { author, topic, title, subjectImage, body, dateOfPost } = this;
+		const { userId, author, topic, title, subjectImage, body, dateOfPost } = this;
 		try {
 			await Axios.post("/posts", {
+				userId,
 				author,
 				topic,
 				title,

@@ -1,6 +1,20 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
+const activity = mongoose.Schema(
+	{
+		likedPosts: { type: [mongoose.Schema.Types.ObjectId] },
+		favoraites: { type: [mongoose.Schema.Types.ObjectId] },
+		savedForLater: { type: [mongoose.Schema.Types.ObjectId] },
+		Post: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: true,
+			ref: "Post"
+		}
+	},
+	{ timestamps: true }
+);
+
 const userSchema = mongoose.Schema(
 	{
 		first_name: {
@@ -24,6 +38,15 @@ const userSchema = mongoose.Schema(
 			type: String,
 			required: true,
 			default: "user"
+		},
+		activity: {
+			likedPosts: { type: [mongoose.Schema.Types.ObjectId] },
+			favoraites: { type: [mongoose.Schema.Types.ObjectId] },
+			savedForLater: { type: [mongoose.Schema.Types.ObjectId] },
+			Post: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Post"
+			}
 		}
 	},
 	{ timestamps: true }
