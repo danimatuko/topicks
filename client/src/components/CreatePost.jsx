@@ -1,20 +1,22 @@
 import React, { useContext, useState } from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Alert } from "react-bootstrap";
 import { Editor } from "@tinymce/tinymce-react";
 import Post from "../stores/PostStore";
 import { StoreContext } from "../stores/RootStore";
 
-const CreatePost = () => {
+const CreatePost = ({ history }) => {
+	const { user } = useContext(StoreContext);
+	const [error, setError] = useState(null);
+
 	const initialState = {
 		userId: "",
-		author: "John Doe",
+		author: user.first_name + " " + user.last_name,
 		title: "",
 		topic: "",
 		subjectImage: "",
 		postHTML: ""
 	};
 	const [post, setPost] = useState(initialState);
-	const { user } = useContext(StoreContext);
 
 	const handleChange = ({ name, value }) => {
 		setPost({ ...post, [name]: value });
@@ -24,7 +26,7 @@ const CreatePost = () => {
 		setPost({ ...post, postHTML: e.target.getContent() });
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		console.table(post);
 
@@ -36,15 +38,25 @@ const CreatePost = () => {
 			post.subjectImage,
 			post.postHTML
 		);
-		newPost.save();
+
+		try {
+			await newPost.save();
+			history.push("/");
+		} catch (error) {
+			console.log({ error });
+			setError(error.response.data.message);
+		}
 	};
 
 	return (
 		<Container className="pt-3 mb-5">
+			{error && <Alert variant="danger">{error}</Alert>}
 			<h1 className="my-5 display-3">Write Somthing...</h1>
 			<Form onSubmit={handleSubmit}>
 				<Form.Group className="mb-3" controlId="title">
-					<Form.Label>Title</Form.Label>
+					<Form.Label>
+						<span className="text-danger me-1">*</span> Title
+					</Form.Label>
 					<Form.Control
 						name="title"
 						type="text"
@@ -55,7 +67,9 @@ const CreatePost = () => {
 					</Form.Text>
 				</Form.Group>
 				<Form.Group className="mb-3" controlId="topic">
-					<Form.Label>Topic</Form.Label>
+					<Form.Label>
+						<span className="text-danger me-1">*</span>Topic
+					</Form.Label>
 					<Form.Select name="topic" onChange={(e) => handleChange(e.target)}>
 						<option>Money</option>
 						<option>Technology</option>
@@ -75,6 +89,9 @@ const CreatePost = () => {
 						This will appear at the preview of the post
 					</Form.Text>
 				</Form.Group>
+				<Form.Label>
+					<span className="text-danger me-1">*</span>Body
+				</Form.Label>
 				<Editor
 					apiKey={process.env.REACT_APP_TINYMCE_API_KEY}
 					initialValue="<p>Write your post here...</p>"

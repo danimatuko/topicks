@@ -6,8 +6,8 @@ import { makePersistable } from "mobx-persist-store";
 class Post {
 	id = "";
 	user_id = "";
-	author = "John Doe";
-	topic = "Technology";
+	author = "";
+	topic = "";
 	title = "";
 	subjectImage = "";
 	body = "";
@@ -51,19 +51,15 @@ class Post {
 
 	async save() {
 		const { userId, author, topic, title, subjectImage, body, dateOfPost } = this;
-		try {
-			await Axios.post("/posts", {
-				userId,
-				author,
-				topic,
-				title,
-				subjectImage,
-				body,
-				dateOfPost
-			});
-		} catch (error) {
-			console.log(error);
-		}
+		return await Axios.post("/posts", {
+			userId,
+			author,
+			topic,
+			title,
+			subjectImage,
+			body,
+			dateOfPost
+		});
 	}
 
 	static async getAllPosts() {

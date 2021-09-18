@@ -3,6 +3,12 @@ import User from "../models/User.js";
 
 export const createPost = async (req, res) => {
 	const { userId, author, topic, title, subjectImage, body, dateOfPost } = req.body;
+
+	if (title === "" || topic === "" || body === "") {
+		res.status(400);
+		throw new Error("Fill the required fields");
+	}
+
 	try {
 		let post = new Post({
 			userId,
