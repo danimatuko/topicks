@@ -19,7 +19,10 @@ const PostPage = observer(({ match }) => {
 	const handleLike = async () => {
 		try {
 			const { data } = await user.like(post.id);
-			post.likes = data.likes;
+			runInAction(() => {
+				post.likes = data.likes;
+				user.activity.likedPosts = data.likedPosts;
+			});
 		} catch (error) {
 			console.log(error);
 		}
@@ -44,7 +47,7 @@ const PostPage = observer(({ match }) => {
 				console.log(error);
 			}
 		})();
-	}, [match.params.id, post.id]);
+	}, [match.params.id, post]);
 
 	// if the user post an image larger then the page container resize the image
 	limitImagesWidth();
@@ -71,13 +74,20 @@ const PostPage = observer(({ match }) => {
 						<Badge className="tag border-radius-5  p-2 me-2" pill bg="secondary">
 							{post && post.topic}
 						</Badge>
-						<div className="d-inline-block">
-							<span>
-								<span>{post && post.likes}</span>
-								<i
-									className="like far fa-thumbs-up me-1 fs-4"
-									onClick={handleLike}
-								></i>
+						<div className="d-inline-block align-middle">
+							<span className="me-1">
+								<span className="me-1">{post && post.likes > 0 && post.likes}</span>
+								{user.activity.likedPosts.includes(post.id) ? (
+									<i
+										className="unlike fas fa-thumbs-up  me-1 fs-4"
+										onClick={handleLike}
+									></i>
+								) : (
+									<i
+										className="like far fa-thumbs-up me-1 fs-4"
+										onClick={handleLike}
+									></i>
+								)}
 							</span>
 							<span>
 								<i className="bookmark far fa-bookmark fs-4"></i>

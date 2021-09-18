@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { StoreContext } from "../stores/RootStore";
 
 const PostPreview = ({ post }) => {
 	const { _id, author, topic, title, subjectImage, dateOfPost, likes } = post;
+	const { user } = useContext(StoreContext);
+
 	return (
 		<div className="d-flex justify-content-between align-items-center mb-4">
 			<div style={{ flex: 3 }}>
@@ -21,8 +24,12 @@ const PostPreview = ({ post }) => {
 					</div>
 					<div className="me-3">
 						<span>
-							<span>{likes}</span>
-							<i className="far fa-thumbs-up me-1"></i>
+							<span>{likes > 0 && likes}</span>
+							{user.activity.likedPosts.includes(_id) ? (
+								<i className="fas fa-thumbs-up  me-1"></i>
+							) : (
+								<i className="far fa-thumbs-up me-1"></i>
+							)}
 						</span>
 						<span>
 							<i className="far fa-bookmark"></i>
