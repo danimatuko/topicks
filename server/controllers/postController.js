@@ -45,58 +45,27 @@ export const getPostById = async (req, res) => {
 };
 
 export const like = async (req, res) => {
-	const { postId, userId, isLiked } = req.body;
-	const user = await updateUserLikes(userId, postId);
-	const post = await updatePostLikes(postId, isLiked, user.alreadyLiked);
+	const { postId, userId } = req.body;
+
+	const user = await User.findOne({ _id: userId });
+	const alreadyLiked = user.activity.likedPosts.includes(postId);
+	const post = await Post.findById({ _id: postId });
+
+	if (alreadyLiked) {
+		post.likes -= 1;
+		const index = user.activity.likedPosts.indexOf(postId);
+		user.activity.likedPosts.splice(index, 1);
+	} else {
+		post.likes += 1;
+		user.activity.likedPosts.push(postId);
+	}
+
+	await user.save();
+	await post.save();
+
 	res.status(200).json({
-		id: post._id,
-		likeResult: post.likeResult,
+		postId: post._id,
 		likes: post.likes,
 		likedPosts: user.activity.likedPosts
 	});
-};
-
-const updatePostLikes = async (id, isLiked, alreadyLiked) => {
-	try {
-		let post = await Post.findById({ _id: id });
-		if (isLiked == "true" && !alreadyLiked) {
-			post.likes = post.likes += 1;
-			post.likeResult = "like";
-			post = await post.save();
-			return post;
-		} else {
-			post.likes = post.likes -= 1;
-			post.likeResult = "disLike";
-			post = await post.save();
-			return post;
-		}
-
-		// post.likes = isLiked == "true" && !alreadyLiked ? (post.likes += 1) : (post.likes -= 1);
-		// post = await post.save();
-		// post.likeResult = isLiked;
-		// return post;
-	} catch (error) {
-		throw new Error(error);
-	}
-};
-
-const updateUserLikes = async (userId, postId) => {
-	try {
-		let user = await User.findById({ _id: userId });
-		const alreadyLiked = user.activity.likedPosts.find((id) => id == postId);
-
-		if (alreadyLiked) {
-			user.activity.likedPosts = user.activity.likedPosts.filter((id) => id !== postId);
-			user = await user.save();
-			// add info if user already liked the post to update the post likes properly
-			user.alreadyLiked = alreadyLiked;
-			return user;
-		} else {
-			user.activity.likedPosts.push(postId);
-			user = await user.save();
-			return user;
-		}
-	} catch (error) {
-		throw new Error(error);
-	}
 };
