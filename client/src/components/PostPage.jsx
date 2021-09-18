@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Badge, Container, Spinner } from "react-bootstrap";
 import Post from "../stores/PostStore";
 import parse from "html-react-parser";
+import { StoreContext } from "../stores/RootStore";
+import { runInAction } from "mobx";
+import { observer } from "mobx-react-lite";
 
-const PostPage = ({ match }) => {
-	const [post, setPost] = useState(null);
+const PostPage = observer(({ match }) => {
 	const [isLoading, setIsLoading] = useState(true);
+	const { user, post } = useContext(StoreContext);
 
 	const limitImagesWidth = () => {
 		document
@@ -13,13 +16,35 @@ const PostPage = ({ match }) => {
 			.forEach((img) => img.setAttribute("style", "max-width:100%;object-fit:cover;"));
 	};
 
+	const handleLike = async () => {
+		try {
+			const { data } = await user.like(post.id);
+			post.likes = data.likes;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	useEffect(() => {
 		(async () => {
-			const { data } = await Post.get(match.params.id);
-			setIsLoading(false);
-			setPost(data);
+			try {
+				const { data } = await Post.getPostById(match.params.id);
+				runInAction(() => {
+					post.id = data._id;
+					post.userId = data.userId;
+					post.author = data.author;
+					post.topic = data.topic;
+					post.title = data.title;
+					post.subjectImage = data.subjectImage;
+					post.body = data.body;
+					post.likes = data.likes;
+				});
+				setIsLoading(false);
+			} catch (error) {
+				console.log(error);
+			}
 		})();
-	}, [match.params.id]);
+	}, [match.params.id, post.id]);
 
 	// if the user post an image larger then the page container resize the image
 	limitImagesWidth();
@@ -46,14 +71,24 @@ const PostPage = ({ match }) => {
 						<Badge className="tag border-radius-5  p-2 me-2" pill bg="secondary">
 							{post && post.topic}
 						</Badge>
-						<i className="far fa-thumbs-up me-1"></i>
-						<i className="far fa-bookmark"></i>
+						<div className="d-inline-block">
+							<span>
+								<span>{post && post.likes}</span>
+								<i
+									className="like far fa-thumbs-up me-1 fs-4"
+									onClick={handleLike}
+								></i>
+							</span>
+							<span>
+								<i className="bookmark far fa-bookmark fs-4"></i>
+							</span>
+						</div>
 					</div>
 				</div>
 				<div className="body mt-5">{post && parse(post.body)}</div>
 			</div>
 		</Container>
 	);
-};
+});
 
 export default PostPage;

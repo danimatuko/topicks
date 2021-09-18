@@ -1,8 +1,10 @@
-import { action, makeObservable, observable } from "mobx";
+import { action, makeAutoObservable, makeObservable, observable } from "mobx";
 import { getDate } from "../helpers/getDate";
 import Axios from "axios";
+import { makePersistable } from "mobx-persist-store";
 
 class Post {
+	id = "";
 	user_id = "";
 	author = "John Doe";
 	topic = "Technology";
@@ -10,13 +12,34 @@ class Post {
 	subjectImage = "";
 	body = "";
 	dateOfPost = "";
+	likes = 0;
 
 	constructor(userId, author, topic, title, subjectImage, body) {
-		makeObservable(this, {
-			title: observable,
-			body: observable,
-			save: action
+		makeAutoObservable(this);
+
+		makePersistable(this, {
+			name: "postStore",
+			properties: [
+				"id",
+				"user_id",
+				"author",
+				"topic",
+				"title",
+				"subjectImage",
+				"body",
+				"dateOfPost",
+				"likes"
+			],
+			storage: window.localStorage
 		});
+
+		// makeObservable(this, {
+		// 	title: observable,
+		// 	body: observable,
+		// 	save: action,
+		// 	getPostById: action
+		// });
+
 		this.userId = userId;
 		this.author = author;
 		this.topic = topic;
@@ -42,20 +65,19 @@ class Post {
 			console.log(error);
 		}
 	}
-	static getAllPosts() {
-		try {
-			return Axios.get("/posts");
-		} catch (error) {
-			console.log(error);
-		}
+
+	static async getAllPosts() {
+		return Axios.get("/posts");
 	}
 
-	static async get(id) {
-		try {
-			return await Axios.get(`/posts/${id}`);
-		} catch (error) {
-			console.log(error);
-		}
+	static async getLatestPosts() {
+		return Axios.get("/posts/latest");
+	}
+	static async getMostLikedPosts() {
+		return Axios.get("/posts/most-liked");
+	}
+	static async getPostById(id) {
+		return await Axios.get(`/posts/${id}`);
 	}
 }
 

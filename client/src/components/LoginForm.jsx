@@ -23,6 +23,7 @@ const LoginForm = ({ history }) => {
 					user.last_name = data.last_name;
 					user.email = data.email;
 					user.role = data.role;
+					user.activity = data.activity;
 				});
 				history.push("/");
 			}

@@ -6,7 +6,7 @@ import { StoreContext } from "../stores/RootStore";
 
 const CreatePost = () => {
 	const initialState = {
-		userId:"",
+		userId: "",
 		author: "John Doe",
 		title: "",
 		topic: "",
@@ -16,13 +16,12 @@ const CreatePost = () => {
 	const [post, setPost] = useState(initialState);
 	const { user } = useContext(StoreContext);
 
-
 	const handleChange = ({ name, value }) => {
 		setPost({ ...post, [name]: value });
 	};
 
 	const handleEditorChange = (e) => {
-		setPost({ ...post, ["postHTML"]: e.target.getContent() });
+		setPost({ ...post, postHTML: e.target.getContent() });
 	};
 
 	const handleSubmit = (e) => {

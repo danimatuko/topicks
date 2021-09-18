@@ -9,13 +9,18 @@ class User {
 	last_name = "";
 	email = "";
 	role = "";
+	activity = {
+		favorites: [],
+		likedPosts: [],
+		savedForLater: []
+	};
 
 	constructor() {
 		makeAutoObservable(this);
 
 		makePersistable(this, {
 			name: "userStore",
-			properties: ["id", "first_name", "last_name", "email", "role"],
+			properties: ["id", "first_name", "last_name", "email", "role", "activity"],
 			storage: window.localStorage
 		});
 	}
@@ -45,6 +50,11 @@ class User {
 
 	async getStoredData() {
 		return getPersistedStore(this);
+	}
+
+	async like(postId) {
+		const userId = this.id;
+		return await Axios.post(`/posts/like`, { postId, userId });
 	}
 }
 

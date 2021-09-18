@@ -57,6 +57,11 @@ export const login = async (req, res) => {
 			last_name: user.last_name,
 			email: user.email,
 			role: user.role,
+			activity: {
+				favoraites: user.activity.favoraites,
+				likedPosts: user.activity.likedPosts,
+				savedForLater: user.activity.savedForLater
+			},
 			token
 		});
 	} else {

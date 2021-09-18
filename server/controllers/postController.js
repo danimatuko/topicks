@@ -1,6 +1,5 @@
 import Post from "../models/Post.js";
 import User from "../models/User.js";
-import mongoose from "mongoose";
 
 export const createPost = async (req, res) => {
 	const { userId, author, topic, title, subjectImage, body, dateOfPost } = req.body;
@@ -28,6 +27,25 @@ export const getAllposts = async (req, res) => {
 	try {
 		const posts = await Post.find({});
 		res.status(200).json(posts);
+	} catch (error) {
+		res.status(500);
+		throw new Error(error);
+	}
+};
+export const getLatestPosts = async (req, res) => {
+	try {
+		const latestPosts = await Post.find().sort({ _id: -1 }).limit(3);
+		res.status(200).json(latestPosts);
+	} catch (error) {
+		res.status(500);
+		throw new Error(error);
+	}
+};
+
+export const getMostLikedposts = async (req, res) => {
+	try {
+		const mostLikedposts = await Post.find().sort({ likes: -1 }).limit(3);
+		res.status(200).json(mostLikedposts);
 	} catch (error) {
 		res.status(500);
 		throw new Error(error);

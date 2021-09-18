@@ -11,7 +11,13 @@ nav.nav {
     width: 50px;
     border-radius: 50%;
 }
+
 /* remove the  default arrow from bootstrap dropdown button*/
 #dropdown-basic-button::after {
     content: none;
+}
+
+.like,
+.bookmark {
+    cursor: pointer;
 }

@@ -9,15 +9,30 @@ import { StoreContext } from "../stores/RootStore";
 
 const HomePage = observer(() => {
 	const [latestPosts, setLatestPosts] = useState(null);
+	const [mostLikedPosts, setMostLikedPosts] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useContext(StoreContext);
 
 	useEffect(() => {
 		(async () => {
-			const { data } = await Post.getAllPosts();
-			setIsLoading(false);
-			setLatestPosts(data);
+			try {
+				const { data } = await Post.getLatestPosts();
+				setIsLoading(false);
+				setLatestPosts(data);
+			} catch (error) {}
+		})();
+	}, []);
+
+	useEffect(() => {
+		(async () => {
+			try {
+				const { data } = await Post.getMostLikedPosts();
+				setIsLoading(false);
+				setMostLikedPosts(data);
+			} catch (error) {
+				console.log(error);
+			}
 		})();
 	}, []);
 
@@ -27,15 +42,28 @@ const HomePage = observer(() => {
 			<Container>
 				<Row className="my-5 d-flex justify-content-between">
 					<Col md={6}>
-						<h2 className="display-4 mb-4 fw-bold text-secondary">Latest</h2>
-						{isLoading ? (
-							<Spinner animation="border" className="d-block mx-auto" />
-						) : (
-							latestPosts &&
-							latestPosts
-								.filter((latestPosts, index) => index < 10)
-								.map((post) => <PostPreview key={post._id} post={post} />)
-						)}
+						<Row>
+							<h2 className="display-4 mb-4 fw-bold text-secondary">Latest</h2>
+							{isLoading ? (
+								<Spinner animation="border" className="d-block mx-auto" />
+							) : (
+								latestPosts &&
+								latestPosts.map((post) => (
+									<PostPreview key={post._id} post={post} />
+								))
+							)}
+						</Row>
+						<Row>
+							<h2 className="display-4 mb-4 fw-bold text-secondary">Most Liked</h2>
+							{isLoading ? (
+								<Spinner animation="border" className="d-block mx-auto" />
+							) : (
+								mostLikedPosts &&
+								mostLikedPosts.map((post) => (
+									<PostPreview key={post._id} post={post} />
+								))
+							)}
+						</Row>
 					</Col>
 					<Col md={4} className="border-start">
 						<RecommandedTopics />
