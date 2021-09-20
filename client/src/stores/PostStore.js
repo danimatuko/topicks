@@ -33,13 +33,6 @@ class Post {
 			storage: window.localStorage
 		});
 
-		// makeObservable(this, {
-		// 	title: observable,
-		// 	body: observable,
-		// 	save: action,
-		// 	getPostById: action
-		// });
-
 		this.userId = userId;
 		this.author = author;
 		this.topic = topic;
@@ -51,7 +44,7 @@ class Post {
 
 	async save() {
 		const { userId, author, topic, title, subjectImage, body, dateOfPost } = this;
-		return await Axios.post("/posts", {
+		return Axios.post("/posts", {
 			userId,
 			author,
 			topic,

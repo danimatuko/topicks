@@ -26,7 +26,7 @@ class User {
 	}
 
 	static async signUp(first_name, last_name, email, password, role) {
-		return await Axios.post("/users", {
+		return Axios.post("/users", {
 			first_name,
 			last_name,
 			email,
@@ -35,7 +35,7 @@ class User {
 	}
 
 	static async login(email, password) {
-		return await Axios.post("/users/login", {
+		return Axios.post("/users/login", {
 			email: email,
 			password: password
 		});
@@ -54,7 +54,11 @@ class User {
 
 	async like(postId) {
 		const userId = this.id;
-		return await Axios.post(`/posts/like`, { postId, userId });
+		return Axios.post(`/posts/like`, { postId, userId });
+	}
+
+	async getMyPosts() {
+		return Axios.get(`/posts/user/${this.id}`);
 	}
 }
 

@@ -94,3 +94,12 @@ export const like = async (req, res) => {
 		likedPosts: user.activity.likedPosts
 	});
 };
+
+export const getUserPosts = async (req, res) => {
+	const posts = await Post.find({ userId: req.params.id });
+	if (posts) {
+		return res.status(200).json(posts);
+	}
+	res.status(500);
+	throw new Error(error);
+};

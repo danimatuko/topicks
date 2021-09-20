@@ -41,8 +41,8 @@ const SignedInMenu = ({ initials, logout }) => {
 			<Dropdown.Item as={Link} to="/post">
 				Write somthing
 			</Dropdown.Item>
-			<Dropdown.Item as={Link} to="/profile">
-				Profile
+			<Dropdown.Item as={Link} to="/dashboard">
+				Dashboard
 			</Dropdown.Item>
 			<Dropdown.Divider />
 			<Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>

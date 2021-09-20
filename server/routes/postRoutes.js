@@ -5,6 +5,7 @@ import {
 	getLatestPosts,
 	getMostLikedposts,
 	getPostById,
+	getUserPosts,
 	like
 } from "../controllers/postController.js";
 const router = express.Router();
@@ -16,5 +17,6 @@ router.get("/", getAllposts);
 router.get("/latest", getLatestPosts);
 router.get("/most-liked", getMostLikedposts);
 router.get("/:id", getPostById);
+router.get("/user/:id", getUserPosts);
 
 export default router;
