@@ -28,6 +28,17 @@ const PostPage = observer(({ match }) => {
 		}
 	};
 
+	const handleBookMark = async () => {
+		try {
+			const { data } = await user.bookMark(post.id);
+			runInAction(() => {
+				user.activity.savedForLater = data.savedForLater;
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	useEffect(() => {
 		(async () => {
 			try {
@@ -89,8 +100,18 @@ const PostPage = observer(({ match }) => {
 									></i>
 								)}
 							</span>
-							<span>
-								<i className="bookmark far fa-bookmark fs-4"></i>
+							<span className="me-1">
+								{user.activity.savedForLater.includes(post.id) ? (
+									<i
+										className="bookmark fas fa-bookmark fs-4"
+										onClick={handleBookMark}
+									></i>
+								) : (
+									<i
+										className="bookmark far fa-bookmark fs-4"
+										onClick={handleBookMark}
+									></i>
+								)}
 							</span>
 						</div>
 					</div>

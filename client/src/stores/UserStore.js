@@ -57,8 +57,18 @@ class User {
 		return Axios.post(`/posts/like`, { postId, userId });
 	}
 
-	async getMyPosts() {
+	async bookMark(postId) {
+		const userId = this.id;
+		return Axios.post(`/posts/read-later`, { postId, userId });
+	}
+
+	async getPosts() {
 		return Axios.get(`/posts/user/${this.id}`);
+	}
+
+	async getReadingList() {
+		console.log(this.id);
+		return Axios.get(`/posts/user/reading-list/${this.id}`);
 	}
 }
 

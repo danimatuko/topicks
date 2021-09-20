@@ -1,25 +1,41 @@
+import { runInAction } from "mobx";
 import React, { useContext, useEffect, useState } from "react";
-import { Col, Container, Image, Row, Button, Form, Tab, Nav, Spinner } from "react-bootstrap";
-import Post from "../stores/PostStore";
+import { Col, Container, Row, Tab, Nav, Spinner } from "react-bootstrap";
 import { StoreContext } from "../stores/RootStore";
 import PostPreview from "./PostPreview";
-const Dashboard = () => {
-	const [isLoading, setIsLoading] = useState(true);
-	const [myPosts, setMyPosts] = useState([]);
+import { observer } from "mobx-react";
 
+const Dashboard = observer(() => {
 	const { user } = useContext(StoreContext);
 
-
+	const [isLoading, setIsLoading] = useState(true);
+	const [myPosts, setMyPosts] = useState([]);
+	const [readingList, setReadingList] = useState([]);
 
 	useEffect(() => {
 		(async () => {
 			try {
-				const { data } = await user.getMyPosts();
+				const { data } = await user.getPosts();
 				setIsLoading(false);
 				setMyPosts(data);
-			} catch (error) {}
+			} catch (error) {
+				console.log(error);
+			}
 		})();
-	}, []);
+	}, [user]);
+
+	useEffect(() => {
+		(async () => {
+			try {
+				const { data } = await user.getReadingList();
+				setIsLoading(false);
+				setReadingList(data);
+				runInAction(() => (user.activity.savedForLater = data));
+			} catch (error) {
+				console.log(error);
+			}
+		})();
+	}, [user]);
 
 	return (
 		<div className="dashboard mt-5">
@@ -33,14 +49,13 @@ const Dashboard = () => {
 									<Nav.Link eventKey="myPosts">My Posts</Nav.Link>
 								</Nav.Item>
 								<Nav.Item>
-									<Nav.Link eventKey="second">Saved</Nav.Link>
+									<Nav.Link eventKey="readingList">Reading List</Nav.Link>
 								</Nav.Item>
 							</Nav>
 						</Col>
 						<Col sm={9}>
 							<Tab.Content>
 								<Tab.Pane eventKey="myPosts">
-									{" "}
 									<Row>
 										<h2>My Posts</h2>
 										{isLoading ? (
@@ -53,8 +68,25 @@ const Dashboard = () => {
 											myPosts.map((post) => (
 												<PostPreview key={post._id} post={post} />
 											))
-										)}{" "}
-									</Row>{" "}
+										)}
+									</Row>
+								</Tab.Pane>
+								<Tab.Pane eventKey="readingList">
+									<Row>
+										<h2>Reading List</h2>
+										{isLoading ? (
+											<Spinner
+												animation="border"
+												className="d-block mx-auto"
+											/>
+										) : readingList.length ? (
+											readingList.map((post) => (
+												<PostPreview key={post._id} post={post} />
+											))
+										) : (
+											<p>You have no items yet...</p>
+										)}
+									</Row>
 								</Tab.Pane>
 							</Tab.Content>
 						</Col>
@@ -63,6 +95,6 @@ const Dashboard = () => {
 			</Container>
 		</div>
 	);
-};
+});
 
 export default Dashboard;
