@@ -75,6 +75,7 @@ const CreatePost = ({ history }) => {
 						<option>Technology</option>
 						<option>Business</option>
 						<option>Mindfulness</option>
+						<option>Art</option>
 					</Form.Select>
 				</Form.Group>
 				<Form.Group className="mb-3" controlId="subjectImage">

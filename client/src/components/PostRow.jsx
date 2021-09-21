@@ -1,19 +1,31 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import { Image } from "react-bootstrap";
+import { Dropdown, DropdownButton, Image } from "react-bootstrap";
 
 const PostRow = ({ post, index }) => {
 	const { _id, topic, title, subjectImage, dateOfPost, likes } = post;
 
 	const history = useHistory();
 
-	const handleClick = () => {
+	const handleClick = (e) => {
 		history.push(`/posts/${_id}`);
 	};
-
+	const options = (e) => {
+		e.stopPropagation();
+		console.log("options");
+	};
 	return (
-		<tr onClick={handleClick} style={{ cursor: "pointer" }}>
+		<tr onClick={(e) => handleClick(e)} style={{ cursor: "pointer" }}>
+			<td onClick={(e) => options(e)}>
+				<DropdownButton
+					title={<i className="fas fa-ellipsis-v text-secondary"></i>}
+					className="table-row-dropdown"
+				>
+					<Dropdown.Item>Edit</Dropdown.Item>
+					<Dropdown.Item>Delete</Dropdown.Item>
+				</DropdownButton>
+			</td>
 			<td>{index + 1}</td>
 			<td>
 				<Image src={subjectImage} width="80px" height="50px" />
@@ -27,5 +39,7 @@ const PostRow = ({ post, index }) => {
 		</tr>
 	);
 };
+
+const OptionsIcon = () => <i className="fas fa-ellipsis-v"></i>;
 
 export default PostRow;

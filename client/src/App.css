@@ -21,6 +21,16 @@ nav.nav {
     content: none;
 }
 
+.table-row-dropdown .dropdown-toggle {
+    background: none;
+    border: none;
+}
+
+.table-row-dropdown .dropdown-toggle::after {
+    content: none !important;
+
+}
+
 .like,
 .unlike,
 .bookmark {
