@@ -67,7 +67,6 @@ class User {
 	}
 
 	async getReadingList() {
-		console.log(this.id);
 		return Axios.get(`/posts/user/reading-list/${this.id}`);
 	}
 }

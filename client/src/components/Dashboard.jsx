@@ -1,9 +1,10 @@
 import { runInAction } from "mobx";
 import React, { useContext, useEffect, useState } from "react";
-import { Col, Container, Row, Tab, Nav, Spinner } from "react-bootstrap";
+import { Col, Container, Row, Tab, Nav, Spinner, Table } from "react-bootstrap";
 import { StoreContext } from "../stores/RootStore";
-import PostPreview from "./PostPreview";
 import { observer } from "mobx-react";
+import PostsTable from "./PostsTable";
+import PostRow from "./PostRow";
 
 const Dashboard = observer(() => {
 	const { user } = useContext(StoreContext);
@@ -57,34 +58,53 @@ const Dashboard = observer(() => {
 							<Tab.Content>
 								<Tab.Pane eventKey="myPosts">
 									<Row>
-										<h2>My Posts</h2>
+										<h2 className="mb-4">My Posts</h2>
 										{isLoading ? (
 											<Spinner
 												animation="border"
 												className="d-block mx-auto"
 											/>
 										) : (
-											myPosts &&
-											myPosts.map((post) => (
-												<PostPreview key={post._id} post={post} />
-											))
+											myPosts && (
+												<Table striped bordered hover>
+													<PostsTable />
+													<tbody>
+														{myPosts.map((post, index) => (
+															<PostRow
+																key={post._id}
+																post={post}
+																index={index}
+															/>
+														))}
+													</tbody>
+												</Table>
+											)
 										)}
 									</Row>
 								</Tab.Pane>
 								<Tab.Pane eventKey="readingList">
 									<Row>
-										<h2>Reading List</h2>
+										<h2 className="mb-4">Reading List</h2>
 										{isLoading ? (
 											<Spinner
 												animation="border"
 												className="d-block mx-auto"
 											/>
-										) : readingList.length ? (
-											readingList.map((post) => (
-												<PostPreview key={post._id} post={post} />
-											))
 										) : (
-											<p>You have no items yet...</p>
+											readingList && (
+												<Table striped bordered hover>
+													<PostsTable />
+													<tbody>
+														{readingList.map((post, index) => (
+															<PostRow
+																key={post._id}
+																post={post}
+																index={index}
+															/>
+														))}
+													</tbody>
+												</Table>
+											)
 										)}
 									</Row>
 								</Tab.Pane>
