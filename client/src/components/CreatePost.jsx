@@ -1,12 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Form, Button, Alert } from "react-bootstrap";
 import { Editor } from "@tinymce/tinymce-react";
 import Post from "../stores/PostStore";
 import { StoreContext } from "../stores/RootStore";
 
-const CreatePost = ({ history }) => {
+const CreatePost = ({ history, match }) => {
 	const { user } = useContext(StoreContext);
 	const [error, setError] = useState(null);
+	const [edit, setEdit] = useState(false);
 
 	const initialState = {
 		userId: "",
@@ -16,7 +17,14 @@ const CreatePost = ({ history }) => {
 		subjectImage: "",
 		postHTML: ""
 	};
+
 	const [post, setPost] = useState(initialState);
+
+	useEffect(() => {
+		match.params.id ? setEdit(true) : setEdit(false);
+		edit ? populateFormData() : setPost(initialState);
+		// eslint-disable-next-line
+	}, [match.params.id, edit]);
 
 	const handleChange = ({ name, value }) => {
 		setPost({ ...post, [name]: value });
@@ -24,6 +32,25 @@ const CreatePost = ({ history }) => {
 
 	const handleEditorChange = (e) => {
 		setPost({ ...post, postHTML: e.target.getContent() });
+	};
+
+	const populateFormData = async () => {
+		try {
+			const { data } = await Post.getPostById(match.params.id);
+
+			const postToEdit = {
+				userId: data._id,
+				author: user.first_name + " " + user.last_name,
+				title: data.title,
+				topic: data.topic,
+				subjectImage: data.subjectImage,
+				postHTML: data.body
+			};
+
+			setPost({ ...post, ...postToEdit });
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const handleSubmit = async (e) => {
@@ -59,6 +86,7 @@ const CreatePost = ({ history }) => {
 					</Form.Label>
 					<Form.Control
 						name="title"
+						value={post.title}
 						type="text"
 						onChange={(e) => handleChange(e.target)}
 					/>
@@ -70,7 +98,11 @@ const CreatePost = ({ history }) => {
 					<Form.Label>
 						<span className="text-danger me-1">*</span>Topic
 					</Form.Label>
-					<Form.Select name="topic" onChange={(e) => handleChange(e.target)}>
+					<Form.Select
+						name="topic"
+						value={post.topic}
+						onChange={(e) => handleChange(e.target)}
+					>
 						<option>Money</option>
 						<option>Technology</option>
 						<option>Business</option>
@@ -82,6 +114,7 @@ const CreatePost = ({ history }) => {
 					<Form.Label>Subject Image</Form.Label>
 					<Form.Control
 						name="subjectImage"
+						value={post.subjectImage}
 						type="text"
 						placeholder="Enter image source from URL"
 						onChange={(e) => handleChange(e.target)}
@@ -95,7 +128,7 @@ const CreatePost = ({ history }) => {
 				</Form.Label>
 				<Editor
 					apiKey={process.env.REACT_APP_TINYMCE_API_KEY}
-					initialValue="<p>Write your post here...</p>"
+					initialValue={post.postHTML}
 					init={{
 						height: 500,
 						menubar: false,

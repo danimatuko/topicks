@@ -74,6 +74,7 @@ const Dashboard = observer(() => {
 																key={post._id}
 																post={post}
 																index={index}
+																editable={true}
 															/>
 														))}
 													</tbody>
