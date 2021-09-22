@@ -1,6 +1,5 @@
 import Post from "../models/Post.js";
 import User from "../models/User.js";
-import mongoose from "mongoose";
 
 export const createPost = async (req, res) => {
 	const { userId, author, topic, title, subjectImage, body, dateOfPost } = req.body;
@@ -24,6 +23,26 @@ export const createPost = async (req, res) => {
 		post = await post.save();
 
 		res.status(201).json(post);
+	} catch (error) {
+		res.status(500);
+		throw new Error(error);
+	}
+};
+
+export const updatePost = async (req, res) => {
+	try {
+		const post = await Post.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true });
+		res.status(200).json(post);
+	} catch (error) {
+		res.status(500);
+		throw new Error(error);
+	}
+};
+
+export const deletePost = async (req, res) => {
+	try {
+		await Post.findByIdAndRemove({ _id: req.params.id });
+		res.status(200).json("Post deleted");
 	} catch (error) {
 		res.status(500);
 		throw new Error(error);
@@ -62,6 +81,7 @@ export const getMostLikedposts = async (req, res) => {
 export const getPostById = async (req, res) => {
 	try {
 		const post = await Post.findOne({ _id: req.params.id });
+		if (!post) throw new Error("Post not found");
 		res.status(200).json(post);
 	} catch (error) {
 		res.status(500);

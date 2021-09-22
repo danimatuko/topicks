@@ -20,7 +20,6 @@ class Post {
 		makePersistable(this, {
 			name: "postStore",
 			properties: [
-				"id",
 				"user_id",
 				"author",
 				"topic",
@@ -32,7 +31,6 @@ class Post {
 			],
 			storage: window.localStorage
 		});
-
 		this.userId = userId;
 		this.author = author;
 		this.topic = topic;
@@ -44,6 +42,7 @@ class Post {
 
 	async save() {
 		const { userId, author, topic, title, subjectImage, body, dateOfPost } = this;
+		console.log(userId);
 		return Axios.post("/posts", {
 			userId,
 			author,
@@ -53,6 +52,24 @@ class Post {
 			body,
 			dateOfPost
 		});
+	}
+
+	async update(id) {
+		console.log(id);
+		const { userId, author, topic, title, subjectImage, body, dateOfPost } = this;
+		return Axios.put(`/posts/${id}`, {
+			userId,
+			author,
+			topic,
+			title,
+			subjectImage,
+			body,
+			dateOfPost
+		});
+	}
+
+	static async delete(id) {
+		return Axios.delete(`/posts/${id}`);
 	}
 
 	static async getAllPosts() {
@@ -66,7 +83,7 @@ class Post {
 		return Axios.get("/posts/most-liked");
 	}
 	static async getPostById(id) {
-		return await Axios.get(`/posts/${id}`);
+		return Axios.get(`/posts/${id}`);
 	}
 }
 

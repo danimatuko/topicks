@@ -12,6 +12,7 @@ const Dashboard = observer(() => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [myPosts, setMyPosts] = useState([]);
 	const [readingList, setReadingList] = useState([]);
+	const [isDeleted, setIsDeleted] = useState(false);
 
 	useEffect(() => {
 		(async () => {
@@ -23,7 +24,7 @@ const Dashboard = observer(() => {
 				console.log(error);
 			}
 		})();
-	}, [user]);
+	}, [user, isDeleted]);
 
 	useEffect(() => {
 		(async () => {
@@ -75,6 +76,7 @@ const Dashboard = observer(() => {
 																post={post}
 																index={index}
 																editable={true}
+																setIsDeleted={setIsDeleted}
 															/>
 														))}
 													</tbody>

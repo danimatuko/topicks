@@ -2,21 +2,32 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { Dropdown, DropdownButton, Image } from "react-bootstrap";
+import Post from "../stores/PostStore";
 
-const PostRow = ({ post, index, editable }) => {
+const PostRow = ({ post, index, editable, setIsDeleted }) => {
 	const { _id, topic, title, subjectImage, dateOfPost, likes } = post;
 
 	const history = useHistory();
 
-	const handleClick = (e) => {
+	const rowClickHandler = (e) => {
 		history.push(`/posts/${_id}`);
 	};
+
+	const deleteHandler = async () => {
+		try {
+			await Post.delete(_id);
+			setIsDeleted(true);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const options = (e) => {
 		// disable the onClick event of the row if the opitons button is clicked
 		e.stopPropagation();
 	};
 	return (
-		<tr onClick={(e) => handleClick(e)} style={{ cursor: "pointer" }}>
+		<tr onClick={(e) => rowClickHandler(e)} style={{ cursor: "pointer" }}>
 			{editable && (
 				<td onClick={(e) => options(e)}>
 					<DropdownButton
@@ -26,7 +37,7 @@ const PostRow = ({ post, index, editable }) => {
 						<Dropdown.Item as={Link} to={`/post/edit/${_id}`}>
 							Edit
 						</Dropdown.Item>
-						<Dropdown.Item>Delete</Dropdown.Item>
+						<Dropdown.Item onClick={deleteHandler}>Delete</Dropdown.Item>
 					</DropdownButton>
 				</td>
 			)}
