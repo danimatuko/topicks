@@ -1,8 +1,8 @@
-const PostsTable = () => {
+const PostsTable = ({ editable }) => {
 	return (
 		<thead>
 			<tr>
-				<th></th>
+				{editable && <th></th>}
 				<th>#</th>
 				<th></th>
 				<th>Title</th>
