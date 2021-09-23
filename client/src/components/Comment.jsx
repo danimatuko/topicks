@@ -3,7 +3,7 @@ import { Image, Row, Col } from "react-bootstrap";
 
 const Comment = () => {
 	return (
-		<div className="comment mb-5">
+		<div className="comment mb-5 ">
 			<Row className="flex-column gy-1" style={{ backgroundColor: "" }}>
 				<Col>
 					<div className="d-flex justify-content-between" style={{ width: "120px" }}>

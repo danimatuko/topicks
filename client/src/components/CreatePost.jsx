@@ -3,6 +3,7 @@ import { Container, Form, Button, Alert } from "react-bootstrap";
 import { Editor } from "@tinymce/tinymce-react";
 import Post from "../stores/PostStore";
 import { StoreContext } from "../stores/RootStore";
+import { editorConfig } from "../tinymce.config";
 
 const CreatePost = ({ history, match }) => {
 	const { user } = useContext(StoreContext);
@@ -129,27 +130,7 @@ const CreatePost = ({ history, match }) => {
 				<Editor
 					apiKey={process.env.REACT_APP_TINYMCE_API_KEY}
 					initialValue={post.postHTML}
-					init={{
-						height: 500,
-						menubar: false,
-						plugins: [
-							"advlist autolink lists link image charmap print preview anchor",
-							"searchreplace visualblocks code fullscreen",
-							"insertdatetime media table paste code help wordcount",
-							"emoticons media image fontsizeselect"
-						],
-						font_formats: ["8pt 10pt 12pt 14pt 18pt 24pt 36pt"],
-						toolbar:
-							"undo redo | formatselect | fontsizeselect |" +
-							"bold italic backcolor | alignleft aligncenter " +
-							"alignright alignjustify | bullist numlist outdent indent | " +
-							"removeformat | help |" +
-							"emoticons | " +
-							"media |" +
-							"image",
-						content_style:
-							"body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
-					}}
+					init={editorConfig}
 					onChange={(e) => handleEditorChange(e)}
 				/>
 				<Button variant="dark" type="submit" className="w-100 mt-3">
