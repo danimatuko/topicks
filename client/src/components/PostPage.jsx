@@ -5,6 +5,7 @@ import parse from "html-react-parser";
 import { StoreContext } from "../stores/RootStore";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react-lite";
+import Comments from "./Comments";
 
 const PostPage = observer(({ match }) => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -71,8 +72,8 @@ const PostPage = observer(({ match }) => {
 			<Spinner animation="border" />)
 		</div>
 	) : (
-		<Container>
-			<div className="post w-75 m-auto my-5">
+		<Container className="mt-5">
+			<div className="post w-75 mx-auto py-5">
 				<h1 className="display-3">{post && post.title}</h1>
 				<div className="d-flex justify-content-between">
 					<div>
@@ -118,6 +119,8 @@ const PostPage = observer(({ match }) => {
 				</div>
 				<div className="body mt-5">{post && parse(post.body)}</div>
 			</div>
+
+			<Comments />
 		</Container>
 	);
 });
