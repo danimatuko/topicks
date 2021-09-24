@@ -3,6 +3,7 @@ import "express-async-errors";
 import connectToDB from "./database/db.js";
 import postRoutes from "./routes/postRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import commentRoutes from "./routes/commentRoutes.js";
 import dotenv from "dotenv";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(express.json());
 //routes
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
+app.use("/post/:id/comments", commentRoutes);
 //error middlewares
 app.use(notFound);
 app.use(errorHandler);

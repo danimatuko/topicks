@@ -30,5 +30,4 @@ router.get("/user/reading-list/:id", getReadingList);
 
 router.delete("/:id", deletePost);
 
-
 export default router;
