@@ -61,7 +61,7 @@ const PostPage = observer(({ match }) => {
 		})();
 	}, [match.params.id, post]);
 
-	// if the user post an image larger then the page container resize the image
+	// if the user posts an image larger then the page container resize the image
 	limitImagesWidth();
 
 	return isLoading ? (
@@ -120,7 +120,7 @@ const PostPage = observer(({ match }) => {
 				<div className="body mt-5">{post && parse(post.body)}</div>
 			</div>
 
-			<Comments />
+			<Comments postId={post.id}/>
 		</Container>
 	);
 });

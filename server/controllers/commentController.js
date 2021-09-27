@@ -4,7 +4,7 @@ export const getPostComments = async (req, res) => {
 	const postId = req.params.id;
 
 	try {
-		const comments = await Comment.find({ postId: postId });
+		const comments = await Comment.find({ postId: postId }).sort({ createdAt: -1 });
 		res.status(200).json(comments);
 	} catch (error) {
 		res.status(500);
@@ -15,6 +15,7 @@ export const getPostComments = async (req, res) => {
 export const addComment = async (req, res) => {
 	const postId = req.params.id;
 	const { userId, author, commentBody, dateOfComment } = req.body;
+	if (commentBody === "") throw new Error("Comment can't be empty");
 
 	try {
 		let comment = new Comment({

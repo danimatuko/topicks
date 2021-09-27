@@ -42,7 +42,6 @@ class Post {
 
 	async save() {
 		const { userId, author, topic, title, subjectImage, body, dateOfPost } = this;
-		console.log(userId);
 		return Axios.post("/posts", {
 			userId,
 			author,
@@ -84,6 +83,10 @@ class Post {
 	}
 	static async getPostById(id) {
 		return Axios.get(`/posts/${id}`);
+	}
+
+	static async getComments(id) {
+		return Axios.get(`/post/${id}/comments`);
 	}
 }
 
