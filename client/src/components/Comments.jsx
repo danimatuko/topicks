@@ -6,6 +6,7 @@ import CommentStore from "../stores/CommentStore";
 const Comments = ({ postId }) => {
 	const [comments, setComments] = useState([]);
 	const [commentSuccsess, setCommentSuccsess] = useState(false);
+	const [isDeleted, setIsDeleted] = useState(false);
 
 	useEffect(() => {
 		(async () => {
@@ -16,7 +17,7 @@ const Comments = ({ postId }) => {
 				console.log(error);
 			}
 		})();
-	}, [postId, commentSuccsess]);
+	}, [postId, commentSuccsess, isDeleted]);
 
 	return (
 		<div className="commentes w-75 mx-auto my-5 pb-3">
@@ -27,7 +28,7 @@ const Comments = ({ postId }) => {
 				setCommentSuccsess={setCommentSuccsess}
 			/>
 			{comments.map((comment) => (
-				<Comment key={comment._id} comment={comment} />
+				<Comment key={comment._id} comment={comment} setIsDeleted={setIsDeleted} />
 			))}
 		</div>
 	);

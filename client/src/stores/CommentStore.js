@@ -17,7 +17,6 @@ class Comment {
 			properties: ["postId", "id", "author", "commentBody", "dateOfComment"],
 			storage: window.localStorage
 		});
-
 	}
 
 	static async getAll(id) {
@@ -34,6 +33,10 @@ class Comment {
 			commentBody,
 			dateOfComment
 		});
+	}
+
+	static async delete(id ,postId) {
+		return Axios.delete(`/post/${postId}/comments/${id}`);
 	}
 }
 

@@ -29,7 +29,7 @@ const CommentForm = ({ commentSuccsess, setCommentSuccsess }) => {
 
 	const addComment = async (e) => {
 		e.preventDefault();
-		setCommentSuccsess(false); 
+		setCommentSuccsess(false);
 		const { userId, author, commentBody, dateOfComment } = commentState;
 
 		runInAction(() => {
