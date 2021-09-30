@@ -3,7 +3,7 @@ import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import CommentStore from "../stores/CommentStore";
 
-const Comments = ({ postId }) => {
+const Comments = ({ postId, setEditComment, editComment }) => {
 	const [comments, setComments] = useState([]);
 	const [commentSuccsess, setCommentSuccsess] = useState(false);
 	const [isDeleted, setIsDeleted] = useState(false);
@@ -26,9 +26,17 @@ const Comments = ({ postId }) => {
 			<CommentForm
 				commentSuccsess={commentSuccsess}
 				setCommentSuccsess={setCommentSuccsess}
+				editComment={editComment}
+				setEditComment={setEditComment}
+
 			/>
 			{comments.map((comment) => (
-				<Comment key={comment._id} comment={comment} setIsDeleted={setIsDeleted} />
+				<Comment
+					key={comment._id}
+					comment={comment}
+					setIsDeleted={setIsDeleted}
+					setEditComment={setEditComment}
+				/>
 			))}
 		</div>
 	);

@@ -4,8 +4,20 @@ import parse from "html-react-parser";
 import { StoreContext } from "../stores/RootStore";
 import CommentModel from "../stores/CommentStore";
 
-const Comment = ({ comment, setIsDeleted }) => {
+const Comment = ({ comment, setIsDeleted, setEditComment }) => {
 	const { user } = useContext(StoreContext);
+//	const { userId, author, commentBody, dateOfComment } = comment;
+
+	const editComment = async () => {
+		setEditComment(comment.commentBody)
+
+		// try {
+		// 	await CommentModel.edit(comment);
+		// 	setIsDeleted(true);
+		// } catch (error) {
+		// 	console.log(error);
+		// }
+	};
 
 	const deleteComment = async () => {
 		try {
@@ -40,7 +52,7 @@ const Comment = ({ comment, setIsDeleted }) => {
 							title={<i className="fas fa-ellipsis-v text-secondary"></i>}
 							className="table-row-dropdown"
 						>
-							<Dropdown.Item>Edit</Dropdown.Item>
+							<Dropdown.Item onClick={editComment}>Edit</Dropdown.Item>
 							<Dropdown.Item onClick={deleteComment}>Delete</Dropdown.Item>
 						</DropdownButton>
 					)}

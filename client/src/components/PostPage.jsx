@@ -10,6 +10,7 @@ import Comments from "./Comments";
 const PostPage = observer(({ match }) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const { user, post } = useContext(StoreContext);
+	const [editComment, setEditComment] = useState(null);
 
 	const limitImagesWidth = () => {
 		document
@@ -120,7 +121,11 @@ const PostPage = observer(({ match }) => {
 				<div className="body mt-5">{post && parse(post.body)}</div>
 			</div>
 
-			<Comments postId={post.id}/>
+			<Comments
+				postId={post.id}
+				setEditComment={setEditComment}
+				editComment={editComment}
+			/>
 		</Container>
 	);
 });

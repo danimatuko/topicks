@@ -35,7 +35,11 @@ class Comment {
 		});
 	}
 
-	static async delete(id ,postId) {
+	static async edit(comment) {
+		return Axios.put(`/post/${comment.postId}/comments/${comment.id}`, comment);
+	}
+
+	static async delete(id, postId) {
 		return Axios.delete(`/post/${postId}/comments/${id}`);
 	}
 }
