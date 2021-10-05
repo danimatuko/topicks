@@ -7,22 +7,28 @@ const RecommandedTopics = () => {
 			<h2 className="h5 mb-4 fw-bold">Recommended topics</h2>
 			<div className="d-flex flex-wrap">
 				<Badge className="tag border-radius-5  p-2 m-1" pill bg="secondary">
-					Technology
+					Music
 				</Badge>
 				<Badge className="tag border-radius-5  p-2 m-1" pill bg="secondary">
-					Technology
+					Money
 				</Badge>
 				<Badge className="tag border-radius-5  p-2 m-1" pill bg="secondary">
-					Technology
+					Business
 				</Badge>
 				<Badge className="tag border-radius-5  p-2 m-1" pill bg="secondary">
-					Technology
+					Mindfulness
 				</Badge>
 				<Badge className="tag border-radius-5  p-2 m-1" pill bg="secondary">
-					Technology
+					Art
 				</Badge>
 				<Badge className="tag border-radius-5  p-2 m-1" pill bg="secondary">
-					Technology
+					Sports
+				</Badge>
+				<Badge className="tag border-radius-5  p-2 m-1" pill bg="secondary">
+					Society
+				</Badge>
+				<Badge className="tag border-radius-5  p-2 m-1" pill bg="secondary">
+					Politics
 				</Badge>
 			</div>
 			<hr />

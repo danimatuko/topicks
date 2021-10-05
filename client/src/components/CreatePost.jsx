@@ -109,6 +109,10 @@ const CreatePost = ({ history, match }) => {
 						<option>Business</option>
 						<option>Mindfulness</option>
 						<option>Art</option>
+						<option>Music</option>
+						<option>Sports</option>
+						<option>Politics</option>
+						<option>Society</option>
 					</Form.Select>
 				</Form.Group>
 				<Form.Group className="mb-3" controlId="subjectImage">

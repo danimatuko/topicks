@@ -8,6 +8,7 @@ import {
 	getLatestPosts,
 	getMostLikedposts,
 	getPostById,
+	getPosts,
 	getReadingList,
 	getUserPosts,
 	like,
@@ -21,7 +22,8 @@ router.post("/read-later", saveForLater);
 
 router.put("/:id", updatePost);
 
-router.get("/", getAllposts);
+//router.get("/", getAllposts);
+ router.get("/", getPosts);
 router.get("/latest", getLatestPosts);
 router.get("/most-liked", getMostLikedposts);
 router.get("/:id", getPostById);

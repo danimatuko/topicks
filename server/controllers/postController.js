@@ -52,12 +52,30 @@ export const deletePost = async (req, res) => {
 export const getAllposts = async (req, res) => {
 	try {
 		const posts = await Post.find({});
-		res.status(200).json(posts);
+		res.status(200).json({ length: posts.length, posts });
 	} catch (error) {
 		res.status(500);
 		throw new Error(error);
 	}
 };
+
+export const getPosts = async (req, res) => {
+	const page = Number(req.query.page) || 1;
+	const resultsPerPage = 3;
+	const sumOfPosts = await Post.countDocuments();
+	const totalPages = Math.ceil(sumOfPosts / resultsPerPage);
+
+	const posts = await Post.find()
+		.limit(resultsPerPage)
+		.skip(resultsPerPage * (page - 1));
+
+	if (posts) res.status(200).json({ posts, page, totalPages, resultsPerPage });
+	else {
+		res.status(404);
+		throw new Error("Products not found");
+	}
+};
+
 export const getLatestPosts = async (req, res) => {
 	try {
 		const latestPosts = await Post.find().sort({ _id: -1 }).limit(3);
