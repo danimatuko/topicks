@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { Container, Row, Col, Spinner, Button } from "react-bootstrap";
 import Post from "../stores/PostStore";
 import Hero from "./Hero";
@@ -13,9 +13,11 @@ const HomePage = ({ match, location }) => {
 	const [mostLikedPosts, setMostLikedPosts] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [allPosts, setAllPosts] = useState(null);
-	const pageNumber = location.search.split("=")[1] || 1;
+	const pageNumber = Number(location.search.split("=")[1] || 1);
 
 	useContext(StoreContext);
+
+	const isFirstRun = useRef(true);
 
 	useEffect(() => {
 		(async () => {
@@ -48,7 +50,13 @@ const HomePage = ({ match, location }) => {
 		}
 	};
 	useEffect(() => {
-		getAllPosts(); 
+		if (isFirstRun.current) {
+			console.log("first run", isFirstRun);
+			isFirstRun.current = false;
+			return; // return from the useEffect function if this is the first render
+		}
+		console.log("another run", isFirstRun);
+		getAllPosts();
 		// eslint-disable-next-line
 	}, [pageNumber]);
 
@@ -93,7 +101,7 @@ const HomePage = ({ match, location }) => {
 								<Paginate
 									total={allPosts.totalPages}
 									page={allPosts.page}
-									path={"posts"}
+									path="posts"
 								/>
 							</Row>
 						) : (
