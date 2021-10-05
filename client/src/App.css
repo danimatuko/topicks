@@ -44,3 +44,14 @@ nav.nav {
 .nav-pills .nav-link.active {
     background-color: black;
 }
+
+.page-link {
+    color: black;
+    height: 100%;
+    width: 100%;
+}
+
+.page-item.active .page-link {
+    background-color: black;
+    border-color: black;
+}

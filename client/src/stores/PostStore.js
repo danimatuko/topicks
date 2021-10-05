@@ -71,8 +71,8 @@ class Post {
 		return Axios.delete(`/posts/${id}`);
 	}
 
-	static async getAllPosts() {
-		return Axios.get("/posts");
+	static async getAllPosts(pageNumber) {
+		return Axios.get(`/posts/?page=${pageNumber}`);
 	}
 
 	static async getLatestPosts() {
