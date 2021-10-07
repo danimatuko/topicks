@@ -17,8 +17,8 @@ const App = () => {
 					<Route exact path="/sign-in" component={SignUpForm} />
 					<Route exact path="/login" component={LoginForm} />
 					<Route exact path="/dashboard" component={Dashboard} />
-					<Route path={["/", "/home"]} component={HomePage} />
 					<Route exact path={["/post", `/post/edit/:id`]} component={CreatePost} />
+					<Route path={["/", "/home"]} component={HomePage} />
 					<Route exact path="/posts/:id" component={PostPage} />
 				</Switch>
 			</main>

@@ -69,7 +69,7 @@ const CreatePost = ({ history, match }) => {
 
 		try {
 			!edit ? await newPost.save() : await newPost.update(match.params.id);
-			history.push("/");
+			history.push("/dashboard");
 		} catch (error) {
 			console.log({ error });
 			setError(error.response.data.message);
