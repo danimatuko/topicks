@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { Dropdown, DropdownButton, Image } from "react-bootstrap";
 import Post from "../stores/PostStore";
+import Comment from "../stores/CommentStore";
 
 const PostRow = ({ post, index, editable, setIsDeleted }) => {
 	const { _id, topic, title, subjectImage, dateOfPost, likes } = post;
+	const [commentsCount, setCommentsCount] = useState(0);
+
+	useEffect(() => {
+		(async () => {
+			try {
+				const { data } = await Comment.getAll(_id);
+				setCommentsCount(data.length);
+			} catch (error) {
+				console.log(error);
+			}
+		})();
+	});
 
 	const history = useHistory();
 
@@ -51,7 +64,7 @@ const PostRow = ({ post, index, editable, setIsDeleted }) => {
 			<td>{topic}</td>
 			<td>23</td>
 			<td>{likes}</td>
-			<td>16</td>
+			<td>{commentsCount}</td>
 		</tr>
 	);
 };

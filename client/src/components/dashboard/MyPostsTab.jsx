@@ -32,7 +32,7 @@ const MyPostsTab = () => {
 				) : (
 					myPosts && (
 						<Table striped bordered hover>
-							<PostsTable />
+							<PostsTable  editable={true}/>
 							<tbody>
 								{myPosts.map((post, index) => (
 									<PostRow

@@ -18,8 +18,8 @@ const App = () => {
 					<Route exact path="/login" component={LoginForm} />
 					<Route exact path="/dashboard" component={Dashboard} />
 					<Route exact path={["/post", `/post/edit/:id`]} component={CreatePost} />
-					<Route path={["/", "/home"]} component={HomePage} />
 					<Route exact path="/posts/:id" component={PostPage} />
+					<Route path={["/", "/home"]} component={HomePage} />
 				</Switch>
 			</main>
 			<Footer />

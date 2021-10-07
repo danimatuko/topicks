@@ -13,10 +13,10 @@ const Dashboard = () => {
 					<Row>
 						<Col sm={3}>
 							<Nav variant="pills" className="flex-column">
-								<Nav.Item>
+								<Nav.Item className="dashboard-nav-item">
 									<Nav.Link eventKey="myPosts">My Posts</Nav.Link>
 								</Nav.Item>
-								<Nav.Item>
+								<Nav.Item className="dashboard-nav-item">
 									<Nav.Link eventKey="readingList">Reading List</Nav.Link>
 								</Nav.Item>
 							</Nav>

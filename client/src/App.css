@@ -55,3 +55,13 @@ nav.nav {
     background-color: black;
     border-color: black;
 }
+
+
+.dashboard-nav-item {
+    cursor: pointer;
+    color: black;
+}
+
+.dashboard-nav-item a {
+    color: black;
+}
