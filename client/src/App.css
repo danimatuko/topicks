@@ -65,3 +65,15 @@ nav.nav {
 .dashboard-nav-item a {
     color: black;
 }
+
+.profile-initials {
+    width: 150px;
+    height: 150px;
+    background-color: #ccc;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem
+}

@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router";
 import CreatePost from "./components/CreatePost";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/dashboard/Dashboard";
 import Footer from "./components/Footer";
 import HomePage from "./components/HomePage";
 import LoginForm from "./components/LoginForm";

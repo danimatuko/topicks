@@ -69,6 +69,11 @@ class User {
 	async getReadingList() {
 		return Axios.get(`/posts/user/reading-list/${this.id}`);
 	}
+
+	async getLoggedInUser() {
+		console.log(this.id)
+		return Axios.get(`/users/${this.id}`);
+	}
 }
 
 export default User;
