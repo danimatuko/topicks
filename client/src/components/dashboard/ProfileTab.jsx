@@ -1,9 +1,10 @@
-import { runInAction } from "mobx";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback, useRef } from "react";
 import { Container, Form, Button, Row, Col, Alert, Tab, Image } from "react-bootstrap";
 import { getNameInitials } from "../../helpers/getNameIntials";
 import { StoreContext } from "../../stores/RootStore";
 import User from "../../stores/UserStore";
+import { useDropzone } from "react-dropzone";
+import Dropzone from "react-dropzone";
 
 const ProfileTab = ({ history }) => {
 	const initialState = {
@@ -15,13 +16,13 @@ const ProfileTab = ({ history }) => {
 		password: ""
 	};
 	const [profile, setProfile] = useState(initialState);
+	const [file, setFile] = useState(null);
 
 	useEffect(() => {
 		try {
 			(async () => {
 				const { data } = await user.getLoggedInUser();
 				setProfile(data);
-				console.log(data);
 			})();
 		} catch (error) {
 			console.log(error);
@@ -40,27 +41,18 @@ const ProfileTab = ({ history }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setError(null);
-		try {
-			const { data } = await User.signUp(first_name, last_name, email, password);
-			if (data) {
-				runInAction(() => {
-					user.id = data.id;
-					user.first_name = data.first_name.charAt(0).toUpperCase() + first_name.slice(1);
-					user.last_name = data.last_name.charAt(0).toUpperCase() + last_name.slice(1);
-					user.email = data.email;
-					user.role = data.role;
-				});
-				history.push("/");
-			}
-		} catch (error) {
-			console.log({ error });
-			setError(error.response.data.message || error.message);
-		}
 	};
 
 	const { profilePic, first_name, last_name, email, password } = profile;
 	const initials = getNameInitials(first_name, last_name);
+
+	const onImageChange = (e) => {
+		e.preventDefault();
+		const file = e.target.files[0];
+
+		setFile({ ...file, path: URL.createObjectURL(file) });
+		console.log(file);
+	};
 
 	return (
 		<Tab.Pane eventKey="profile">
@@ -73,16 +65,35 @@ const ProfileTab = ({ history }) => {
 									{error}
 								</Alert>
 							)}
-							{profilePic ? (
-								<Image
-									className="d-block mx-auto mb-3"
-									src="https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
-									width="150px"
-									roundedCircle
-								/>
-							) : (
-								<div className="profile-initials mx-auto mb-3">{initials}</div>
-							)}
+							<Form>
+								{!file ? (
+									<Image
+										className="d-block mx-auto mb-3"
+										src={
+											"https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
+										}
+										width="150px"
+										roundedCircle
+									/>
+								) : (
+									<Image
+										className="d-block mx-auto mb-3"
+										src={file.path}
+										width="150px"
+										height="150px"
+										roundedCircle
+										style={{ objectFit: "cover" }}
+									/>
+								)}{" "}
+								<Form.Group className="mb-4" controlId="first_name">
+									<Form.Label>Profile Image</Form.Label>
+									<input
+										type="file"
+										accept="image/*"
+										onChange={(e) => onImageChange(e)}
+									/>
+								</Form.Group>
+							</Form>
 
 							<Form onSubmit={handleSubmit}>
 								<Form.Group className="mb-3" controlId="first_name">
