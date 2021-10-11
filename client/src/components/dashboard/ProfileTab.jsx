@@ -20,6 +20,8 @@ const ProfileTab = ({ history }) => {
 	const [file, setFile] = useState(null);
 	const [filePath, setFilePath] = useState("");
 	const [isUploading, setIsUploading] = useState(false);
+	const [newUser, setNewUser] = useState(initialState);
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		try {
@@ -32,10 +34,6 @@ const ProfileTab = ({ history }) => {
 		}
 	}, [user]);
 
-	const [newUser, setNewUser] = useState(initialState);
-
-	const [error, setError] = useState(null);
-
 	const handleChange = ({ name, value }) => {
 		setNewUser({ ...newUser, [name]: value });
 	};
@@ -45,11 +43,9 @@ const ProfileTab = ({ history }) => {
 	};
 
 	const onImageChange = (e) => {
-		e.preventDefault();
 		const file = e.target.files[0];
 		setFile(file);
 		setFilePath(URL.createObjectURL(file));
-		console.log(URL.createObjectURL(file).split("blob:")[1]);
 	};
 
 	const uploadImage = async () => {
@@ -57,7 +53,7 @@ const ProfileTab = ({ history }) => {
 		formData.append("file", file);
 		formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
 		formData.append("folder", "blog");
-
+		// upload image to the cloud
 		try {
 			setIsUploading(true);
 			const { data } = await Axios.post(
@@ -71,9 +67,19 @@ const ProfileTab = ({ history }) => {
 			console.log(error);
 			setError(error.message);
 		}
+
+		// update image path in the database
+		try {
+			const { data } = await user.updateProfileImage(profile.profileImage);
+			console.log(data);
+		} catch (error) {
+			console.log(error);
+			setError(error.message);
+		}
 	};
 
 	const { profileImage, first_name, last_name, email } = profile;
+	console.log(profileImage, profile);
 
 	return (
 		<Tab.Pane eventKey="profile">
@@ -90,9 +96,7 @@ const ProfileTab = ({ history }) => {
 								{!file ? (
 									<Image
 										className="d-block mx-auto mb-3"
-										src={
-											"https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
-										}
+										src={profileImage}
 										width="150px"
 										roundedCircle
 									/>

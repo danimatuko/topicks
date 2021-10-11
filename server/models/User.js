@@ -47,6 +47,10 @@ const userSchema = mongoose.Schema(
 				type: mongoose.Schema.Types.ObjectId,
 				ref: "Post"
 			}
+		},
+		profileImage: {
+			type: String,
+			default: "https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
 		}
 	},
 	{ timestamps: true }

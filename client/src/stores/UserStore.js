@@ -73,6 +73,10 @@ class User {
 	async getLoggedInUser() {
 		return Axios.get(`/users/${this.id}`);
 	}
+
+	async updateProfileImage(profileImage) {
+		return Axios.put(`/users/${this.id}/profile-image`, profileImage);
+	}
 }
 
 export default User;

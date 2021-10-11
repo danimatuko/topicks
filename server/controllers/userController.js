@@ -62,6 +62,7 @@ export const login = async (req, res) => {
 				likedPosts: user.activity.likedPosts,
 				savedForLater: user.activity.savedForLater
 			},
+			profileImage: user.profileImage,
 			token
 		});
 	} else {
@@ -77,4 +78,11 @@ export const getUserById = async (req, res) => {
 		throw new Error("User not found");
 	}
 	res.json(user);
+};
+
+export const changeProfileImage = async (req, res) => {
+	const user = await User.findByIdAndUpdate(req.params.id, {
+		profileImage: req.body.profileImage
+	});
+	res.json(user.profileImage);
 };
