@@ -71,7 +71,6 @@ class User {
 	}
 
 	async getLoggedInUser() {
-		console.log(this.id)
 		return Axios.get(`/users/${this.id}`);
 	}
 }
