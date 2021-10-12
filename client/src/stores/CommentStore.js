@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import Axios from "axios";
-import { makePersistable } from "mobx-persist-store";
+import { clearPersistedStore, makePersistable } from "mobx-persist-store";
 
 class Comment {
 	postId = "";
@@ -9,12 +9,13 @@ class Comment {
 	author = "";
 	commentBody = "";
 	dateOfComment = "";
+	profileImage = "";
 
 	constructor() {
 		makeAutoObservable(this);
 		makePersistable(this, {
 			name: "commentStore",
-			properties: ["postId", "id", "author", "commentBody", "dateOfComment"],
+			properties: ["postId", "id", "author", "commentBody", "dateOfComment", "profileImage"],
 			storage: window.localStorage
 		});
 	}
@@ -24,14 +25,15 @@ class Comment {
 	}
 
 	async save() {
-		const { postId, userId, author, commentBody, dateOfComment } = this;
+		const { postId, userId, author, commentBody, dateOfComment, profileImage } = this;
 
 		return Axios.post(`/post/${postId}/comments`, {
 			postId,
 			userId,
 			author,
 			commentBody,
-			dateOfComment
+			dateOfComment,
+			profileImage
 		});
 	}
 
@@ -41,6 +43,10 @@ class Comment {
 
 	static async delete(id, postId) {
 		return Axios.delete(`/post/${postId}/comments/${id}`);
+	}
+
+	async clear() {
+		await clearPersistedStore(this);
 	}
 }
 

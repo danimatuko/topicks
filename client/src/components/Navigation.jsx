@@ -1,14 +1,18 @@
 import { observer } from "mobx-react-lite";
 import React, { useContext } from "react";
-import { Container, Nav, Navbar, Dropdown, DropdownButton, Button } from "react-bootstrap";
+import { Container, Nav, Navbar, Dropdown, DropdownButton, Button, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../stores/RootStore";
 
 const Navigation = observer(() => {
-	const { user } = useContext(StoreContext);
+	const { user, comment, post } = useContext(StoreContext);
 	const initials = user.first_name.charAt(0) + user.last_name.charAt(0);
 
-	const logout = () => user.logout();
+	const logout = () => {
+		comment.clear();
+		post.clear();
+		user.logout();
+	};
 
 	return (
 		<Navbar bg="dark" variant="dark">
@@ -30,11 +34,21 @@ const Navigation = observer(() => {
 	);
 });
 
-const SignedInMenu = ({ initials, logout }) => {
+const SignedInMenu = observer(({ initials, logout }) => {
+	const { user } = useContext(StoreContext);
+	const defaultProfileImage =
+		"https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png";
+
 	return (
 		<DropdownButton
 			id="dropdown-basic-button"
-			title={initials}
+			title={
+				user.profileImage === defaultProfileImage ? (
+					initials
+				) : (
+					<img src={user.profileImage} className="dropdown-img" />
+				)
+			}
 			variant="secondary"
 			menuVariant="dark"
 		>
@@ -48,7 +62,27 @@ const SignedInMenu = ({ initials, logout }) => {
 			<Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
 		</DropdownButton>
 	);
-};
+});
+
+// const SignedInMenu = ({ initials, logout }) => {
+// 	return (
+// 		<DropdownButton
+// 			id="dropdown-basic-button"
+// 			title={initials}
+// 			variant="secondary"
+// 			menuVariant="dark"
+// 		>
+// 			<Dropdown.Item as={Link} to="/post">
+// 				Write somthing
+// 			</Dropdown.Item>
+// 			<Dropdown.Item as={Link} to="/dashboard">
+// 				Dashboard
+// 			</Dropdown.Item>
+// 			<Dropdown.Divider />
+// 			<Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
+// 		</DropdownButton>
+// 	);
+// };
 
 const UnsignedMenu = () => {
 	return (

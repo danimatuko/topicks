@@ -23,6 +23,9 @@ export const commentSchema = mongoose.Schema(
 		commentBody: {
 			type: String,
 			required: true
+		},
+		profileImage: {
+			type: String
 		}
 	},
 	{ timestamps: true }

@@ -18,7 +18,8 @@ const CommentForm = ({ commentSuccsess, setCommentSuccsess, setEditComment, edit
 		userId: user.id,
 		author: user.first_name + " " + user.last_name,
 		commentBody: "",
-		dateOfComment: getDate()
+		dateOfComment: getDate(),
+		profileImage: user.profileImage
 	};
 
 	const [commentState, setCommentState] = useState(initialState);
@@ -32,7 +33,7 @@ const CommentForm = ({ commentSuccsess, setCommentSuccsess, setEditComment, edit
 		e.preventDefault();
 
 		setCommentSuccsess(false);
-		const { userId, author, commentBody, dateOfComment } = commentState;
+		const { userId, author, commentBody, dateOfComment, profileImage } = commentState;
 
 		runInAction(() => {
 			comment.postId = id;
@@ -40,6 +41,7 @@ const CommentForm = ({ commentSuccsess, setCommentSuccsess, setEditComment, edit
 			comment.author = author;
 			comment.commentBody = commentBody;
 			comment.dateOfComment = dateOfComment;
+			comment.profileImage = profileImage;
 		});
 
 		try {

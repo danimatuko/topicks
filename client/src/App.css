@@ -77,3 +77,14 @@ nav.nav {
     align-items: center;
     font-size: 3rem
 }
+
+.dropdown-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px !important;
+    height: 50px !important;
+    object-fit: unset;
+    border-radius: 50%;
+
+}

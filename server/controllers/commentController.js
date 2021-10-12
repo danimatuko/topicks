@@ -14,7 +14,7 @@ export const getPostComments = async (req, res) => {
 
 export const addComment = async (req, res) => {
 	const postId = req.params.id;
-	const { userId, author, commentBody, dateOfComment } = req.body;
+	const { userId, author, commentBody, dateOfComment, profileImage } = req.body;
 	if (commentBody === "") throw new Error("Comment can't be empty");
 
 	try {
@@ -23,7 +23,8 @@ export const addComment = async (req, res) => {
 			postId,
 			author,
 			commentBody,
-			dateOfComment
+			dateOfComment,
+			profileImage
 		});
 
 		comment = await comment.save();
@@ -36,6 +37,7 @@ export const addComment = async (req, res) => {
 };
 
 export const editComment = async (req, res) => {
+	console.log(req.params.cid);
 	const commentId = req.params.cid;
 	const { userId, author, commentBody, dateOfComment } = req.body;
 

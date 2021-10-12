@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { getDate } from "../helpers/getDate";
 import Axios from "axios";
-import { makePersistable } from "mobx-persist-store";
+import { clearPersistedStore, makePersistable } from "mobx-persist-store";
 
 class Post {
 	id = "";
@@ -87,6 +87,10 @@ class Post {
 
 	static async getComments(id) {
 		return Axios.get(`/post/${id}/comments`);
+	}
+
+	async clear() {
+		await clearPersistedStore(this);
 	}
 }
 
