@@ -24,6 +24,7 @@ const LoginForm = ({ history }) => {
 					user.email = data.email;
 					user.role = data.role;
 					user.activity = data.activity;
+					user.profileImage = data.profileImage;
 				});
 				history.push("/");
 			}

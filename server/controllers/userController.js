@@ -81,8 +81,16 @@ export const getUserById = async (req, res) => {
 };
 
 export const changeProfileImage = async (req, res) => {
-	const user = await User.findByIdAndUpdate(req.params.id, {
-		profileImage: req.body.profileImage
-	});
+	const user = await User.findByIdAndUpdate(
+		req.params.id,
+		{
+			$set: {
+				profileImage: req.body.profileImage
+			}
+		},
+		{
+			new: true
+		}
+	);
 	res.json(user.profileImage);
 };

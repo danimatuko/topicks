@@ -6,17 +6,11 @@ import CommentModel from "../stores/CommentStore";
 
 const Comment = ({ comment, setIsDeleted, setEditComment }) => {
 	const { user } = useContext(StoreContext);
-//	const { userId, author, commentBody, dateOfComment } = comment;
+	console.log(user.profileImage);
+	//	const { userId, author, commentBody, dateOfComment } = comment;
 
 	const editComment = async () => {
-		setEditComment(comment.commentBody)
-
-		// try {
-		// 	await CommentModel.edit(comment);
-		// 	setIsDeleted(true);
-		// } catch (error) {
-		// 	console.log(error);
-		// }
+		setEditComment(comment.commentBody);
 	};
 
 	const deleteComment = async () => {
@@ -33,12 +27,7 @@ const Comment = ({ comment, setIsDeleted, setEditComment }) => {
 			<Row className="flex gy-1" style={{ backgroundColor: "" }}>
 				<Col>
 					<div className="d-flex justify-content-between" style={{ width: "145px" }}>
-						<Image
-							width="40px"
-							height="40px"
-							src="https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
-							roundedCircle
-						/>
+						<Image width="40px" height="40px" src={user.profileImage} roundedCircle />
 						<div>
 							<div className="fw-bold">{comment.author}</div>
 							<small className="d-block">{comment.dateOfComment}</small>

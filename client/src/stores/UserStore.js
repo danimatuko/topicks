@@ -14,13 +14,22 @@ class User {
 		likedPosts: [],
 		savedForLater: []
 	};
+	profileImage = "";
 
 	constructor() {
 		makeAutoObservable(this);
 
 		makePersistable(this, {
 			name: "userStore",
-			properties: ["id", "first_name", "last_name", "email", "role", "activity"],
+			properties: [
+				"id",
+				"first_name",
+				"last_name",
+				"email",
+				"role",
+				"activity",
+				"profileImage"
+			],
 			storage: window.localStorage
 		});
 	}
@@ -75,7 +84,7 @@ class User {
 	}
 
 	async updateProfileImage(profileImage) {
-		return Axios.put(`/users/${this.id}/profile-image`, profileImage);
+		return Axios.put(`/users/${this.id}/profile-image`, { profileImage: profileImage });
 	}
 }
 

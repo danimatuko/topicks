@@ -3,8 +3,9 @@ import { Container, Form, Button, Row, Col, Alert, Tab, Image, Spinner } from "r
 import { StoreContext } from "../../stores/RootStore";
 
 import Axios from "axios";
+import { runInAction } from "mobx";
 
-const ProfileTab = ({ history }) => {
+const ProfileTab = () => {
 	const initialState = {
 		profileImage: "",
 		first_name: "",
@@ -20,7 +21,6 @@ const ProfileTab = ({ history }) => {
 	const [file, setFile] = useState(null);
 	const [filePath, setFilePath] = useState("");
 	const [isUploading, setIsUploading] = useState(false);
-	const [newUser, setNewUser] = useState(initialState);
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
@@ -35,7 +35,7 @@ const ProfileTab = ({ history }) => {
 	}, [user]);
 
 	const handleChange = ({ name, value }) => {
-		setNewUser({ ...newUser, [name]: value });
+		//		setNewUser({ ...newUser, [name]: value });
 	};
 
 	const handleSubmit = async (e) => {
@@ -45,33 +45,39 @@ const ProfileTab = ({ history }) => {
 	const onImageChange = (e) => {
 		const file = e.target.files[0];
 		setFile(file);
+		console.log(e.target.files[0]);
+		// get the path of the local file to preview it
 		setFilePath(URL.createObjectURL(file));
+		console.log(filePath);
 	};
 
 	const uploadImage = async () => {
+		// construct the form data to cloudinary
 		const formData = new FormData();
 		formData.append("file", file);
 		formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
 		formData.append("folder", "blog");
+
 		// upload image to the cloud
 		try {
 			setIsUploading(true);
-			const { data } = await Axios.post(
+			let response = await Axios.post(
 				` https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/upload`,
 				formData
 			);
 			setIsUploading(false);
-			console.log(data);
-			setProfile({ ...profile, profileImage: data.url });
-		} catch (error) {
-			console.log(error);
-			setError(error.message);
-		}
+			// get the image URL on the cloud
+			const imageURL = response.data.url;
 
-		// update image path in the database
-		try {
-			const { data } = await user.updateProfileImage(profile.profileImage);
-			console.log(data);
+			// update image URL in the database
+			response = await user.updateProfileImage(imageURL);
+
+			// update the profile image in the store
+			if (response.data) {
+				runInAction(() => {
+					user.profileImage = response.data;
+				});
+			}
 		} catch (error) {
 			console.log(error);
 			setError(error.message);
@@ -79,7 +85,6 @@ const ProfileTab = ({ history }) => {
 	};
 
 	const { profileImage, first_name, last_name, email } = profile;
-	console.log(profileImage, profile);
 
 	return (
 		<Tab.Pane eventKey="profile">
@@ -98,6 +103,7 @@ const ProfileTab = ({ history }) => {
 										className="d-block mx-auto mb-3"
 										src={profileImage}
 										width="150px"
+										height="150px"
 										roundedCircle
 									/>
 								) : (
