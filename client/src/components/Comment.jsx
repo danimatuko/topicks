@@ -25,7 +25,7 @@ const Comment = ({ comment, setIsDeleted, setEditComment }) => {
 		<div className="comment mb-5 ">
 			<Row className="flex gy-1" style={{ backgroundColor: "" }}>
 				<Col>
-					<div className="d-flex justify-content-between" style={{ width: "145px" }}>
+					<div className="d-flex justify-content-between" style={{ width: "175px" }}>
 						<Image
 							width="40px"
 							height="40px"
@@ -33,7 +33,7 @@ const Comment = ({ comment, setIsDeleted, setEditComment }) => {
 							roundedCircle
 						/>
 						<div>
-							<div className="fw-bold">{comment.author}</div>
+							<div className="fw-bold me-2">{comment.author}</div>
 							<small className="d-block">{comment.dateOfComment}</small>
 						</div>
 					</div>

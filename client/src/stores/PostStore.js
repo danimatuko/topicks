@@ -13,8 +13,9 @@ class Post {
 	body = "";
 	dateOfPost = "";
 	likes = 0;
+	profileImage = "";
 
-	constructor(userId, author, topic, title, subjectImage, body) {
+	constructor(userId, author, topic, title, subjectImage, body,profileImage) {
 		makeAutoObservable(this);
 
 		makePersistable(this, {
@@ -27,7 +28,8 @@ class Post {
 				"subjectImage",
 				"body",
 				"dateOfPost",
-				"likes"
+				"likes",
+				"profileImage"
 			],
 			storage: window.localStorage
 		});
@@ -38,10 +40,11 @@ class Post {
 		this.subjectImage = subjectImage;
 		this.body = body;
 		this.dateOfPost = getDate();
+		this.profileImage = profileImage;
 	}
 
 	async save() {
-		const { userId, author, topic, title, subjectImage, body, dateOfPost } = this;
+		const { userId, author, topic, title, subjectImage, body, dateOfPost, profileImage } = this;
 		return Axios.post("/posts", {
 			userId,
 			author,
@@ -49,7 +52,8 @@ class Post {
 			title,
 			subjectImage,
 			body,
-			dateOfPost
+			dateOfPost,
+			profileImage
 		});
 	}
 

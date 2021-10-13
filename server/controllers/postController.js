@@ -2,7 +2,7 @@ import Post from "../models/Post.js";
 import User from "../models/User.js";
 
 export const createPost = async (req, res) => {
-	const { userId, author, topic, title, subjectImage, body, dateOfPost } = req.body;
+	const { userId, author, topic, title, subjectImage, body, dateOfPost, profileImage } = req.body;
 
 	if (title === "" || topic === "" || body === "") {
 		res.status(400);
@@ -12,12 +12,13 @@ export const createPost = async (req, res) => {
 	try {
 		let post = new Post({
 			userId,
-			author: author,
-			title: title,
-			topic: topic,
-			subjectImage: subjectImage,
-			body: body,
-			dateOfPost: dateOfPost
+			author,
+			title,
+			topic,
+			subjectImage,
+			body,
+			dateOfPost,
+			profileImage
 		});
 
 		post = await post.save();

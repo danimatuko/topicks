@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React, { useContext } from "react";
-import { Container, Nav, Navbar, Dropdown, DropdownButton, Button, Image } from "react-bootstrap";
+import { Container, Nav, Navbar, Dropdown, DropdownButton, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../stores/RootStore";
 
@@ -46,7 +46,7 @@ const SignedInMenu = observer(({ initials, logout }) => {
 				user.profileImage === defaultProfileImage ? (
 					initials
 				) : (
-					<img src={user.profileImage} className="dropdown-img" />
+					<img src={user.profileImage} className="dropdown-img" alt="profile"/>
 				)
 			}
 			variant="secondary"

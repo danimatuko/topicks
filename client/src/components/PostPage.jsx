@@ -54,6 +54,7 @@ const PostPage = observer(({ match }) => {
 					post.subjectImage = data.subjectImage;
 					post.body = data.body;
 					post.likes = data.likes;
+					post.profileImage = data.profileImage;
 				});
 				setIsLoading(false);
 			} catch (error) {
@@ -75,13 +76,20 @@ const PostPage = observer(({ match }) => {
 	) : (
 		<Container className="mt-5">
 			<div className="post w-75 mx-auto py-5">
-				<h1 className="display-3">{post && post.title}</h1>
+				<h1 className="display-3 mb-5">{post && post.title}</h1>
 				<div className="d-flex justify-content-between">
 					<div>
-						<div className="author mb-2 text-muted text-capitalize fw-bold">
-							{post && post.author}
+						<div className="d-flex author  mb-2 text-muted text-capitalize fw-bold">
+							<img
+								src={post.profileImage}
+								className="dropdown-img position-static me-1"
+								alt=""
+							/>
+							<div>
+								<div>{post.author}</div>
+								<div className="text-muted me-2">{post && post.dateOfPost}</div>
+							</div>
 						</div>
-						<span className="text-muted me-2">{post && post.dateOfPost}</span>
 					</div>
 					<div>
 						<Badge className="tag border-radius-5  p-2 me-2" pill bg="secondary">
@@ -121,11 +129,7 @@ const PostPage = observer(({ match }) => {
 				<div className="body mt-5">{post && parse(post.body)}</div>
 			</div>
 
-			<Comments
-				postId={post.id}
-				setEditComment={setEditComment}
-				editComment={editComment}
-			/>
+			<Comments postId={post.id} setEditComment={setEditComment} editComment={editComment} />
 		</Container>
 	);
 });

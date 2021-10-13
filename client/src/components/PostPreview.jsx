@@ -36,7 +36,8 @@ const PostPreview = observer(({ post }) => {
 		<div className="d-flex justify-content-between align-items-center mb-4">
 			<div style={{ flex: 3 }}>
 				<Link to={`/posts/${_id}`} className="text-decoration-none text-dark">
-					<div className="author mb-2 text-muted text-capitalize">{author}</div>
+					<img src={post.profileImage} className="author-image me-1 mb-2" alt="" />
+					<span className="author mb-2 text-muted text-capitalize">{author}</span>
 					<h2 className="h4 text-capitalize mb-1 fw-bold">{title}</h2>
 					<p className="fw-lighter">CRUD is an ancient paradigm better left behind.</p>
 				</Link>

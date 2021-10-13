@@ -16,7 +16,8 @@ const CreatePost = ({ history, match }) => {
 		title: "",
 		topic: "",
 		subjectImage: "",
-		postHTML: ""
+		postHTML: "",
+		profileImage: user.profileImage
 	};
 
 	const [post, setPost] = useState(initialState);
@@ -56,7 +57,6 @@ const CreatePost = ({ history, match }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.table(post);
 
 		const newPost = new Post(
 			user.id,
@@ -64,9 +64,9 @@ const CreatePost = ({ history, match }) => {
 			post.topic,
 			post.title,
 			post.subjectImage,
-			post.postHTML
+			post.postHTML,
+			post.profileImage
 		);
-
 		try {
 			!edit ? await newPost.save() : await newPost.update(match.params.id);
 			history.push("/dashboard");

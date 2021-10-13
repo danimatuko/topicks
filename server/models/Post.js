@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { commentSchema } from "./Comment.js";
 
 const PostSchema = mongoose.Schema(
 	{
@@ -34,6 +33,9 @@ const PostSchema = mongoose.Schema(
 		likes: {
 			type: Number,
 			default: 0
+		},
+		profileImage: {
+			type: String
 		}
 	},
 	{
