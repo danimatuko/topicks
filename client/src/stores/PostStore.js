@@ -15,7 +15,7 @@ class Post {
 	likes = 0;
 	profileImage = "";
 
-	constructor(userId, author, topic, title, subjectImage, body,profileImage) {
+	constructor(userId, author, topic, title, subjectImage, body, profileImage) {
 		makeAutoObservable(this);
 
 		makePersistable(this, {
@@ -85,6 +85,10 @@ class Post {
 	static async getMostLikedPosts() {
 		return Axios.get("/posts/most-liked");
 	}
+	static async getPostsByTopic(topic) {
+		return Axios.get(`/posts/topic=${topic}`);
+	}
+
 	static async getPostById(id) {
 		return Axios.get(`/posts/${id}`);
 	}

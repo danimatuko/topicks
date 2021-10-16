@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import React, { useContext } from "react";
 import { Container, Nav, Navbar, Dropdown, DropdownButton, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { StoreContext } from "../stores/RootStore";
+import { StoreContext } from "../../stores/RootStore";
 
 const Navigation = observer(() => {
 	const { user, comment, post } = useContext(StoreContext);

@@ -1,10 +1,10 @@
 import { Route, Switch } from "react-router";
 import CreatePost from "./components/CreatePost";
 import Dashboard from "./components/dashboard/Dashboard";
-import Footer from "./components/Footer";
+import Footer from "./components/layout/Footer";
 import HomePage from "./components/HomePage";
 import LoginForm from "./components/LoginForm";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/layout/Navigation";
 import PostPage from "./components/PostPage";
 import SignUpForm from "./components/SignUpForm";
 

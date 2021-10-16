@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { Container, Row, Col, Spinner, Button } from "react-bootstrap";
 import Post from "../stores/PostStore";
-import Hero from "./Hero";
+import Hero from "./layout/Hero";
 import PostPreview from "./PostPreview";
 import RecommandedTopics from "./RecommandedTopics";
 import { StoreContext } from "../stores/RootStore";
@@ -13,6 +13,7 @@ const HomePage = ({ match, location }) => {
 	const [mostLikedPosts, setMostLikedPosts] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [allPosts, setAllPosts] = useState(null);
+	const [postsByTopic, setPostsByTopic] = useState(null);
 	const pageNumber = Number(location.search.split("=")[1] || 1);
 
 	useContext(StoreContext);
@@ -40,7 +41,7 @@ const HomePage = ({ match, location }) => {
 			}
 		})();
 	}, []);
-
+	// limited number of results (pagination)
 	const getAllPosts = async () => {
 		try {
 			const { data } = await Post.getAllPosts(pageNumber);
@@ -49,6 +50,7 @@ const HomePage = ({ match, location }) => {
 			console.log(error);
 		}
 	};
+
 	useEffect(() => {
 		if (isFirstRun.current) {
 			console.log("first run", isFirstRun);
@@ -137,7 +139,7 @@ const HomePage = ({ match, location }) => {
 					</Col>
 
 					<Col md={4} className="border-start">
-						<RecommandedTopics />
+						<RecommandedTopics setPostsByTopic={setPostsByTopic} />
 
 						<Container>
 							<h2 className="h5 mb-4 mt-4 fw-bold">Reading List</h2>

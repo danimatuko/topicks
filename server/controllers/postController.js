@@ -176,3 +176,8 @@ export const getUserPosts = async (req, res) => {
 	res.status(500);
 	throw new Error(error);
 };
+
+export const getPostsByTopic = async (req, res) => {
+	const posts = await Post.find({ topic: req.params.topic });
+	res.status(200).json(posts);
+};
