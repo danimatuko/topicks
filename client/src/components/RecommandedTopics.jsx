@@ -17,8 +17,10 @@ const RecommandedTopics = ({ setPostsByTopic }) => {
 	const getPostsByTopic = async (topic) => {
 		try {
 			const { data } = await Post.getPostsByTopic(topic);
-			setPostsByTopic(data);
-			console.log(data);
+			setPostsByTopic({
+				topic: topic,
+				posts: data
+			});
 		} catch (error) {
 			console.log(error);
 		}

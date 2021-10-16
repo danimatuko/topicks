@@ -13,7 +13,10 @@ const HomePage = ({ match, location }) => {
 	const [mostLikedPosts, setMostLikedPosts] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [allPosts, setAllPosts] = useState(null);
-	const [postsByTopic, setPostsByTopic] = useState(null);
+	const [postsByTopic, setPostsByTopic] = useState({
+		topic: "",
+		posts: []
+	});
 	const pageNumber = Number(location.search.split("=")[1] || 1);
 
 	useContext(StoreContext);
@@ -51,6 +54,17 @@ const HomePage = ({ match, location }) => {
 		}
 	};
 
+	const pickTopic = () => {
+		setPostsByTopic({
+			topic: "",
+			posts: []
+		});
+
+		// setLatestPosts(null);
+		// setLatestPosts(null);
+		// setAllPosts(null);
+	};
+
 	useEffect(() => {
 		if (isFirstRun.current) {
 			console.log("first run", isFirstRun);
@@ -71,7 +85,7 @@ const HomePage = ({ match, location }) => {
 						{allPosts ? (
 							<Link
 								as={Button}
-								className="text-dark"
+								className="text-dark me-3"
 								to="#"
 								onClick={() => setAllPosts(null)}
 							>
@@ -80,15 +94,39 @@ const HomePage = ({ match, location }) => {
 						) : (
 							<Link
 								as={Button}
-								className="text-dark"
+								className="text-dark me-3"
 								to="#"
 								onClick={() => getAllPosts()}
 							>
 								View All Posts
 							</Link>
 						)}
-
-						{allPosts ? (
+						{postsByTopic.topic && (
+							<Link
+								as={Button}
+								className="text-dark me-3"
+								to="#"
+								onClick={() => pickTopic()}
+							>
+								<i className="fas fa-times me-1"></i>
+								{postsByTopic.topic}
+							</Link>
+						)}
+						{postsByTopic.topic && (
+							<Row className="mt-3">
+								<h2 className="display-4 my-4 fw-bold text-secondary">
+									{postsByTopic.topic}
+								</h2>
+								{isLoading ? (
+									<Spinner animation="border" className="d-block mx-auto" />
+								) : (
+									postsByTopic.posts.map((post) => (
+										<PostPreview key={post._id} post={post} />
+									))
+								)}
+							</Row>
+						)}
+						{allPosts && postsByTopic.topic === "" && (
 							<Row className="mt-3" key={pageNumber}>
 								<h2 className="display-4 my-4 fw-bold text-secondary">All Posts</h2>
 								{isLoading ? (
@@ -106,7 +144,8 @@ const HomePage = ({ match, location }) => {
 									path="posts"
 								/>
 							</Row>
-						) : (
+						)}
+						{postsByTopic.topic === "" && !allPosts && (
 							<>
 								<Row className="mt-3">
 									<h2 className="display-4 my-4 fw-bold text-secondary">
