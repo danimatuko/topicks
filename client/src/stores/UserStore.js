@@ -15,6 +15,7 @@ class User {
 		savedForLater: []
 	};
 	profileImage = "";
+	token = "";
 
 	constructor() {
 		makeAutoObservable(this);
@@ -28,7 +29,8 @@ class User {
 				"email",
 				"role",
 				"activity",
-				"profileImage"
+				"profileImage",
+				"token"
 			],
 			storage: window.localStorage
 		});
@@ -84,7 +86,12 @@ class User {
 	}
 
 	async updateProfileImage(profileImage) {
-		return Axios.put(`/users/${this.id}/profile-image`, { profileImage: profileImage });
+		const config = {
+			headers: {
+				Authorization: `Bearer ${this.token}`
+			}
+		};
+		return Axios.put(`/users/${this.id}/profile-image`, { profileImage: profileImage }, config);
 	}
 }
 
