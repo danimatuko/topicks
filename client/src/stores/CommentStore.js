@@ -24,25 +24,45 @@ class Comment {
 		return Axios.get(`/post/${id}/comments`);
 	}
 
-	async save() {
+	async save(token) {
 		const { postId, userId, author, commentBody, dateOfComment, profileImage } = this;
 
-		return Axios.post(`/post/${postId}/comments`, {
-			postId,
-			userId,
-			author,
-			commentBody,
-			dateOfComment,
-			profileImage
-		});
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		};
+
+		return Axios.post(
+			`/post/${postId}/comments`,
+			{
+				postId,
+				userId,
+				author,
+				commentBody,
+				dateOfComment,
+				profileImage
+			},
+			config
+		);
 	}
 
-	static async edit(comment) {
-		return Axios.put(`/post/${comment.postId}/comments/${comment.id}`, comment);
+	static async edit(comment, token) {
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		};
+		return Axios.put(`/post/${comment.postId}/comments/${comment.id}`, comment, config);
 	}
 
-	static async delete(id, postId) {
-		return Axios.delete(`/post/${postId}/comments/${id}`);
+	static async delete(id, postId, token) {
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		};
+		return Axios.delete(`/post/${postId}/comments/${id}`, config);
 	}
 
 	async clear() {

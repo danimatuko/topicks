@@ -14,7 +14,7 @@ const Comment = ({ comment, setIsDeleted, setEditComment }) => {
 
 	const deleteComment = async () => {
 		try {
-			await CommentModel.delete(comment._id, comment.postId);
+			await CommentModel.delete(comment._id, comment.postId, user.token);
 			setIsDeleted(true);
 		} catch (error) {
 			console.log(error);

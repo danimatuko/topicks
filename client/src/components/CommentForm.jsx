@@ -46,13 +46,13 @@ const CommentForm = ({ commentSuccsess, setCommentSuccsess, setEditComment, edit
 
 		try {
 			if (!editComment) {
-				const { data } = await comment.save();
+				const { data } = await comment.save(user.token);
 				// after saving a comment get the id and save it in the store
 				runInAction(() => (comment.id = data._id));
 				// rerender the editor and comments on succsess
 				data && setCommentSuccsess(true);
 			} else {
-				const { data } = await CommentModel.edit(comment);
+				const { data } = await CommentModel.edit(comment, user.token);
 				// rerender the editor and comments on succsess
 				data && setCommentSuccsess(true);
 			}
