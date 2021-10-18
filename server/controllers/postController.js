@@ -44,7 +44,6 @@ export const updatePost = async (req, res) => {
 			res.status(401);
 			throw new Error("You are not allowed to modify this data");
 		}
-		//	const post = await Post.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true });
 	} catch (error) {
 		res.status(500);
 		throw new Error(error);

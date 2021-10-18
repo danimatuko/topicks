@@ -81,16 +81,17 @@ export const getUserById = async (req, res) => {
 };
 
 export const changeProfileImage = async (req, res) => {
-	const user = await User.findByIdAndUpdate(
-		req.params.id,
-		{
-			$set: {
-				profileImage: req.body.profileImage
-			}
-		},
-		{
-			new: true
-		}
-	);
-	res.json(user.profileImage);
+	let user = await User.findById(req.params.id);
+	if (!user) throw new Error("User not found");
+	
+	if (user._id.toString() === req.user.id) {
+		user.set({
+			profileImage: req.body.profileImage
+		});
+		user = await user.save();
+		res.status(200).json(user.profileImage);
+	} else {
+		res.status(401);
+		throw new Error("You are not allowed to modify this data");
+	}
 };
