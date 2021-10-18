@@ -64,13 +64,24 @@ class User {
 	}
 
 	async like(postId) {
+		const config = {
+			headers: {
+				Authorization: `Bearer ${this.token}`
+			}
+		};
+
 		const userId = this.id;
-		return Axios.post(`/posts/like`, { postId, userId });
+		return Axios.post(`/posts/like`, { postId, userId }, config);
 	}
 
 	async bookMark(postId) {
+		const config = {
+			headers: {
+				Authorization: `Bearer ${this.token}`
+			}
+		};
 		const userId = this.id;
-		return Axios.post(`/posts/read-later`, { postId, userId });
+		return Axios.post(`/posts/read-later`, { postId, userId }, config);
 	}
 
 	async getPosts() {
