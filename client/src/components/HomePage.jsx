@@ -78,7 +78,7 @@ const HomePage = ({ match, location }) => {
 
 	return (
 		<>
-			<Hero />
+				<Hero />
 			<Container>
 				<Row className="my-5 d-flex justify-content-between">
 					<Col md={6}>
@@ -114,7 +114,7 @@ const HomePage = ({ match, location }) => {
 						)}
 						{postsByTopic.topic && (
 							<Row className="mt-3">
-								<h2 className="display-4 my-4 fw-bold text-secondary">
+								<h2 className="display-6 my-5 fw-bold text-secondary">
 									{postsByTopic.topic}
 								</h2>
 								{isLoading ? (
@@ -128,7 +128,7 @@ const HomePage = ({ match, location }) => {
 						)}
 						{allPosts && postsByTopic.topic === "" && (
 							<Row className="mt-3" key={pageNumber}>
-								<h2 className="display-4 my-4 fw-bold text-secondary">All Posts</h2>
+								<h2 className="display-6 my-5 fw-bold text-secondary">All Posts</h2>
 								{isLoading ? (
 									<Spinner animation="border" className="d-block mx-auto" />
 								) : (
@@ -148,7 +148,7 @@ const HomePage = ({ match, location }) => {
 						{postsByTopic.topic === "" && !allPosts && (
 							<>
 								<Row className="mt-3">
-									<h2 className="display-4 my-4 fw-bold text-secondary">
+									<h2 className="display-6 my-4 fw-bold text-secondary">
 										Latest
 									</h2>
 									{isLoading ? (
@@ -161,7 +161,7 @@ const HomePage = ({ match, location }) => {
 									)}
 								</Row>
 								<Row>
-									<h2 className="display-4 mb-4 fw-bold text-secondary">
+									<h2 className="display-6 mb-4 fw-bold text-secondary">
 										Most Liked
 									</h2>
 									{isLoading ? (

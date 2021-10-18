@@ -38,7 +38,7 @@ const PostPreview = observer(({ post }) => {
 				<Link to={`/posts/${_id}`} className="text-decoration-none text-dark">
 					<img src={post.profileImage} className="author-image me-1 mb-2" alt="" />
 					<span className="author mb-2 text-muted text-capitalize">{author}</span>
-					<h2 className="h4 text-capitalize mb-1 fw-bold">{title}</h2>
+					<h2 className="h5 text-capitalize mb-1 fw-bold">{title}</h2>
 					<p className="fw-lighter">CRUD is an ancient paradigm better left behind.</p>
 				</Link>
 				<div className="d-flex flex-wrap justify-content-between align-items-center">
@@ -54,12 +54,12 @@ const PostPreview = observer(({ post }) => {
 								<span className="me-1">{post && post.likes > 0 && post.likes}</span>
 								{user.activity.likedPosts.includes(_id) ? (
 									<i
-										className="unlike fas fa-thumbs-up  me-1 fs-4"
+										className="unlike fas fa-thumbs-up  me-1 fs-5"
 										onClick={handleLike}
 									></i>
 								) : (
 									<i
-										className="like far fa-thumbs-up me-1 fs-4"
+										className="like far fa-thumbs-up me-1 fs-5"
 										onClick={handleLike}
 									></i>
 								)}
@@ -67,12 +67,12 @@ const PostPreview = observer(({ post }) => {
 							<span className="me-1">
 								{user.activity.savedForLater.includes(_id) ? (
 									<i
-										className="bookmark fas fa-bookmark fs-4"
+										className="bookmark fas fa-bookmark fs-5"
 										onClick={handleBookMark}
 									></i>
 								) : (
 									<i
-										className="bookmark far fa-bookmark fs-4"
+										className="bookmark far fa-bookmark fs-5"
 										onClick={handleBookMark}
 									></i>
 								)}
@@ -82,12 +82,12 @@ const PostPreview = observer(({ post }) => {
 				</div>
 			</div>
 
-			<div style={{ flex: "1" }}>
+			<div style={{ flex: "1", height: "100%" }}>
 				<Link to={`/posts/${_id}`} className="text-decoration-none text-dark">
 					<img
 						src={subjectImage}
 						alt="img"
-						style={{ width: "220px", height: "150px", objectFit: "cover" }}
+						style={{ width: "190px", height: "100%", objectFit: "cover" }}
 					/>
 				</Link>
 			</div>
