@@ -57,6 +57,7 @@ const CreatePost = ({ history, match }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		console.log(user.id);
 
 		const newPost = new Post(
 			user.id,
@@ -67,12 +68,15 @@ const CreatePost = ({ history, match }) => {
 			post.postHTML,
 			post.profileImage
 		);
+
+		const token = user.token;
+
 		try {
-			!edit ? await newPost.save() : await newPost.update(match.params.id);
+			!edit ? await newPost.save(token) : await newPost.update(match.params.id, token);
 			history.push("/dashboard");
 		} catch (error) {
 			console.log({ error });
-			setError(error.response.data.message);
+			setError(error.message || error.response.data.message);
 		}
 	};
 

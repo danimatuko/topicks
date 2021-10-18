@@ -32,6 +32,7 @@ const RecommandedTopics = ({ setPostsByTopic }) => {
 			<div className="d-flex flex-wrap">
 				{TOPICS.map((topic) => (
 					<Badge
+						key={topic}
 						className="topic tag border-radius-5  p-2 m-1"
 						pill
 						bg="secondary"

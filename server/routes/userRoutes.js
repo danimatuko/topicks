@@ -8,7 +8,7 @@ router.post("/", register);
 // LOGIN
 router.post("/login", login);
 // GET USER BY ID
-router.get("/:id", getUserById);
+router.get("/:id", auth, getUserById);
 // CHANGE PROFILE IMAGE
 router.put("/:id/profile-image", auth, changeProfileImage);
 

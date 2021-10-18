@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { Dropdown, DropdownButton, Image } from "react-bootstrap";
 import Post from "../stores/PostStore";
 import Comment from "../stores/CommentStore";
+import { StoreContext } from "../stores/RootStore";
 
 const PostRow = ({ post, index, editable, setIsDeleted }) => {
 	const { _id, topic, title, subjectImage, dateOfPost, likes } = post;
 	const [commentsCount, setCommentsCount] = useState(0);
+	const { user } = useContext(StoreContext);
 
 	useEffect(() => {
 		(async () => {
@@ -27,8 +29,9 @@ const PostRow = ({ post, index, editable, setIsDeleted }) => {
 	};
 
 	const deleteHandler = async () => {
+		const token = user.token;
 		try {
-			await Post.delete(_id);
+			await Post.delete(_id, token);
 			setIsDeleted(true);
 		} catch (error) {
 			console.log(error);

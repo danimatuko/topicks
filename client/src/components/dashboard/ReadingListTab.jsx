@@ -1,6 +1,6 @@
 import { runInAction } from "mobx";
 import React, { useContext, useEffect, useState } from "react";
-import { Row, Tab,Spinner, Table } from "react-bootstrap";
+import { Row, Tab, Spinner, Table } from "react-bootstrap";
 import { StoreContext } from "../../stores/RootStore";
 import PostRow from "../PostRow";
 import PostsTable from "../PostsTable";

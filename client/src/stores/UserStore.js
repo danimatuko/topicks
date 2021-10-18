@@ -78,11 +78,21 @@ class User {
 	}
 
 	async getReadingList() {
-		return Axios.get(`/posts/user/reading-list/${this.id}`);
+		const config = {
+			headers: {
+				Authorization: `Bearer ${this.token}`
+			}
+		};
+		return Axios.get(`/posts/user/reading-list/${this.id}`, config);
 	}
 
 	async getLoggedInUser() {
-		return Axios.get(`/users/${this.id}`);
+		const config = {
+			headers: {
+				Authorization: `Bearer ${this.token}`
+			}
+		};
+		return Axios.get(`/users/${this.id}`, config);
 	}
 
 	async updateProfileImage(profileImage) {

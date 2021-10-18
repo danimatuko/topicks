@@ -32,8 +32,19 @@ export const createPost = async (req, res) => {
 
 export const updatePost = async (req, res) => {
 	try {
-		const post = await Post.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true });
-		res.status(200).json(post);
+		let post = await Post.findOne({ _id: req.params.id });
+
+		if (post.userId.toString() === req.user.id) {
+			for (let key in req.body) {
+				post[key] = req.body[key];
+			}
+			post = await post.save();
+			res.status(200).json(post);
+		} else {
+			res.status(401);
+			throw new Error("You are not allowed to modify this data");
+		}
+		//	const post = await Post.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true });
 	} catch (error) {
 		res.status(500);
 		throw new Error(error);
@@ -41,12 +52,19 @@ export const updatePost = async (req, res) => {
 };
 
 export const deletePost = async (req, res) => {
-	try {
-		await Post.findByIdAndRemove({ _id: req.params.id });
-		res.status(200).json("Post deleted");
-	} catch (error) {
-		res.status(500);
-		throw new Error(error);
+	let post = await Post.findOne({ _id: req.params.id });
+
+	if (post.userId.toString() === req.user.id) {
+		try {
+			await post.remove();
+			res.status(200).json("Post deleted");
+		} catch (error) {
+			res.status(500);
+			throw new Error(error);
+		}
+	} else {
+		res.status(401);
+		throw new Error("You are not allowed to modify this data");
 	}
 };
 
@@ -158,14 +176,18 @@ export const saveForLater = async (req, res) => {
 export const getReadingList = async (req, res) => {
 	const user = await User.findOne({ _id: req.params.id });
 
-	if (user) {
-		let readingList = user.activity.savedForLater;
-		readingList = await Post.find({ _id: { $in: readingList } });
-		return res.status(200).json(readingList);
+	if (user.id === req.user.id) {
+		if (user) {
+			let readingList = user.activity.savedForLater;
+			readingList = await Post.find({ _id: { $in: readingList } });
+			return res.status(200).json(readingList);
+		}
+
+		res.status(500);
+		throw new Error(error);
 	}
 
-	res.status(500);
-	throw new Error(error);
+	throw new Error("You can't view this data");
 };
 
 export const getUserPosts = async (req, res) => {

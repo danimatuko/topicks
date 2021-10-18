@@ -43,36 +43,62 @@ class Post {
 		this.profileImage = profileImage;
 	}
 
-	async save() {
+	async save(token) {
 		const { userId, author, topic, title, subjectImage, body, dateOfPost, profileImage } = this;
-		return Axios.post("/posts", {
-			userId,
-			author,
-			topic,
-			title,
-			subjectImage,
-			body,
-			dateOfPost,
-			profileImage
-		});
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		};
+
+		return Axios.post(
+			"/posts",
+			{
+				userId,
+				author,
+				topic,
+				title,
+				subjectImage,
+				body,
+				dateOfPost,
+				profileImage
+			},
+			config
+		);
 	}
 
-	async update(id) {
-		console.log(id);
+	async update(id, token) {
 		const { userId, author, topic, title, subjectImage, body, dateOfPost } = this;
-		return Axios.put(`/posts/${id}`, {
-			userId,
-			author,
-			topic,
-			title,
-			subjectImage,
-			body,
-			dateOfPost
-		});
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		};
+
+		return Axios.put(
+			`/posts/${id}`,
+			{
+				userId,
+				author,
+				topic,
+				title,
+				subjectImage,
+				body,
+				dateOfPost
+			},
+			config
+		);
 	}
 
-	static async delete(id) {
-		return Axios.delete(`/posts/${id}`);
+	static async delete(id, token) {
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		};
+		return Axios.delete(`/posts/${id}`, config);
 	}
 
 	static async getAllPosts(pageNumber) {
@@ -82,9 +108,11 @@ class Post {
 	static async getLatestPosts() {
 		return Axios.get("/posts/latest");
 	}
+
 	static async getMostLikedPosts() {
 		return Axios.get("/posts/most-liked");
 	}
+
 	static async getPostsByTopic(topic) {
 		return Axios.get(`/posts/topic=${topic}`);
 	}
