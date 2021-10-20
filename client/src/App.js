@@ -10,6 +10,7 @@ import SignUpForm from "./components/SignUpForm";
 import ProtectedRoute from "./components/layout/ProtecedRoute";
 import ForbiddenPage from "./components/error-page/ForbiddenPage";
 import PageNotFound from "./components/error-page/PageNotFound";
+import AllPosts from "./components/AllPosts";
 
 const App = () => {
 	const isAuth = JSON.parse(localStorage.getItem("userStore"))?.token || null;
@@ -29,6 +30,7 @@ const App = () => {
 						component={CreatePost}
 					/>
 					<Route exact path="/posts/:id" component={PostPage} />
+					<Route exact path="/posts" component={AllPosts} />
 					{
 						// add regex to match this route/posts/?page=2
 					}

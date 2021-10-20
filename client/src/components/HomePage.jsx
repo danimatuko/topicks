@@ -8,7 +8,7 @@ import { StoreContext } from "../stores/RootStore";
 import { Link } from "react-router-dom";
 import Paginate from "./Paginate";
 
-const HomePage = ({ match, location }) => {
+const HomePage = ({ match, location, history }) => {
 	const [latestPosts, setLatestPosts] = useState(null);
 	const [mostLikedPosts, setMostLikedPosts] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
@@ -78,7 +78,7 @@ const HomePage = ({ match, location }) => {
 
 	return (
 		<>
-				<Hero />
+			<Hero />
 			<Container>
 				<Row className="my-5 d-flex justify-content-between">
 					<Col md={6}>
@@ -96,7 +96,7 @@ const HomePage = ({ match, location }) => {
 								as={Button}
 								className="text-dark me-3"
 								to="#"
-								onClick={() => getAllPosts()}
+								onClick={() => history.push("/posts")}
 							>
 								View All Posts
 							</Link>

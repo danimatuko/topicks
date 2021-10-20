@@ -6,6 +6,7 @@ import { LinkContainer } from "react-router-bootstrap";
 const Paginate = ({ total, page, path }) => {
 	const location = useLocation();
 	path = path || location.pathname;
+	console.log(path);
 	if (total <= 1) return null;
 
 	return (
