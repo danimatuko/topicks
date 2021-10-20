@@ -77,13 +77,14 @@ export const getUserById = async (req, res) => {
 		res.status(404);
 		throw new Error("User not found");
 	}
+
 	res.json(user);
 };
 
 export const changeProfileImage = async (req, res) => {
 	let user = await User.findById(req.params.id);
 	if (!user) throw new Error("User not found");
-	
+
 	if (user._id.toString() === req.user.id) {
 		user.set({
 			profileImage: req.body.profileImage

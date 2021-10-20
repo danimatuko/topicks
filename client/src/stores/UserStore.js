@@ -15,7 +15,7 @@ class User {
 		savedForLater: []
 	};
 	profileImage = "";
-	token = "";
+	token = null;
 
 	constructor() {
 		makeAutoObservable(this);
@@ -97,7 +97,7 @@ class User {
 		return Axios.get(`/posts/user/reading-list/${this.id}`, config);
 	}
 
-	async getLoggedInUser() {
+	async authenticate() {
 		const config = {
 			headers: {
 				Authorization: `Bearer ${this.token}`

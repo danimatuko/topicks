@@ -25,7 +25,7 @@ const ProfileTab = () => {
 	useEffect(() => {
 		try {
 			(async () => {
-				const { data } = await user.getLoggedInUser();
+				const { data } = await user.authenticate();
 				setProfile(data);
 			})();
 		} catch (error) {

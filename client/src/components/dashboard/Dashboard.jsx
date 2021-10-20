@@ -1,6 +1,5 @@
 import React from "react";
 import { Col, Container, Row, Tab, Nav } from "react-bootstrap";
-
 import MyPostsTab from "./MyPostsTab";
 import ProfileTab from "./ProfileTab";
 import ReadingListTab from "./ReadingListTab";
