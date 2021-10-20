@@ -38,8 +38,8 @@ const PostPreview = observer(({ post }) => {
 				<Link to={`/posts/${_id}`} className="text-decoration-none text-dark">
 					<img src={post.profileImage} className="author-image me-1 mb-2" alt="" />
 					<span className="author mb-2 text-muted text-capitalize">{author}</span>
-					<h2 className="h5 text-capitalize mb-1 fw-bold">{title}</h2>
-					<p className="fw-lighter">CRUD is an ancient paradigm better left behind.</p>
+					<h2 className="h5 text-capitalize my-2 fw-bold">{title}</h2>
+					{/* <p className="fw-lighter">CRUD is an ancient paradigm better left behind.</p> */}
 				</Link>
 				<div className="d-flex flex-wrap justify-content-between align-items-center">
 					<div>

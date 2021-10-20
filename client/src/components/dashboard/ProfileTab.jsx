@@ -141,6 +141,7 @@ const ProfileTab = () => {
 								<Form.Group className="mb-3" controlId="first_name">
 									<Form.Label>First Name</Form.Label>
 									<Form.Control
+										disabled
 										name="first_name"
 										value={first_name}
 										type="text"
@@ -150,6 +151,7 @@ const ProfileTab = () => {
 								<Form.Group className="mb-3" controlId="last_name">
 									<Form.Label>Last Name</Form.Label>
 									<Form.Control
+										disabled
 										name="last_name"
 										value={last_name}
 										type="text"
@@ -169,10 +171,6 @@ const ProfileTab = () => {
 										We'll never share your email with anyone else.
 									</Form.Text>
 								</Form.Group>
-
-								<Button className="w-100" variant="dark" type="submit">
-									Submit
-								</Button>
 							</Form>
 						</Col>
 					</Row>

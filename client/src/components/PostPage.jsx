@@ -7,7 +7,7 @@ import { runInAction } from "mobx";
 import { observer } from "mobx-react-lite";
 import Comments from "./Comments";
 
-const PostPage = observer(({ match }) => {
+const PostPage = observer(({ match, history }) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const { user, post } = useContext(StoreContext);
 	const [editComment, setEditComment] = useState(null);
@@ -45,6 +45,7 @@ const PostPage = observer(({ match }) => {
 		(async () => {
 			try {
 				const { data } = await Post.getPostById(match.params.id);
+
 				runInAction(() => {
 					post.id = data._id;
 					post.userId = data.userId;
@@ -59,9 +60,10 @@ const PostPage = observer(({ match }) => {
 				setIsLoading(false);
 			} catch (error) {
 				console.log(error);
+				history.push("/not-found");
 			}
 		})();
-	}, [match.params.id, post]);
+	}, [match.params.id, post, history]);
 
 	// if the user posts an image larger then the page container resize the image
 	limitImagesWidth();
