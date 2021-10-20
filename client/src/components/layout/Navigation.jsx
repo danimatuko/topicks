@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { Container, Nav, Navbar, Dropdown, DropdownButton, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../../stores/RootStore";
+import Search from "./Search";
 
 const Navigation = observer(() => {
 	const { user, comment, post } = useContext(StoreContext);
@@ -15,7 +16,7 @@ const Navigation = observer(() => {
 	};
 
 	return (
-		<Navbar bg="dark" variant="dark">
+		<Navbar bg="dark" variant="dark" className="pt-3">
 			<Container>
 				<Navbar.Brand as={Link} to="/home">
 					BLOG
@@ -26,8 +27,10 @@ const Navigation = observer(() => {
 					</Nav.Link>
 					<Nav.Link as={Link} to="/about">
 						About
-					</Nav.Link>
-				</Nav>
+					</Nav.Link>{" "}
+					<Nav.Item></Nav.Item>
+				</Nav>{" "}
+				<Search />
 				{user.id ? <SignedInMenu initials={initials} logout={logout} /> : <UnsignedMenu />}
 			</Container>
 		</Navbar>
@@ -46,7 +49,7 @@ const SignedInMenu = observer(({ initials, logout }) => {
 				user.profileImage === defaultProfileImage ? (
 					initials
 				) : (
-					<img src={user.profileImage} className="dropdown-img" alt="profile"/>
+					<img src={user.profileImage} className="dropdown-img" alt="profile" />
 				)
 			}
 			variant="secondary"
@@ -64,26 +67,6 @@ const SignedInMenu = observer(({ initials, logout }) => {
 	);
 });
 
-// const SignedInMenu = ({ initials, logout }) => {
-// 	return (
-// 		<DropdownButton
-// 			id="dropdown-basic-button"
-// 			title={initials}
-// 			variant="secondary"
-// 			menuVariant="dark"
-// 		>
-// 			<Dropdown.Item as={Link} to="/post">
-// 				Write somthing
-// 			</Dropdown.Item>
-// 			<Dropdown.Item as={Link} to="/dashboard">
-// 				Dashboard
-// 			</Dropdown.Item>
-// 			<Dropdown.Divider />
-// 			<Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
-// 		</DropdownButton>
-// 	);
-// };
-
 const UnsignedMenu = () => {
 	return (
 		<>
@@ -91,7 +74,7 @@ const UnsignedMenu = () => {
 				Sign In
 			</Button>
 			<Button variant="secondary" as={Link} to="/sign-in">
-				Create Account
+				Register
 			</Button>
 		</>
 	);
