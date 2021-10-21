@@ -79,7 +79,7 @@ export const getAllposts = async (req, res) => {
 
 export const getPosts = async (req, res) => {
 	const page = Number(req.query.page) || 1;
-	const resultsPerPage = 3;
+	const resultsPerPage = 10;
 	const sumOfPosts = await Post.countDocuments();
 	const totalPages = Math.ceil(sumOfPosts / resultsPerPage);
 

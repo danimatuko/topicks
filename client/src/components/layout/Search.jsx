@@ -15,9 +15,9 @@ const Search = () => {
 
 	return (
 		<Row>
-			<Col md={10}>
+			<Col md={10} className="px-xs-3">
 				<Form className="d-flex" onSubmit={search}>
-					<InputGroup size="">
+					<InputGroup>
 						<FormControl
 							type="search"
 							placeholder="Search..."

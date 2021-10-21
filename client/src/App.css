@@ -98,3 +98,15 @@ nav.nav {
 .topic {
     cursor: pointer;
 }
+
+
+@media screen and (max-width: 768px) {
+    .post-preview {
+        flex-direction: column;
+    }
+
+    .post-preview-image {
+        width: 95% !important;
+        margin-top: 8px;
+    }
+}

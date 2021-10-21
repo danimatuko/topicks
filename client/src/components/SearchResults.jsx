@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
 import Post from "../stores/PostStore";
 import PostPreview from "./PostPreview";
@@ -7,7 +7,6 @@ const SearchResults = ({ location }) => {
 	let keyWords = location.search.split("=")[1].replace("%", " ");
 	const [results, setResults] = useState([]);
 	const [isLoading, setisLoading] = useState(true);
-	// const results = useRef([]);
 
 	const fetchResults = async () => {
 		try {
@@ -19,7 +18,11 @@ const SearchResults = ({ location }) => {
 		}
 	};
 
-	useEffect(() => keyWords !== "" && fetchResults(), [keyWords]);
+	useEffect(
+		() => keyWords !== "" && fetchResults(),
+		// eslint-disable-next-line
+		[keyWords]
+	);
 
 	return (
 		<Container>
@@ -27,7 +30,8 @@ const SearchResults = ({ location }) => {
 				<Col md={8}>
 					<div className="my-4">
 						<h1 className="h3 fw-bold text-secondary">
-							{results.length || "No"} results for <span className="">"{keyWords}"</span>
+							{results.length || "No"} results for{" "}
+							<span className="">"{keyWords}"</span>
 						</h1>
 						{isLoading ? (
 							<Spinner animation="border" className="d-block mx-auto" />

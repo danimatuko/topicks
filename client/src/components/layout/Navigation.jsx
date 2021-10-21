@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React, { useContext } from "react";
-import { Container, Nav, Navbar, Dropdown, DropdownButton, Button } from "react-bootstrap";
+import { Container, Nav, Navbar, Dropdown, DropdownButton, Button, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../../stores/RootStore";
 import Search from "./Search";
@@ -14,37 +14,44 @@ const Navigation = observer(() => {
 		post.clear();
 		user.logout();
 	};
-
+	const mobileView = window.matchMedia("(max-width: 767px)");
+	// const [mobileView, setMobileView] = useState(initialState)
 	return (
-		<Navbar bg="dark" variant="dark" className="pt-3">
-			<Container>
-				<Navbar.Brand as={Link} to="/home">
-					BLOG
-				</Navbar.Brand>
-				<Nav className="me-auto">
-					<Nav.Link as={Link} to="/home">
-						Home
-					</Nav.Link>
-					<Nav.Link as={Link} to="/about">
-						About
-					</Nav.Link>{" "}
-					<Nav.Item></Nav.Item>
-				</Nav>
-				<Search />
-				{user.id ? <SignedInMenu initials={initials} logout={logout} /> : <UnsignedMenu />}
-			</Container>
-		</Navbar>
+		<>
+			<Navbar bg="dark" variant="dark" className="pt-3">
+				<Container>
+					<Navbar.Brand as={Link} to="/home">
+						BLOG
+					</Navbar.Brand>
+					<Nav className="me-auto">
+						<Nav.Link as={Link} to="/home">
+							Home
+						</Nav.Link>
+						<Nav.Link as={Link} to="/about">
+							About
+						</Nav.Link>{" "}
+						<Nav.Item></Nav.Item>
+					</Nav>
+					{!mobileView.matches && <Search />}
+					{user.id ? (
+						<SignedInMenu initials={initials} logout={logout} />
+					) : (
+						<UnsignedMenu />
+					)}
+				</Container>
+			</Navbar>
+			{mobileView.matches && <Search />}
+		</>
 	);
 });
 
 const SignedInMenu = observer(({ initials, logout }) => {
 	const { user } = useContext(StoreContext);
-	const defaultProfileImage =
-		"https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png";
 
 	return (
 		<DropdownButton
 			id="dropdown-basic-button"
+			align={{ sm: "start" }}
 			title={
 				!user.profileImage ? (
 					initials

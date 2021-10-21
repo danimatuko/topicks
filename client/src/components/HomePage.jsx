@@ -81,7 +81,7 @@ const HomePage = ({ location, history }) => {
 			<Hero />
 			<Container>
 				<Row className="my-5 d-flex justify-content-between">
-					<Col md={6}>
+					<Col sm={8}>
 						{allPosts ? (
 							<Link
 								as={Button}
@@ -177,7 +177,7 @@ const HomePage = ({ location, history }) => {
 						)}
 					</Col>
 
-					<Col md={4} className="border-start">
+					<Col md={4} sm={6} xs={12} className="border-start">
 						<RecommandedTopics setPostsByTopic={setPostsByTopic} />
 
 						<Container>

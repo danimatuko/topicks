@@ -12,7 +12,7 @@ import ForbiddenPage from "./components/error-page/ForbiddenPage";
 import PageNotFound from "./components/error-page/PageNotFound";
 import AllPosts from "./components/AllPosts";
 import SearchResults from "./components/SearchResults";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext } from "react";
 import { StoreContext } from "./stores/RootStore";
 import { observer } from "mobx-react-lite";
 
