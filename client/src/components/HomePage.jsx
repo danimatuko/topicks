@@ -8,7 +8,7 @@ import { StoreContext } from "../stores/RootStore";
 import { Link } from "react-router-dom";
 import Paginate from "./Paginate";
 
-const HomePage = ({ match, location, history }) => {
+const HomePage = ({ location, history }) => {
 	const [latestPosts, setLatestPosts] = useState(null);
 	const [mostLikedPosts, setMostLikedPosts] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);

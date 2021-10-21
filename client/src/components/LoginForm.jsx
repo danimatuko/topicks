@@ -26,6 +26,7 @@ const LoginForm = ({ history }) => {
 					user.activity = data.activity;
 					user.profileImage = data.profileImage;
 					user.token = data.token;
+					user.isAuth = true;
 				});
 				history.push("/");
 			}

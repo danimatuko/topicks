@@ -46,7 +46,7 @@ const SignedInMenu = observer(({ initials, logout }) => {
 		<DropdownButton
 			id="dropdown-basic-button"
 			title={
-				user.profileImage === defaultProfileImage ? (
+				!user.profileImage ? (
 					initials
 				) : (
 					<img src={user.profileImage} className="dropdown-img" alt="profile" />

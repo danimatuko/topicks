@@ -6,7 +6,8 @@ import { runInAction } from "mobx";
 
 const ProfileTab = () => {
 	const initialState = {
-		profileImage: "",
+		profileImage:
+			"https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png",
 		first_name: "",
 		last_name: "",
 		initials: "",

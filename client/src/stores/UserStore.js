@@ -16,6 +16,7 @@ class User {
 	};
 	profileImage = "";
 	token = null;
+	isAuth = false;
 
 	constructor() {
 		makeAutoObservable(this);
@@ -30,7 +31,8 @@ class User {
 				"role",
 				"activity",
 				"profileImage",
-				"token"
+				"token",
+				"isAuth"
 			],
 			storage: window.localStorage
 		});

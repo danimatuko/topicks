@@ -34,6 +34,7 @@ const SignUpForm = ({ history }) => {
 					user.last_name = data.last_name.charAt(0).toUpperCase() + last_name.slice(1);
 					user.email = data.email;
 					user.role = data.role;
+					user.isAuth = true;
 				});
 				history.push("/");
 			}

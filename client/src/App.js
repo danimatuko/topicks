@@ -12,9 +12,12 @@ import ForbiddenPage from "./components/error-page/ForbiddenPage";
 import PageNotFound from "./components/error-page/PageNotFound";
 import AllPosts from "./components/AllPosts";
 import SearchResults from "./components/SearchResults";
+import { useContext, useEffect, useRef, useState } from "react";
+import { StoreContext } from "./stores/RootStore";
+import { observer } from "mobx-react-lite";
 
-const App = () => {
-	const isAuth = JSON.parse(localStorage.getItem("userStore"))?.token || null;
+const App = observer(() => {
+	const { user } = useContext(StoreContext);
 
 	return (
 		<div className="App">
@@ -23,9 +26,14 @@ const App = () => {
 				<Switch>
 					<Route exact path="/sign-in" component={SignUpForm} />
 					<Route exact path="/login" component={LoginForm} />
-					<ProtectedRoute isAuth={isAuth} exact path="/dashboard" component={Dashboard} />
 					<ProtectedRoute
-						isAuth={isAuth}
+						isAuth={user.isAuth}
+						exact
+						path="/dashboard"
+						component={Dashboard}
+					/>
+					<ProtectedRoute
+						isAuth={user.isAuth}
 						exact
 						path={["/post", `/post/edit/:id`]}
 						component={CreatePost}
@@ -44,6 +52,6 @@ const App = () => {
 			<Footer />
 		</div>
 	);
-};
+});
 
 export default App;
