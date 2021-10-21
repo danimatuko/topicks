@@ -110,3 +110,11 @@ nav.nav {
         margin-top: 8px;
     }
 }
+
+ul {
+    list-style: none;
+}
+
+footer ul {
+    width: 100px;
+}

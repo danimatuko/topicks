@@ -6,14 +6,16 @@ import PostPreview from "./PostPreview";
 const SearchResults = ({ location }) => {
 	let keyWords = location.search.split("=")[1].replace("%", " ");
 	const [results, setResults] = useState([]);
-	const [isLoading, setisLoading] = useState(true);
+	const [isLoading, setisLoading] = useState(false);
 
 	const fetchResults = async () => {
 		try {
+			setisLoading(true);
 			const { data } = await Post.searchPosts(keyWords);
 			setResults(data);
 			setisLoading(false);
 		} catch (error) {
+			setisLoading(false);
 			console.log(error);
 		}
 	};
