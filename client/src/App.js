@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/layout/ProtecedRoute";
 import ForbiddenPage from "./components/error-page/ForbiddenPage";
 import PageNotFound from "./components/error-page/PageNotFound";
 import AllPosts from "./components/AllPosts";
+import SearchResults from "./components/SearchResults";
 
 const App = () => {
 	const isAuth = JSON.parse(localStorage.getItem("userStore"))?.token || null;
@@ -31,6 +32,7 @@ const App = () => {
 					/>
 					<Route exact path="/posts/:id" component={PostPage} />
 					<Route exact path="/posts" component={AllPosts} />
+					<Route exact path="/search" component={SearchResults} />
 					{
 						// add regex to match this route/posts/?page=2
 					}

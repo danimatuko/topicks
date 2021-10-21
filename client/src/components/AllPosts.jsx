@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
-import { Container, Row, Col, Spinner, Button } from "react-bootstrap";
+import React, { useState, useEffect, useContext } from "react";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 import Post from "../stores/PostStore";
 import PostPreview from "./PostPreview";
 import Paginate from "./Paginate";

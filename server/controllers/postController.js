@@ -202,3 +202,17 @@ export const getPostsByTopic = async (req, res) => {
 	const posts = await Post.find({ topic: req.params.topic });
 	res.status(200).json(posts);
 };
+
+export const searchForPosts = async (req, res) => {
+	const keyWords = req.params.keywords;
+
+	const regex = new RegExp(`${keyWords}`, "i");
+
+	try {
+		const posts = await Post.find({ title: regex });
+		res.status(200).json(posts);
+	} catch (error) {
+		res.status(500);
+		throw new Error(error);
+	}
+};

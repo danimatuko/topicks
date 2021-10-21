@@ -125,6 +125,10 @@ class Post {
 		return Axios.get(`/post/${id}/comments`);
 	}
 
+	static async searchPosts(keywords) {
+		return Axios.get(`/posts/search=${keywords}`);
+	}
+
 	async clear() {
 		await clearPersistedStore(this);
 	}

@@ -29,7 +29,7 @@ const Navigation = observer(() => {
 						About
 					</Nav.Link>{" "}
 					<Nav.Item></Nav.Item>
-				</Nav>{" "}
+				</Nav>
 				<Search />
 				{user.id ? <SignedInMenu initials={initials} logout={logout} /> : <UnsignedMenu />}
 			</Container>

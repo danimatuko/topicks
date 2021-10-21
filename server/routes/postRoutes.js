@@ -15,6 +15,7 @@ import {
 	getUserPosts,
 	like,
 	saveForLater,
+	searchForPosts,
 	updatePost
 } from "../controllers/postController.js";
 
@@ -25,10 +26,12 @@ router.post("/read-later", auth, saveForLater);
 router.put("/:id", auth, updatePost);
 
 //router.get("/", getAllposts);
+
 router.get("/", getPosts);
 router.get("/latest", getLatestPosts);
 router.get("/most-liked", getMostLikedposts);
 router.get("/topic=:topic", getPostsByTopic);
+router.get("/search=:keywords", searchForPosts);
 
 router.get("/:id", getPostById);
 router.get("/user/:id", getUserPosts);
