@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Container, Nav, Navbar, Dropdown, DropdownButton, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../../stores/RootStore";
@@ -8,6 +8,7 @@ import Search from "./Search";
 const Navigation = observer(() => {
 	const { user, comment, post } = useContext(StoreContext);
 	const initials = user.first_name.charAt(0) + user.last_name.charAt(0);
+	const [displaySearch, setDisplaySearch] = useState(false);
 
 	const logout = () => {
 		comment.clear();
@@ -34,9 +35,18 @@ const Navigation = observer(() => {
 						</Nav.Link>
 						<Nav.Link as={Link} to="/about">
 							About
-						</Nav.Link>{" "}
-						<Nav.Item></Nav.Item>
+						</Nav.Link>
 					</Nav>
+					{mobileView.matches && (
+						<Button
+							variant="outline-light border-0 me-2"
+							type="button"
+							onClick={() => setDisplaySearch(true)}
+						>
+							<i className="fas fa-search"></i>
+						</Button>
+					)}
+
 					{!mobileView.matches && <Search />}
 					{user.id ? (
 						<SignedInMenu initials={initials} logout={logout} />
@@ -45,7 +55,9 @@ const Navigation = observer(() => {
 					)}
 				</Container>
 			</Navbar>
-			{mobileView.matches && <Search />}
+			{mobileView.matches && displaySearch && (
+				<Search isMobile={true} setDisplaySearch={setDisplaySearch} />
+			)}
 		</>
 	);
 });
@@ -80,8 +92,6 @@ const SignedInMenu = observer(({ initials, logout }) => {
 });
 
 const UnsignedMenu = ({ mobileView }) => {
-	const { user } = useContext(StoreContext);
-
 	return (
 		<>
 			{mobileView.matches ? (
@@ -94,6 +104,7 @@ const UnsignedMenu = ({ mobileView }) => {
 						<img
 							src="https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
 							className="dropdown-img"
+							alt="user"
 						/>
 					}
 				>
