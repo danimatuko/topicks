@@ -21,7 +21,7 @@ const Navigation = observer(() => {
 			<Navbar bg="dark" variant="dark" className="pt-3">
 				<Container>
 					<Navbar.Brand as={Link} to="/home">
-						<img src="/Topicks-logos_white.png" alt="logo" width="100px" />
+						<img src="/logo/Topicks-logos_white.png" alt="logo" width="100px" />
 					</Navbar.Brand>
 					<Nav className="me-auto">
 						<Nav.Link as={Link} to="/home">
