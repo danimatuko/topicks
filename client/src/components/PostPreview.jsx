@@ -43,14 +43,18 @@ const PostPreview = observer(({ post }) => {
 								className="author-image me-1 mb-2"
 								alt=""
 							/>
-							<span className="author mb-2 text-muted text-capitalize">{author}</span>
-							<h2 className="h5 text-capitalize my-2 fw-bold">{title}</h2>
-							{/* <p className="fw-lighter">CRUD is an ancient paradigm better left behind.</p> */}
+							<span className="author mb-2  text-dark text-muted text-capitalize">
+								{author}
+							</span>
+							<h2 className="h5 text-capitalize my-2 fw-bold text-primary">
+								{title}
+							</h2>
+							{/* <p className="fw-primaryer">CRUD is an ancient paradigm better left behind.</p> */}
 						</Link>
 						<div className="d-flex flex-wrap justify-content-between align-items-center">
 							<div>
 								<span className="text-muted me-2">{dateOfPost}</span>
-								<Badge className="tag border-radius-5 p-2" pill bg="secondary">
+								<Badge className="tag border-radius-5 p-2" pill bg="primary">
 									{topic}
 								</Badge>
 							</div>
@@ -62,12 +66,12 @@ const PostPreview = observer(({ post }) => {
 										</span>
 										{user.activity.likedPosts.includes(_id) ? (
 											<i
-												className="unlike fas fa-thumbs-up  me-1 fs-5"
+												className="unlike fas fa-thumbs-up  me-1 fs-5 text-primary"
 												onClick={handleLike}
 											></i>
 										) : (
 											<i
-												className="like far fa-thumbs-up me-1 fs-5"
+												className="like far fa-thumbs-up me-1 fs-5 text-primary"
 												onClick={handleLike}
 											></i>
 										)}
@@ -75,12 +79,12 @@ const PostPreview = observer(({ post }) => {
 									<span className="me-1">
 										{user.activity.savedForLater.includes(_id) ? (
 											<i
-												className="bookmark fas fa-bookmark fs-5"
+												className="bookmark fas fa-bookmark fs-5 text-primary"
 												onClick={handleBookMark}
 											></i>
 										) : (
 											<i
-												className="bookmark far fa-bookmark fs-5"
+												className="bookmark far fa-bookmark fs-5 text-primary"
 												onClick={handleBookMark}
 											></i>
 										)}
@@ -96,7 +100,7 @@ const PostPreview = observer(({ post }) => {
 								className="post-preview-image"
 								src={subjectImage}
 								alt="img"
-								style={{ width: "190px", height: "100%", objectFit: "cover" }}
+								style={{ width: "160px", height: "100%", objectFit: "cover" }}
 							/>
 						</Link>
 					</div>

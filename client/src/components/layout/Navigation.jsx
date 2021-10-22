@@ -18,10 +18,15 @@ const Navigation = observer(() => {
 	// const [mobileView, setMobileView] = useState(initialState)
 	return (
 		<>
-			<Navbar bg="dark" variant="dark" className="pt-3">
+			<Navbar bg="primary" variant="dark" className="">
 				<Container>
 					<Navbar.Brand as={Link} to="/home">
-						<img src="/logo/Topicks-logos_white.png" alt="logo" width="100px" />
+						<img
+							src="/logo/Topicks-logos_white.png"
+							alt="logo"
+							width="85px"
+							className="logo p-0 m-0"
+						/>
 					</Navbar.Brand>
 					<Nav className="me-auto">
 						<Nav.Link as={Link} to="/home">
@@ -36,7 +41,7 @@ const Navigation = observer(() => {
 					{user.id ? (
 						<SignedInMenu initials={initials} logout={logout} />
 					) : (
-						<UnsignedMenu />
+						<UnsignedMenu mobileView={mobileView} />
 					)}
 				</Container>
 			</Navbar>
@@ -74,15 +79,42 @@ const SignedInMenu = observer(({ initials, logout }) => {
 	);
 });
 
-const UnsignedMenu = () => {
+const UnsignedMenu = ({ mobileView }) => {
+	const { user } = useContext(StoreContext);
+
 	return (
 		<>
-			<Button variant="dark" className="me-2 border-light" as={Link} to="/login">
-				Sign In
-			</Button>
-			<Button variant="secondary" as={Link} to="/sign-in">
-				Register
-			</Button>
+			{mobileView.matches ? (
+				<DropdownButton
+					id="dropdown-basic-button"
+					align={{ sm: "start" }}
+					variant="secondary"
+					menuVariant="dark"
+					title={
+						<img
+							src="https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
+							className="dropdown-img"
+						/>
+					}
+				>
+					<Dropdown.Item as={Link} to="/login">
+						Sign In
+					</Dropdown.Item>
+					<Dropdown.Item as={Link} to="/sign-in">
+						Register
+					</Dropdown.Item>
+				</DropdownButton>
+			) : (
+				<>
+					<Button variant="dark" className="me-2 border-light" as={Link} to="/login">
+						Sign In
+					</Button>
+					<Button variant="secondary" as={Link} to="/sign-in">
+						Register
+					</Button>
+				</>
+			)}
+			);
 		</>
 	);
 };

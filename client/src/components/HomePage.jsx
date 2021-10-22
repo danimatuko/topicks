@@ -59,10 +59,6 @@ const HomePage = ({ location, history }) => {
 			topic: "",
 			posts: []
 		});
-
-		// setLatestPosts(null);
-		// setLatestPosts(null);
-		// setAllPosts(null);
 	};
 
 	useEffect(() => {
@@ -81,7 +77,7 @@ const HomePage = ({ location, history }) => {
 			<Hero />
 			<Container>
 				<Row className="my-5 d-flex justify-content-between">
-					<Col sm={8}>
+					<Col md={6}>
 						{allPosts ? (
 							<Link
 								as={Button}
@@ -114,7 +110,7 @@ const HomePage = ({ location, history }) => {
 						)}
 						{postsByTopic.topic && (
 							<Row className="mt-3">
-								<h2 className="display-6 my-5 fw-bold text-secondary">
+								<h2 className="display-6 my-5 fw-bold text-primary">
 									{postsByTopic.topic}
 								</h2>
 								{isLoading ? (
@@ -127,8 +123,8 @@ const HomePage = ({ location, history }) => {
 							</Row>
 						)}
 						{allPosts && postsByTopic.topic === "" && (
-							<Row className="mt-3" key={pageNumber}>
-								<h2 className="display-6 my-5 fw-bold text-secondary">All Posts</h2>
+							<Row className="mb-5 mx-auto" key={pageNumber}>
+								<h2 className="display-6 my-5 fw-bold text-primary">All Posts</h2>
 								{isLoading ? (
 									<Spinner animation="border" className="d-block mx-auto" />
 								) : (
@@ -147,10 +143,8 @@ const HomePage = ({ location, history }) => {
 						)}
 						{postsByTopic.topic === "" && !allPosts && (
 							<>
-								<Row className="mt-3">
-									<h2 className="display-6 my-4 fw-bold text-secondary">
-										Latest
-									</h2>
+								<Row className="mb-5 mx-auto">
+									<h2 className="display-6 my-4 fw-bold text-primary">Latest</h2>
 									{isLoading ? (
 										<Spinner animation="border" className="d-block mx-auto" />
 									) : (
@@ -160,8 +154,8 @@ const HomePage = ({ location, history }) => {
 										))
 									)}
 								</Row>
-								<Row>
-									<h2 className="display-6 mb-4 fw-bold text-secondary">
+								<Row className="mb-5 mx-auto">
+									<h2 className="display-6 mb-4 fw-bold text-primary">
 										Most Liked
 									</h2>
 									{isLoading ? (

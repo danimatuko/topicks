@@ -7,7 +7,7 @@ const Footer = () => {
 		<footer className="text-center py-4" style={{ backgroundColor: "#e7e7e794" }}>
 			<Container className="d-flex justify-content-between align-items-center">
 				<Link to="/">
-					<Image src="/logo/Topicks-logos_black.png" alt="logo" width="80px" />
+					<Image src="/logo/Topicks-logos_black.png" alt="logo" width="85px" />
 				</Link>
 				<div>
 					<p className="text-secondary fw-bold mb-1">© 2021 Dani Matuko</p>

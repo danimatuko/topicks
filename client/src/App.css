@@ -7,7 +7,7 @@ nav.nav {
 }
 
 .hero {
-    padding: 8rem
+    padding: 8rem;
 }
 
 #dropdown-basic-button {
@@ -99,8 +99,29 @@ nav.nav {
     cursor: pointer;
 }
 
+ul {
+    list-style: none;
+}
 
+footer ul {
+    width: 100px;
+}
+
+/* MOBILE */
 @media screen and (max-width: 768px) {
+    .logo {
+        width: 55px !important;
+    }
+
+    .hero {
+        padding: 4rem;
+    }
+
+    .hero .lead,
+    .hero button {
+        font-size: 1rem !important;
+    }
+
     .post-preview {
         flex-direction: column;
     }
@@ -109,12 +130,13 @@ nav.nav {
         width: 95% !important;
         margin-top: 8px;
     }
-}
 
-ul {
-    list-style: none;
-}
+    footer>div {
+        flex-direction: column;
 
-footer ul {
-    width: 100px;
+    }
+
+    footer>div>div {
+        margin-top: 15px;
+    }
 }
