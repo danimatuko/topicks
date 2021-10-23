@@ -25,7 +25,7 @@ const Search = ({ isMobile, setDisplaySearch }) => {
 					<InputGroup
 						style={mobileStyle}
 						size={isMobile && "sm"}
-						onBlur={() => setDisplaySearch(false)}
+						onBlur={() => isMobile && setDisplaySearch(false)}
 					>
 						{isMobile && (
 							<Button

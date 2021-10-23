@@ -5,6 +5,8 @@ import { StoreContext } from "../stores/RootStore";
 import User from "../stores/UserStore";
 
 const LoginForm = ({ history }) => {
+	const mobileView = window.matchMedia("(max-width: 767px)");
+
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
@@ -37,7 +39,7 @@ const LoginForm = ({ history }) => {
 	};
 
 	return (
-		<Container>
+		<Container className="login-page ">
 			<Row className="justify-content-center">
 				<Col md={4}>
 					{error && (
@@ -46,11 +48,12 @@ const LoginForm = ({ history }) => {
 						</Alert>
 					)}
 
-					<h1 className="display-5 mt-5 mb-4">Login</h1>
+					<h1 className="display-5 mt-5 mb-4 text-primary">Login</h1>
 					<Form onSubmit={handleSubmit}>
 						<Form.Group className="mb-3" controlId="email">
 							<Form.Label>Email address</Form.Label>
 							<Form.Control
+								size={mobileView && "sm"}
 								value={email}
 								type="email"
 								placeholder="Enter email"
@@ -64,13 +67,19 @@ const LoginForm = ({ history }) => {
 						<Form.Group className="mb-3" controlId="password">
 							<Form.Label>Password</Form.Label>
 							<Form.Control
+								size={mobileView && "sm"}
 								value={password}
 								type="password"
 								placeholder="Password"
 								onChange={(e) => setPassword(e.target.value)}
 							/>
 						</Form.Group>
-						<Button className="w-100" variant="dark" type="submit">
+						<Button
+							className="w-100"
+							variant="dark"
+							type="submit"
+							size={mobileView && "sm"}
+						>
 							Submit
 						</Button>
 					</Form>

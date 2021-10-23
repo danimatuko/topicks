@@ -16,6 +16,7 @@ const Navigation = observer(() => {
 		user.logout();
 	};
 	const mobileView = window.matchMedia("(max-width: 767px)");
+
 	// const [mobileView, setMobileView] = useState(initialState)
 	return (
 		<>
@@ -100,6 +101,7 @@ const UnsignedMenu = ({ mobileView }) => {
 					align={{ sm: "start" }}
 					variant="secondary"
 					menuVariant="dark"
+					className="dd-btn"
 					title={
 						<img
 							src="https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
@@ -125,7 +127,6 @@ const UnsignedMenu = ({ mobileView }) => {
 					</Button>
 				</>
 			)}
-			);
 		</>
 	);
 };

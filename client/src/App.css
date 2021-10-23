@@ -107,19 +107,38 @@ footer ul {
     width: 100px;
 }
 
-/* MOBILE */
+
+
+
+
+
+
+
+/********** MOBILE **********/
 @media screen and (max-width: 768px) {
+
+    p,
+    span {
+        font-size: 0.9rem !important;
+    }
+
     .logo {
         width: 55px !important;
     }
 
+    /* HERO */
     .hero {
         padding: 4rem;
     }
 
-    .hero .lead,
+    .hero .lead {
+        font-size: 1rem !important;
+    }
+
     .hero button {
         font-size: 1rem !important;
+        padding-top: 0.3rem !important;
+        padding-bottom: 0.3rem !important;
     }
 
     .post-preview {
@@ -139,4 +158,55 @@ footer ul {
     footer>div>div {
         margin-top: 15px;
     }
+
+    /* POST-PAGE */
+    .post {
+        padding-top: 0 !important;
+        width: 85vw !important;
+    }
+
+    .post .tag {
+        font-size: 0.5rem !important;
+        padding: 0;
+    }
+
+    .post .dropdown-img {
+        height: 35px !important;
+        width: 35px !important;
+    }
+
+
+    .post-date,
+    .author {
+        font-size: 0.8rem;
+    }
+
+    .like,
+    .bookmark {
+        font-size: 0.8rem !important;
+    }
+
+    .post-title {
+        font-size: 1.5rem;
+    }
+
+    .post-body img {
+        max-width: 100%;
+        height: 100%;
+    }
+
+    .comments {
+        width: 85vw !important;
+        margin-top: 0 !important;
+    }
+
+
+    /* LOGIN & REGISTER PAGE */
+    .login-page,
+    .register-page {
+        width: 75vw !important;
+        font-size: 1rem;
+        font-size: 0.8rem;
+    }
+
 }
