@@ -1,6 +1,8 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utils/generateToken.js";
+import Post from "../models/Post.js";
+import Comment from "../models/Comment.js";
 
 export const register = async (req, res) => {
 	const { first_name, last_name, email, password, role } = req.body;
@@ -90,6 +92,16 @@ export const changeProfileImage = async (req, res) => {
 			profileImage: req.body.profileImage
 		});
 		user = await user.save();
+		// update profile image in the user's posts
+		await Post.updateMany(
+			{ userId: req.params.id },
+			{ $set: { profileImage: req.body.profileImage } }
+		);
+		// update profile image in the user's comments
+		await Comment.updateMany(
+			{ userId: req.params.id },
+			{ $set: { profileImage: req.body.profileImage } }
+		);
 		res.status(200).json(user.profileImage);
 	} else {
 		res.status(401);

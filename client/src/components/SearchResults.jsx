@@ -3,11 +3,10 @@ import { Container, Row, Col, Spinner } from "react-bootstrap";
 import Post from "../stores/PostStore";
 import PostPreview from "./PostPreview";
 
-const SearchResults = ({ location }) => {
-	let keyWords = location.search.split("=")[1].replace("%", " ");
+const SearchResults = ({ location, match }) => {
+	let keyWords = location.search.split("=")[1]?.replace("%", " ");
 	const [results, setResults] = useState([]);
 	const [isLoading, setisLoading] = useState(false);
-
 	const fetchResults = async () => {
 		try {
 			setisLoading(true);

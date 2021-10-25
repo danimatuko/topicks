@@ -27,7 +27,7 @@ const RecommandedTopics = ({ setPostsByTopic }) => {
 	};
 
 	return (
-		<Container>
+		<Container className="recommended-topics">
 			<h2 className="h5 mb-4 fw-bold">Recommended topics</h2>
 			<div className="d-flex flex-wrap">
 				{TOPICS.map((topic) => (

@@ -182,6 +182,7 @@ footer ul {
     }
 
     .like,
+    .unlike,
     .bookmark {
         font-size: 0.8rem !important;
     }
@@ -207,6 +208,11 @@ footer ul {
         width: 75vw !important;
         font-size: 1rem;
         font-size: 0.8rem;
+    }
+
+    .recommended-topics .topic,
+    .post-preview .tag {
+        font-size: 0.7rem !important;
     }
 
 }
