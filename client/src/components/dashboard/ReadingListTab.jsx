@@ -32,7 +32,7 @@ const ReadingListTab = () => {
 					<Spinner animation="border" className="d-block mx-auto" />
 				) : (
 					readingList && (
-						<Table striped bordered hover>
+						<Table striped bordered hover responsive>
 							<PostsTable />
 							<tbody>
 								{readingList.map((post, index) => (

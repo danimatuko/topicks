@@ -17,7 +17,7 @@ const LoginForm = ({ history }) => {
 		e.preventDefault();
 		setError(null);
 		try {
-			const { data } = await User.login(email, password);
+			const { data } = await User.login(email.toLowerCase(), password);
 			if (data) {
 				runInAction(() => {
 					user.id = data.id;

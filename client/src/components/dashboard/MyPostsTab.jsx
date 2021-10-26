@@ -31,8 +31,8 @@ const MyPostsTab = () => {
 					<Spinner animation="border" className="d-block mx-auto" />
 				) : (
 					myPosts && (
-						<Table striped bordered hover>
-							<PostsTable  editable={true}/>
+						<Table striped bordered hover responsive>
+							<PostsTable editable={true} />
 							<tbody>
 								{myPosts.map((post, index) => (
 									<PostRow

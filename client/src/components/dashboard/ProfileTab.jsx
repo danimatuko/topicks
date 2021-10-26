@@ -3,6 +3,7 @@ import { Container, Form, Button, Row, Col, Alert, Tab, Image, Spinner } from "r
 import { StoreContext } from "../../stores/RootStore";
 import Axios from "axios";
 import { runInAction } from "mobx";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 const ProfileTab = () => {
 	const initialState = {
@@ -22,6 +23,7 @@ const ProfileTab = () => {
 	const [filePath, setFilePath] = useState("");
 	const [isUploading, setIsUploading] = useState(false);
 	const [error, setError] = useState(null);
+	const [isMobileView] = useMediaQuery();
 
 	useEffect(() => {
 		try {
@@ -97,82 +99,94 @@ const ProfileTab = () => {
 									{error}
 								</Alert>
 							)}
-							<Form>
-								{!file ? (
-									<Image
-										className="d-block mx-auto mb-3"
-										src={profileImage}
-										width="150px"
-										height="150px"
-										roundedCircle
-									/>
-								) : (
-									<Image
-										className="d-block mx-auto mb-3 "
-										src={filePath}
-										width="150px"
-										height="150px"
-										roundedCircle
-										style={{ objectFit: "unset" }}
-									/>
-								)}
-								<Form.Group className="mb-4 d-inline" controlId="first_name">
-									<Form.Label className="d-block">Profile Image</Form.Label>
-									<input
-										type="file"
-										accept="image/*"
-										onChange={(e) => onImageChange(e)}
-									/>
-								</Form.Group>
-								<Button variant="dark" onClick={uploadImage} disabled={isUploading}>
-									{isUploading ? (
-										<>
-											<Spinner as="span" size="sm" animation="border" />
-											<span className="mx-1">uploading...</span>
-										</>
+							<Container>
+								<Form>
+									{!file ? (
+										<Image
+											className="d-block mx-auto mb-3 mt-3"
+											src={profileImage}
+											width={isMobileView ? "100px" : "150px"}
+											height={isMobileView ? "100px" : "150px"}
+											roundedCircle
+										/>
 									) : (
-										"Update"
+										<Image
+											className="d-block mx-auto mb-3 "
+											src={filePath}
+											width={isMobileView ? "100px" : "150px"}
+											height={isMobileView ? "100px" : "150px"}
+											roundedCircle
+											style={{ objectFit: "unset" }}
+										/>
 									)}
-								</Button>
-							</Form>
+									<Form.Group className="mb-4 d-inline" controlId="first_name">
+										<Form.Label className="d-block">Profile Image</Form.Label>
+										<input
+											className={isMobileView && "w-75"}
+											type="file"
+											accept="image/*"
+											onChange={(e) => onImageChange(e)}
+										/>
+									</Form.Group>
+									<Button
+										variant="dark"
+										onClick={uploadImage}
+										disabled={isUploading}
+										size={isMobileView && "sm"}
+									>
+										{isUploading ? (
+											<>
+												<Spinner as="span" size="sm" animation="border" />
+												<span className="mx-1">uploading...</span>
+											</>
+										) : (
+											"Update"
+										)}
+									</Button>
+								</Form>
+							</Container>
 
 							<hr />
-
-							<Form onSubmit={handleSubmit}>
-								<Form.Group className="mb-3" controlId="first_name">
-									<Form.Label>First Name</Form.Label>
-									<Form.Control
-										disabled
-										name="first_name"
-										value={first_name}
-										type="text"
-										onChange={(e) => handleChange(e.target)}
-									/>
-								</Form.Group>
-								<Form.Group className="mb-3" controlId="last_name">
-									<Form.Label>Last Name</Form.Label>
-									<Form.Control
-										disabled
-										name="last_name"
-										value={last_name}
-										type="text"
-										onChange={(e) => handleChange(e.target)}
-									/>
-								</Form.Group>
-								<Form.Group className="mb-3" controlId="email">
-									<Form.Label>Email address</Form.Label>
-									<Form.Control
-										disabled
-										name="email"
-										value={email}
-										type="email"
-										onChange={(e) => handleChange(e.target)}
-									/>
-									<Form.Text className="text-muted">
-										We'll never share your email with anyone else.
-									</Form.Text>
-								</Form.Group>
-							</Form>
+							<Container>
+								<Form onSubmit={handleSubmit}>
+									<Form.Group className="mb-3" controlId="first_name">
+										<Form.Label>First Name</Form.Label>
+										<Form.Control
+											disabled
+											name="first_name"
+											value={first_name}
+											type="text"
+											size={isMobileView && "sm"}
+											onChange={(e) => handleChange(e.target)}
+										/>
+									</Form.Group>
+									<Form.Group className="mb-3" controlId="last_name">
+										<Form.Label>Last Name</Form.Label>
+										<Form.Control
+											disabled
+											name="last_name"
+											value={last_name}
+											type="text"
+											size={isMobileView && "sm"}
+											onChange={(e) => handleChange(e.target)}
+										/>
+									</Form.Group>
+									<Form.Group className="mb-3" controlId="email">
+										<Form.Label>Email address</Form.Label>
+										<Form.Control
+											disabled
+											name="email"
+											value={email}
+											type="email"
+											size={isMobileView && "sm"}
+											onChange={(e) => handleChange(e.target)}
+										/>
+										<Form.Text className="text-muted">
+											We'll never share your email with anyone else.
+										</Form.Text>
+									</Form.Group>
+								</Form>
+							</Container>
 						</Col>
 					</Row>
 				</Container>

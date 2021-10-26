@@ -76,7 +76,8 @@ const CreatePost = ({ history, match }) => {
 			history.push("/dashboard");
 		} catch (error) {
 			console.log({ error });
-			setError(error.message || error.response.data.message);
+			setError(error.response.data.message || error.message);
+			window.scrollTo(0, 0);
 		}
 	};
 

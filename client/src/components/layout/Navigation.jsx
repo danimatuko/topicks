@@ -31,10 +31,10 @@ const Navigation = observer(() => {
 						/>
 					</Navbar.Brand>
 					<Nav className="me-auto">
-						<Nav.Link as={Link} to="/home">
+						<Nav.Link as={Link} to="/home" className="main-nav-link">
 							Home
 						</Nav.Link>
-						<Nav.Link as={Link} to="/about">
+						<Nav.Link as={Link} to="/about" className="main-nav-link">
 							About
 						</Nav.Link>
 					</Nav>

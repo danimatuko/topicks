@@ -28,7 +28,12 @@ const SignUpForm = ({ history }) => {
 		e.preventDefault();
 		setError(null);
 		try {
-			const { data } = await User.signUp(first_name, last_name, email, password);
+			const { data } = await User.signUp(
+				first_name,
+				last_name,
+				email.toLowerCase(),
+				password
+			);
 			if (data) {
 				runInAction(() => {
 					user.id = data.id;
