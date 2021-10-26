@@ -10,7 +10,7 @@ const auth = (req, res, next) => {
 			next();
 		} catch (e) {
 			res.status(400);
-			throw new Error("Invalid token");
+			throw new Error("You must login");
 		}
 	} else {
 		return res.status(401).send("No token provided");

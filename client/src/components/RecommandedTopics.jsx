@@ -17,6 +17,7 @@ const RecommandedTopics = ({ setPostsByTopic }) => {
 	];
 
 	const getPostsByTopic = async (topic) => {
+		document.getElementById("home-posts-container").scrollIntoView();
 		try {
 			const { data } = await Post.getPostsByTopic(topic);
 			setPostsByTopic({

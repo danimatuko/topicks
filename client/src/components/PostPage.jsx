@@ -78,7 +78,7 @@ const PostPage = observer(({ match, history }) => {
 	) : (
 		<Container className="mt-5">
 			<div className="post w-75 mx-auto py-5">
-				<h1 className="post-title display-3 mb-5">{post && post.title}</h1>
+				<h1 className="post-title display-3 mb-5 fw-bold">{post && post.title}</h1>
 				<div className="d-flex justify-content-between">
 					<div>
 						<div className="d-flex author  mb-2 text-muted text-capitalize fw-bold">
@@ -89,7 +89,9 @@ const PostPage = observer(({ match, history }) => {
 							/>
 							<div>
 								<div className="author">{post.author}</div>
-								<div className="post-date text-muted me-2">{post && post.dateOfPost}</div>
+								<div className="post-date text-muted me-2">
+									{post && post.dateOfPost}
+								</div>
 							</div>
 						</div>
 					</div>

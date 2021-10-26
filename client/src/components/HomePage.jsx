@@ -75,7 +75,7 @@ const HomePage = ({ location, history }) => {
 	return (
 		<>
 			<Hero />
-			<Container>
+			<Container id="home-posts-container">
 				<Row className="my-5 d-flex justify-content-between">
 					<Col md={6}>
 						{allPosts ? (
@@ -98,12 +98,7 @@ const HomePage = ({ location, history }) => {
 							</Link>
 						)}
 						{postsByTopic.topic && (
-							<Link
-								as={Button}
-								className="text-dark me-3"
-								to="#"
-								onClick={() => pickTopic()}
-							>
+							<Link className="text-dark me-3" to="#" onClick={() => pickTopic()}>
 								<i className="fas fa-times me-1"></i>
 								{postsByTopic.topic}
 							</Link>

@@ -4,11 +4,12 @@ import { Badge, Col, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../stores/RootStore";
 import { observer } from "mobx-react";
+import useMediaQuery from "../hooks/useMediaQuery";
 
 const PostPreview = observer(({ post }) => {
 	const { _id, author, topic, title, subjectImage, dateOfPost } = post;
 	const { user } = useContext(StoreContext);
-
+	const [isMobileView] = useMediaQuery();
 	const handleLike = async () => {
 		try {
 			const { data } = await user.like(_id);
@@ -33,7 +34,7 @@ const PostPreview = observer(({ post }) => {
 	};
 
 	return (
-		<Row className="mx-auto">
+		<Row className="mx-auto mt-2">
 			<Col>
 				<div className="post-preview d-flex justify-content-between align-items-center mb-4">
 					<div style={{ flex: 3 }}>
@@ -46,7 +47,10 @@ const PostPreview = observer(({ post }) => {
 							<span className="author mb-2  text-dark text-muted text-capitalize">
 								{author}
 							</span>
-							<h2 className="h5 text-capitalize my-2 fw-bold text-primary">
+							<h2
+								className="h5 text-capitalize my-2 fw-bold text-primary"
+								style={{ width: isMobileView && "85vw" }}
+							>
 								{title}
 							</h2>
 							{/* <p className="fw-primaryer">CRUD is an ancient paradigm better left behind.</p> */}
@@ -100,7 +104,11 @@ const PostPreview = observer(({ post }) => {
 								className="post-preview-image"
 								src={subjectImage}
 								alt="img"
-								style={{ width: "160px", height: "160px", objectFit: "unset" }}
+								style={{
+									width: isMobileView ? "85vw" : "160px",
+									height: !isMobileView && "120px",
+									objectFit: "unset"
+								}}
 							/>
 						</Link>
 					</div>

@@ -156,8 +156,8 @@ footer ul {
     }
 
     .post-preview-image {
-        width: 95% !important;
-        margin-top: 8px;
+        /* width: 95% !important; */
+        margin-top: 12px;
     }
 
     footer>div {

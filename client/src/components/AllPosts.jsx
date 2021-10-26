@@ -35,7 +35,7 @@ const AllPosts = ({ location }) => {
 				<Col md={8}>
 					{allPosts && (
 						<Row className="mt-3" key={pageNumber}>
-							<h2 className="display-6 my-5 fw-bold text-secondary">All Posts</h2>
+							<h2 className="display-6 mb-5 fw-bold text-secondary">All Posts</h2>
 							{isLoading ? (
 								<Spinner animation="border" className="d-block mx-auto" />
 							) : (
