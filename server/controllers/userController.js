@@ -5,10 +5,14 @@ import Post from "../models/Post.js";
 import Comment from "../models/Comment.js";
 
 export const register = async (req, res) => {
-	const { first_name, last_name, email, password, role } = req.body;
+	const { first_name, last_name, email, password, confirmPassword, role } = req.body;
 	if (first_name === "" || last_name === "" || email === "" || password === "" || role === "") {
 		res.status(400);
 		throw new Error("All fields are required");
+	}
+	if (password !== confirmPassword) {
+		res.status(400);
+		throw new Error("Passwords must match!");
 	}
 	const userExists = await User.findOne({ email });
 	if (userExists) {

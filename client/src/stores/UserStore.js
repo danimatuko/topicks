@@ -18,7 +18,7 @@ class User {
 	token = null;
 	isAuth =
 		localStorage.getItem("userStore") && JSON.parse(localStorage.getItem("userStore")).isAuth;
-		
+
 	constructor() {
 		makeAutoObservable(this);
 
@@ -39,12 +39,13 @@ class User {
 		});
 	}
 
-	static async signUp(first_name, last_name, email, password, role) {
+	static async signUp(first_name, last_name, email, password, confirmPassword) {
 		return Axios.post("/users", {
 			first_name,
 			last_name,
 			email,
-			password
+			password,
+			confirmPassword
 		});
 	}
 

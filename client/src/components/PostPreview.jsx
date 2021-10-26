@@ -100,7 +100,7 @@ const PostPreview = observer(({ post }) => {
 								className="post-preview-image"
 								src={subjectImage}
 								alt="img"
-								style={{ width: "160px", height: "100%", objectFit: "cover" }}
+								style={{ width: "160px", height: "160px", objectFit: "unset" }}
 							/>
 						</Link>
 					</div>

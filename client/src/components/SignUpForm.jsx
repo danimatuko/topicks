@@ -11,7 +11,8 @@ const SignUpForm = ({ history }) => {
 		first_name: "",
 		last_name: "",
 		email: "",
-		password: ""
+		password: "",
+		confirmPassword: ""
 	};
 
 	const [newUser, setNewUser] = useState(initialState);
@@ -32,7 +33,9 @@ const SignUpForm = ({ history }) => {
 				first_name,
 				last_name,
 				email.toLowerCase(),
-				password
+				password,
+				confirmPassword
+				
 			);
 			if (data) {
 				runInAction(() => {
@@ -42,6 +45,7 @@ const SignUpForm = ({ history }) => {
 					user.email = data.email;
 					user.role = data.role;
 					user.isAuth = true;
+					user.token = data.token;
 				});
 				history.push("/");
 			}
@@ -51,7 +55,7 @@ const SignUpForm = ({ history }) => {
 		}
 	};
 
-	const { first_name, last_name, email, password } = newUser;
+	const { first_name, last_name, email, password ,confirmPassword} = newUser;
 
 	return (
 		<Container className="register-page">
@@ -97,13 +101,22 @@ const SignUpForm = ({ history }) => {
 								We'll never share your email with anyone else.
 							</Form.Text>
 						</Form.Group>
-
 						<Form.Group className="mb-3" controlId="password">
 							<Form.Label>Password</Form.Label>
 							<Form.Control
 								size={mobileView && "sm"}
 								name="password"
 								value={password}
+								type="password"
+								onChange={(e) => handleChange(e.target)}
+							/>
+						</Form.Group>
+						<Form.Group className="mb-3" controlId="confirmPassword">
+							<Form.Label>Confirm Password</Form.Label>
+							<Form.Control
+								size={mobileView && "sm"}
+								name="confirmPassword"
+								value={confirmPassword}
 								type="password"
 								onChange={(e) => handleChange(e.target)}
 							/>

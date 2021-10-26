@@ -49,8 +49,8 @@ const userSchema = mongoose.Schema(
 			}
 		},
 		profileImage: {
-			type: String
-			// default: "https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
+			type: String,
+			default: "https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
 		}
 	},
 	{ timestamps: true }
