@@ -7,11 +7,13 @@ const RecommandedTopics = ({ setPostsByTopic }) => {
 		"Music",
 		"Money",
 		"Bussiness",
-		"Mindfulness",
+		"Technology",
+		"Programming",
+		"Gaming",
 		"Art",
 		"Sports",
-		"Society",
-		"Politics"
+		"Politics",
+		"History"
 	];
 
 	const getPostsByTopic = async (topic) => {

@@ -10,11 +10,25 @@ const CreatePost = ({ history, match }) => {
 	const [error, setError] = useState(null);
 	const [edit, setEdit] = useState(false);
 
+	const topicOptions = [
+		"Money",
+		"Technology",
+		"Programming",
+		"Business",
+		"Gaming",
+		"Mindfulness",
+		"Art",
+		"Music",
+		"Sports",
+		"Politics",
+		"History"
+	];
+
 	const initialState = {
 		userId: "",
 		author: user.first_name + " " + user.last_name,
 		title: "",
-		topic: "",
+		topic: topicOptions[0],
 		subjectImage: "",
 		postHTML: "",
 		profileImage: user.profileImage
@@ -109,15 +123,9 @@ const CreatePost = ({ history, match }) => {
 						value={post.topic}
 						onChange={(e) => handleChange(e.target)}
 					>
-						<option>Money</option>
-						<option>Technology</option>
-						<option>Business</option>
-						<option>Mindfulness</option>
-						<option>Art</option>
-						<option>Music</option>
-						<option>Sports</option>
-						<option>Politics</option>
-						<option>Society</option>
+						{topicOptions.map((option) => (
+							<option key={option}>{option}</option>
+						))}
 					</Form.Select>
 				</Form.Group>
 				<Form.Group className="mb-3" controlId="subjectImage">
