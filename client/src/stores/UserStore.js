@@ -16,8 +16,9 @@ class User {
 	};
 	profileImage = "";
 	token = null;
-	isAuth = false;
-
+	isAuth =
+		localStorage.getItem("userStore") && JSON.parse(localStorage.getItem("userStore")).isAuth;
+		
 	constructor() {
 		makeAutoObservable(this);
 

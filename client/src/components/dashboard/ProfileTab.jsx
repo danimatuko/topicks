@@ -122,7 +122,7 @@ const ProfileTab = () => {
 									<Form.Group className="mb-4 d-inline" controlId="first_name">
 										<Form.Label className="d-block">Profile Image</Form.Label>
 										<input
-											className={isMobileView && "w-75"}
+											className={isMobileView.toString() && "w-75"}
 											type="file"
 											accept="image/*"
 											onChange={(e) => onImageChange(e)}

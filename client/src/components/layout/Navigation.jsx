@@ -17,7 +17,6 @@ const Navigation = observer(() => {
 	};
 	const mobileView = window.matchMedia("(max-width: 767px)");
 
-	// const [mobileView, setMobileView] = useState(initialState)
 	return (
 		<>
 			<Navbar bg="primary" variant="dark" className="">
@@ -119,10 +118,10 @@ const UnsignedMenu = ({ mobileView }) => {
 				</DropdownButton>
 			) : (
 				<>
-					<Button variant="dark" className="me-2 border-light" as={Link} to="/login">
+					<Button variant="dark" className="me-2 " as={Link} to="/login">
 						Sign In
 					</Button>
-					<Button variant="secondary" as={Link} to="/sign-in">
+					<Button variant="outline-secondary" as={Link} to="/sign-in">
 						Register
 					</Button>
 				</>
