@@ -43,9 +43,6 @@ const App = observer(() => {
 					<Route exact path="/posts/:id" component={PostPage} />
 					<Route exact path="/posts" component={AllPosts} />
 					<Route exact path="/search" component={SearchResults} />
-					{
-						// add regex to match this route/posts/?page=2
-					}
 					<Route exact path={["/", "/home", "/posts/"]} component={HomePage} />
 					<Route exact path="/forbbiden" component={ForbiddenPage} />
 					<Route exact path="*" component={PageNotFound} />
