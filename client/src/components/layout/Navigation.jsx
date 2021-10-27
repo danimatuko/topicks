@@ -1,14 +1,30 @@
 import { observer } from "mobx-react-lite";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Nav, Navbar, Dropdown, DropdownButton, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../../stores/RootStore";
 import Search from "./Search";
+import Hero from "./Hero";
+import { useHistory } from "react-router-dom";
 
 const Navigation = observer(() => {
 	const { user, comment, post } = useContext(StoreContext);
 	const initials = user.first_name.charAt(0) + user.last_name.charAt(0);
 	const [displaySearch, setDisplaySearch] = useState(false);
+	const [isHomePage, setIsHomePage] = useState(
+		window.location.pathname === "/" || window.location.pathname === "/home"
+	);
+
+	const history = useHistory();
+
+	useEffect(() => {
+		history.listen(
+			(location) => {
+				setIsHomePage(location.pathname === "/" || location.pathname === "/home");
+			},
+			[history]
+		);
+	});
 
 	const logout = () => {
 		comment.clear();
@@ -19,7 +35,7 @@ const Navigation = observer(() => {
 
 	return (
 		<>
-			<Navbar bg="primary" variant="dark" className="">
+			<Navbar variant="dark" className="p-0">
 				<Container>
 					<Navbar.Brand as={Link} to="/home">
 						<img
@@ -58,6 +74,7 @@ const Navigation = observer(() => {
 			{mobileView.matches && displaySearch && (
 				<Search isMobile={true} setDisplaySearch={setDisplaySearch} />
 			)}
+			{isHomePage && <Hero />}
 		</>
 	);
 });

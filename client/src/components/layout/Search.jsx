@@ -19,7 +19,7 @@ const Search = ({ isMobile, setDisplaySearch }) => {
 	};
 
 	return (
-		<Row className="bg-primary">
+		<Row className="">
 			<Col md={11} className="px-xs-3">
 				<Form className="d-flex" onSubmit={search}>
 					<InputGroup
@@ -38,6 +38,7 @@ const Search = ({ isMobile, setDisplaySearch }) => {
 						)}
 
 						<FormControl
+							id="search"
 							ref={inputRef}
 							type="search"
 							placeholder="Search..."

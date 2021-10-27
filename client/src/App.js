@@ -21,8 +21,10 @@ const App = observer(() => {
 
 	return (
 		<div className="App">
-			<Navigation />
-			<main style={{ minHeight: "72.5vh" }}>
+			<div className="hero-wrapper">
+				<Navigation />
+			</div>
+			<main style={{ minHeight: "76.6vh" }}>
 				<Switch>
 					<Route exact path="/sign-in" component={SignUpForm} />
 					<Route exact path="/login" component={LoginForm} />

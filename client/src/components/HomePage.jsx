@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { Container, Row, Col, Spinner, Button } from "react-bootstrap";
 import Post from "../stores/PostStore";
-import Hero from "./layout/Hero";
 import PostPreview from "./PostPreview";
 import RecommandedTopics from "./RecommandedTopics";
 import { StoreContext } from "../stores/RootStore";
@@ -72,7 +71,6 @@ const HomePage = ({ location, history }) => {
 
 	return (
 		<>
-			<Hero />
 			<Container id="home-posts-container">
 				<Row className="my-5 d-flex justify-content-between">
 					<Col md={6}>

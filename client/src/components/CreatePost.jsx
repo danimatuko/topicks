@@ -29,9 +29,12 @@ const CreatePost = ({ history, match }) => {
 		author: user.first_name + " " + user.last_name,
 		title: "",
 		topic: topicOptions[0],
-		subjectImage: "",
+		subjectImage:
+			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbeQlsruJMdFTjMK9OkGZY527BXOvbGDWWHg&usqp=CAU",
 		postHTML: "",
-		profileImage: user.profileImage
+		profileImage:
+			user.profileImage ||
+			"https://romancebooks.co.il/wp-content/uploads/2019/06/default-user-image.png"
 	};
 
 	const [post, setPost] = useState(initialState);

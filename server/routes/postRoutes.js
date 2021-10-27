@@ -25,7 +25,6 @@ router.post("/read-later", auth, saveForLater);
 
 router.put("/:id", auth, updatePost);
 
-//router.get("/", getAllposts);
 
 router.get("/", getPosts);
 router.get("/latest", getLatestPosts);

@@ -6,7 +6,7 @@ import { StoreProvider } from "./stores/RootStore";
 import ScrollToTop from "./helpers/ScrollToTop";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./bootstrap.min.css";
-// import "./custom.scss";
+import "./custom.scss";
 import "./App.css";
 
 ReactDOM.render(
