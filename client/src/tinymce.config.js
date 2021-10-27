@@ -5,7 +5,7 @@ export const editorConfig = {
 		"advlist autolink lists link image charmap print preview anchor",
 		"searchreplace visualblocks code fullscreen",
 		"insertdatetime media table paste code help wordcount",
-		"emoticons media image fontsizeselect"
+		"emoticons media image "
 	],
 	font_formats: ["8pt 10pt 12pt 14pt 18pt 24pt 36pt"],
 	toolbar:
@@ -26,7 +26,7 @@ export const commentEditorConfig = {
 		"advlist autolink lists link image charmap print preview anchor",
 		"searchreplace visualblocks code fullscreen",
 		"insertdatetime media table paste code help wordcount",
-		"emoticons media image fontsizeselect"
+		"emoticons media image"
 	],
 	font_formats: ["8pt 10pt 12pt 14pt 18pt 24pt 36pt"],
 	toolbar:

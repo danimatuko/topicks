@@ -63,11 +63,9 @@ const HomePage = ({ location, history }) => {
 
 	useEffect(() => {
 		if (isFirstRun.current) {
-			console.log("first run", isFirstRun);
 			isFirstRun.current = false;
 			return; // return from the useEffect function if this is the first render
 		}
-		console.log("another run", isFirstRun);
 		getAllPosts();
 		// eslint-disable-next-line
 	}, [pageNumber]);
