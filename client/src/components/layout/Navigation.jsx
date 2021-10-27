@@ -135,10 +135,20 @@ const UnsignedMenu = ({ mobileView }) => {
 				</DropdownButton>
 			) : (
 				<>
-					<Button variant="dark" className="me-2 " as={Link} to="/login">
+					<Button
+						variant="dark"
+						className="me-2 fw-bold border-2 border-light"
+						as={Link}
+						to="/login"
+					>
 						Sign In
 					</Button>
-					<Button variant="outline-secondary" as={Link} to="/sign-in">
+					<Button
+						variant="outline-secondary"
+						className="text-light border-2 fw-bold"
+						as={Link}
+						to="/sign-in"
+					>
 						Register
 					</Button>
 				</>
