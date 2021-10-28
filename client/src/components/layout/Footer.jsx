@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
 	return (
-		<footer className="text-center py-4" style={{ backgroundColor: "#e7e7e794" }}>
+		<footer className="text-center mt-5 py-4" style={{ backgroundColor: "#e7e7e794" }}>
 			<Container className="d-flex justify-content-between align-items-center">
 				<Link to="/">
 					<Image src="/logo/Topicks-logos_black.png" alt="logo" width="85px" />

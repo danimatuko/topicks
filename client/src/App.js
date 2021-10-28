@@ -15,6 +15,7 @@ import SearchResults from "./components/SearchResults";
 import { useContext } from "react";
 import { StoreContext } from "./stores/RootStore";
 import { observer } from "mobx-react-lite";
+import AboutPage from "./components/pages/AboutPage";
 
 const App = observer(() => {
 	const { user } = useContext(StoreContext);
@@ -40,6 +41,7 @@ const App = observer(() => {
 						path={["/post", `/post/edit/:id`]}
 						component={CreatePost}
 					/>
+					<Route exact path="/about" component={AboutPage} />
 					<Route exact path="/posts/:id" component={PostPage} />
 					<Route exact path="/posts" component={AllPosts} />
 					<Route exact path="/search" component={SearchResults} />
