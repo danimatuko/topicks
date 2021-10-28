@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 
 const AboutPage = () => (
-	<Container>
+	<Container className="w-50">
 		<h1 className="display-5 mt-5 mb-4">About</h1>
 		<p className="lead">
 			Topicks is a blog ,created to read and share articles about variety of topics.
@@ -16,8 +16,8 @@ const AboutPage = () => (
 					to publish a post.
 				</li>
 				<li>
-					After a few projects which I have worked with Redux, I wanted to try MobX for
-					state mangement.
+					After a few projects in which I have worked with Redux, I wanted to try MobX for
+					state management.
 				</li>
 			</ul>
 		</p>

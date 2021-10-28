@@ -37,7 +37,9 @@ class Post {
 		this.author = author;
 		this.topic = topic;
 		this.title = title;
-		this.subjectImage = subjectImage;
+		this.subjectImage =
+			subjectImage ||
+			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbeQlsruJMdFTjMK9OkGZY527BXOvbGDWWHg&usqp=CAU";
 		this.body = body;
 		this.dateOfPost = getDate();
 		this.profileImage = profileImage;

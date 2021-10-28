@@ -29,8 +29,7 @@ const CreatePost = ({ history, match }) => {
 		author: user.first_name + " " + user.last_name,
 		title: "",
 		topic: topicOptions[0],
-		subjectImage:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbeQlsruJMdFTjMK9OkGZY527BXOvbGDWWHg&usqp=CAU",
+		subjectImage: "",
 		postHTML: "",
 		profileImage:
 			user.profileImage ||

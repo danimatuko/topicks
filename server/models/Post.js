@@ -35,7 +35,9 @@ const PostSchema = mongoose.Schema(
 			default: 0
 		},
 		profileImage: {
-			type: String
+			type: String,
+			default:
+				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbeQlsruJMdFTjMK9OkGZY527BXOvbGDWWHg&usqp=CAU"
 		}
 	},
 	{
