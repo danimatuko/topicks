@@ -6,7 +6,7 @@ const RecommandedTopics = ({ setPostsByTopic }) => {
 	const TOPICS = [
 		"Music",
 		"Money",
-		"Bussiness",
+		"Business",
 		"Technology",
 		"Programming",
 		"Gaming",
