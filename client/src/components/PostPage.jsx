@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Badge, Container, Spinner } from "react-bootstrap";
 import Post from "../stores/PostStore";
 import parse from "html-react-parser";
@@ -12,10 +12,11 @@ const PostPage = observer(({ match, history }) => {
 	const { user, post } = useContext(StoreContext);
 	const [editComment, setEditComment] = useState(null);
 
+	const postBody = useRef();
 	const limitImagesWidth = () => {
 		document
 			.querySelectorAll("img")
-			.forEach((img) => img.setAttribute("style", "max-width:100%;object-fit:cover;"));
+			.forEach((img) => img.setAttribute("style", "max-width:100%;object-fit:fill;"));
 	};
 
 	const handleLike = async () => {
@@ -58,15 +59,14 @@ const PostPage = observer(({ match, history }) => {
 					post.profileImage = data.profileImage;
 				});
 				setIsLoading(false);
+				// if the user posts an image larger then the page container resize the image
+				limitImagesWidth();
 			} catch (error) {
 				console.log(error);
 				history.push("/not-found");
 			}
 		})();
 	}, [match.params.id, post, history]);
-
-	// if the user posts an image larger then the page container resize the image
-	limitImagesWidth();
 
 	return isLoading ? (
 		<div
@@ -130,7 +130,9 @@ const PostPage = observer(({ match, history }) => {
 						</div>
 					</div>
 				</div>
-				<div className="post-body mt-5">{post && parse(post.body)}</div>
+				<div ref={postBody} className="post-body mt-5">
+					{post && parse(post.body)}
+				</div>
 			</div>
 
 			<Comments postId={post.id} setEditComment={setEditComment} editComment={editComment} />

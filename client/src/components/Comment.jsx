@@ -25,12 +25,13 @@ const Comment = ({ comment, setIsDeleted, setEditComment }) => {
 		<div className="comment mb-5 ">
 			<Row className="flex gy-1" style={{ backgroundColor: "" }}>
 				<Col>
-					<div className="d-flex justify-content-between" style={{ width: "175px" }}>
+					<div className="d-flex " style={{ width: "175px" }}>
 						<Image
 							width="40px"
 							height="40px"
 							src={comment.profileImage}
 							roundedCircle
+							className="me-2"
 						/>
 						<div>
 							<div className="fw-bold me-2">{comment.author}</div>

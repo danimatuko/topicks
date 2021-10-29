@@ -39,6 +39,7 @@ const Search = ({ isMobile, setDisplaySearch }) => {
 
 						<FormControl
 							id="search"
+							className="border border-1"
 							ref={inputRef}
 							type="search"
 							placeholder="Search..."
@@ -47,7 +48,7 @@ const Search = ({ isMobile, setDisplaySearch }) => {
 							onChange={(e) => setKeyWord(e.target.value)}
 						/>
 						{!isMobile && (
-							<Button variant="light" type="submit">
+							<Button id="search-btn" variant="light" type="submit">
 								<i className="fas fa-search"></i>
 							</Button>
 						)}
