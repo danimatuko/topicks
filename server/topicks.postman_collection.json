@@ -1,0 +1,665 @@
+{
+	"info": {
+		"_postman_id": "b1bd31e7-5ccb-4a69-91a5-d30148628de9",
+		"name": "blog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Jarmaine\",\n    \"last_name\": \"Cole\",\n    \"email\": \"cole@example.com\",\n    \"password\": \"123456\",\n    \"role\":\"user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"TOKEN\",pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"hill@gmail.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/users/613dc6b3838bbd987cf62b1a",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"613dc6b3838bbd987cf62b1a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit profile image",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxM2RjNmIzODM4YmJkOTg3Y2Y2MmIxYSIsImZpcnN0X25hbWUiOiJKb2huIiwibGFzdF9uYW1lIjoiRG9lIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2MzQ0NjMyNzMsImV4cCI6MTYzNDQ2Njg3M30.K4FVDst8wzLiumy9gYfC_mB5faRu4QfrHmrfTn_kI3M",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"profileImage\": \"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users/613dc6b3838bbd987cf62b1a/profile-image",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"613dc6b3838bbd987cf62b1a",
+								"profile-image"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "post",
+			"item": [
+				{
+					"name": "like",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postId\":\"614484c07c70529602fbe3d1\",\n    \"userId\":\"613dc6b3838bbd987cf62b1a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/posts/like",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"posts",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "most liked posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/posts/most-liked",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts",
+								"most-liked"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "latest posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/posts/latest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts",
+								"latest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user's posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/posts/user/6143cef53f7111ac43222810",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts",
+								"user",
+								"6143cef53f7111ac43222810"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save for later",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postId\":\"61448045864300057fa46f0b\",\n    \"userId\":\"613dc6b3838bbd987cf62b1a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/posts/read-later",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"posts",
+								"read-later"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get reading -list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/posts/user/reading-list/6143cef53f7111ac43222810",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"posts",
+								"user",
+								"reading-list",
+								"6143cef53f7111ac43222810"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create  post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"614ab5f3cc63684c6c2a5cd4\",\n    \"author\": \"Eric Thomas\",\n    \"title\": \"test post\",\n    \"topic\": \"test topic\",\n    \"subjectImage\": \"https://miro.medium.com/max/1200/1*12GwRq9-YTLEdjoYrtBgaQ.jpeg\",\n    \"body\": \"<h1> test post body </h1>\",\n    \"dateOfPost\": \"22.9.2021\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/posts",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/posts/614b66b76705c0daf4a99cb6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts",
+								"614b66b76705c0daf4a99cb6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"614ab5f3cc63684c6c2a5cd4\",\n    \"author\": \"Eric Thomas\",\n    \"title\": \"test post protect\",\n    \"topic\": \"protect protect\",\n    \"subjectImage\": \"https://miro.medium.com/max/1200/1*12GwRq9-YTLEdjoYrtBgaQ.jpeg\",\n    \"body\": \"<h1> protectprotectprotectprotect </h1>\",\n    \"dateOfPost\": \"22.9.2021\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/posts/616c4f6dc01446a53dc89896",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"posts",
+								"616c4f6dc01446a53dc89896"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/posts/616d8bfd2a49310b42d29bfa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts",
+								"616d8bfd2a49310b42d29bfa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all posts (pagingation)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/posts/?page=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get posts by topic",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/posts/topic=Business",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"posts",
+								"topic=Business"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/posts/search=How to Preview",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"posts",
+								"search=How to Preview"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comment",
+			"item": [
+				{
+					"name": "add comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"6143cef53f7111ac43222810\",\n    \"author\": \"Lauren Hill\",\n    \"commentBody\": \"Great Post!\",\n    \"dateOfComment\": \"24.9.2021\",\n    \"profileImage\":\"https://i1.sndcdn.com/avatars-000281750456-tvewmv-t500x500.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/post/6159f96ae8f1c54b5ce82665/comments",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"post",
+								"6159f96ae8f1c54b5ce82665",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"6143cef53f7111ac43222810\",\n    \"author\": \"Lauren Hill\",\n    \"commentBody\": \"Great post!!\",\n    \"dateOfComment\": \"18.10.2021\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/post/6159f96ae8f1c54b5ce82665/comments/616dada52fbe1c321cbe556f",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"post",
+								"6159f96ae8f1c54b5ce82665",
+								"comments",
+								"616dada52fbe1c321cbe556f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/post/614612fa61d805c24542d7d3/comments/6165681ddcd54b3fa09e5159",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"post",
+								"614612fa61d805c24542d7d3",
+								"comments",
+								"6165681ddcd54b3fa09e5159"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post's comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/post/6159f96ae8f1c54b5ce82665/comments",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"post",
+								"6159f96ae8f1c54b5ce82665",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
