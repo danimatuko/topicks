@@ -1,6 +1,6 @@
 
 # TOPICKS
-> Blog, created to read and share articles about variety of topics.
+> Blog, created to read and share articles about a variety of topics.
 
 <img src="client/public/topicks.png" width="100%"/>
 
