@@ -19,7 +19,7 @@ const Search = ({ isMobile, setDisplaySearch }) => {
 	};
 
 	return (
-		<Row className="">
+		<Row className="pb-1">
 			<Col md={11} className="px-xs-3">
 				<Form className="d-flex" onSubmit={search}>
 					<InputGroup

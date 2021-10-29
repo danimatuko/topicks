@@ -24,7 +24,7 @@ const Comment = ({ comment, setIsDeleted, setEditComment }) => {
 	return (
 		<div className="comment mb-5 ">
 			<Row className="flex gy-1" style={{ backgroundColor: "" }}>
-				<Col>
+				<Col xs={10}>
 					<div className="d-flex " style={{ width: "175px" }}>
 						<Image
 							width="40px"
@@ -40,7 +40,7 @@ const Comment = ({ comment, setIsDeleted, setEditComment }) => {
 					</div>
 					<div className="comment-content ps-5">{parse(comment.commentBody)}</div>
 				</Col>
-				<Col className="text-end">
+				<Col xs={2} className="text-end">
 					{user.id === comment.userId && (
 						<DropdownButton
 							title={<i className="fas fa-ellipsis-v text-secondary"></i>}
