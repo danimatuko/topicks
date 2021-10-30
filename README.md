@@ -36,19 +36,19 @@ To run this project, you will need to add the following environment variables to
 
 #### Server (create .env file in the project root folder)
 
-`NODE_ENV`
+`NODE_ENV = development`
 
-`MONGO_URI`
+`MONGO_URI = your mongodb URI`
 
-`JWT_SECRET`
+`JWT_SECRET =  your JWT SECRET`
 
 #### Client (create .env file in the client folder)
 
-`REACT_APP_TINYMCE_API_KEY`
+`REACT_APP_TINYMCE_API_KEY = your tinyMCE API key`
 
-`REACT_APP_CLOUD_NAME`
+`REACT_APP_CLOUD_NAME = your cloud name on cloudinary`
 
-`REACT_APP_CLOUDINARY_UPLOAD_PRESET`
+`REACT_APP_CLOUDINARY_UPLOAD_PRESET = your upload preset on cloudinary`
 
 ## Installation
 
