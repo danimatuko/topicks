@@ -1,8 +1,8 @@
 
 # TOPICKS
-> Blog ,created to read and share articles about variety of topics.
+> Blog, created to read and share articles about a variety of topics.
 
-<img src="client/public/topicks.jpg" width="100%"/>
+<img src="client/public/topicks.png" width="100%"/>
 
 ## Demo
 
@@ -92,7 +92,7 @@ npm run build
 ```
 There is a Heroku postbuild script, so if you push to Heroku, no need to build manually for deployment to Heroku
 
-##  Api testing with Postman
+##  API testing with Postman
 Open postman and import the topicks.postman_collection.json file from  server/topicks.postman_collection.json
 
 ## 🔗 Links
